@@ -8,9 +8,9 @@ public class Config {
 
 	public static ArrayList<String> createOptions() {
 		options = new ArrayList<String>();
+		options.add("Signin");
+		options.add("Signup");
 		options.add("Search");
-		options.add("Test2");
-		options.add("Test3");
 		options.add("Test4");
 		options.add("Test5");
 		options.add("Test6");

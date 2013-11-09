@@ -19,6 +19,10 @@
             android:label="SearchByName" >
         </activity>
         <activity
+            android:name="com.example.mealdelivery.Signin"
+            android:label="Signin" >
+        </activity>
+        <activity
             android:name="com.example.mealdelivery.Sidebar"
             android:label="@string/app_name" >
             <intent-filter>

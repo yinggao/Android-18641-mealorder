@@ -10,25 +10,18 @@ import com.example.mealdelivery.SidebarView.SizeCallback;
 import utilities.Config;
 import adapter.MenuAdapter;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -86,9 +79,14 @@ public class Sidebar extends Activity {
         		menuOut = false;
         	    stack.push(options.get(position));
         	    Log.d("The contents of Stack is" , stack.toString());
+        	    Intent myIntent;
         	    switch (position) {
         	    case 0:
-        	    	Intent myIntent = new Intent(Sidebar.this, SearchByName.class);
+        	    	myIntent = new Intent(Sidebar.this, Signin.class);
+        	    	startActivity(myIntent);
+        	    	break;
+        	    case 2:
+        	    	myIntent = new Intent(Sidebar.this, SearchByName.class);
         	    	startActivity(myIntent);
         	    	break;
         	    }

@@ -7,12 +7,21 @@
     <string name="search">Search</string>
     <string name="nearby">Nearby</string>
     <string name="shake">Shake</string>
+    <string name="home">Home</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="signin">Sign in</string>
+    <string name="signup">Sign up</string>
+    <string name="search_hint">Search</string>
 
     <color name="background">#6CBDC4</color>
     <color name="sidebar_bg">#D88778</color>
     <color name="header_background">#F8F6DE</color>
     <color name="header_text">#82CED4</color>
     <color name="searchbar_bg">#cccc33</color>
+    <color name="text_bg">#E1E3E5</color>
+    <color name="button_bg">#cccccc</color>
+    <color name="button_text">#0099cc</color>
 
     <string-array name="category">
         <item>category1</item>
