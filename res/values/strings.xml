@@ -13,6 +13,8 @@
     <string name="signin">Sign in</string>
     <string name="signup">Sign up</string>
     <string name="search_hint">Search</string>
+    <string name="order">order now</string>
+    <string name="addtobag">Add to bag</string>
 
     <color name="background">#6CBDC4</color>
     <color name="sidebar_bg">#D88778</color>
@@ -23,6 +25,7 @@
     <color name="button_bg">#cccccc</color>
     <color name="button_text">#0099cc</color>
     <color name="content_bg">#f5bf9b</color>
+    <color name="name_text">#E3745F</color>
 
     <string-array name="category">
         <item>category1</item>

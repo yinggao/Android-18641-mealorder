@@ -91,6 +91,10 @@ public class Sidebar extends Activity {
         	    	myIntent = new Intent(Sidebar.this, SearchByName.class);
         	    	startActivity(myIntent);
         	    	break;
+        	    case 3:
+        	    	myIntent = new Intent(Sidebar.this, RestaurantDetail.class);
+        	    	startActivity(myIntent);
+        	    	break;
         	    }
             }
 

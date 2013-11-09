@@ -11,7 +11,7 @@ public class Config {
 		options.add("Signin");
 		options.add("Signup");
 		options.add("Search");
-		options.add("Test4");
+		options.add("Detail");
 		options.add("Test5");
 		options.add("Test6");
 		
