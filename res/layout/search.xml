@@ -2,13 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-    <include 
-		android:id="@+id/txtTitle"
+
+    <include
+        android:id="@+id/txtTitle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/search"
+        layout="@layout/sidebar"
+        android:text="@string/search" />
+
+    <RelativeLayout
+        android:id="@+id/searchBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/searchbar_bg" />
+
+        <TextView
+            android:id="@+id/search_icon"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/search"
+            android:layout_alignLeft="@+id/search"
+            android:background="@drawable/searchbar_icon" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/search"
+            android:layout_alignRight="@+id/search"
+            android:layout_toRightOf="@+id/search_icon"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/search"
+            android:layout_below="@+id/search"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@+id/show_in_map"
+            android:entries="@array/category" />
         
-        layout="@layout/sidebar" />
+        <TextView
+            android:id="@+id/show_in_map"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:layout_alignRight="@+id/search"
+            android:layout_below="@+id/search"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/showinmap" />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.example.mealdelivery;
 
 
 import java.util.ArrayList;
+import android.content.Intent;
 import java.util.Stack;
 
 import com.example.mealdelivery.SidebarView.SizeCallback;
@@ -14,7 +15,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -82,10 +82,16 @@ public class Sidebar extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Context context = view.getContext();
                 menuOut = true;
-                scrollWebviw(scrollView, menu);
+                scrollSideBarVeiw(scrollView, menu);
         		menuOut = false;
         	    stack.push(options.get(position));
         	    Log.d("The contents of Stack is" , stack.toString());
+        	    switch (position) {
+        	    case 0:
+        	    	Intent myIntent = new Intent(Sidebar.this, SearchByName.class);
+        	    	startActivity(myIntent);
+        	    	break;
+        	    }
         	    TextView title = (TextView)findViewById(R.id.txtTitle);
         	    title.setText(options.get(position));
             }
@@ -99,6 +105,7 @@ public class Sidebar extends Activity {
         final View[] children = new View[] { menu, app };
 
         // Scroll to app (view[1]) when layout finished.
+
         int scrollToViewIdx = 1;
         
         scrollView.initViews(children, scrollToViewIdx, new SizeCallbackForMenu(btnSlide));
@@ -181,7 +188,7 @@ public class Sidebar extends Activity {
     
     
     //scroll the page
-    private void scrollWebviw(SidebarView scrollView, View menu) {
+    private void scrollSideBarVeiw(SidebarView scrollView, View menu) {
     	 Context context = menu.getContext();
          
          int menuWidth = menu.getMeasuredWidth();

@@ -8,7 +8,7 @@ public class Config {
 
 	public static ArrayList<String> createOptions() {
 		options = new ArrayList<String>();
-		options.add("Test1");
+		options.add("Search");
 		options.add("Test2");
 		options.add("Test3");
 		options.add("Test4");

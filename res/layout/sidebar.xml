@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="match_parent"
     android:background="@color/background" >
-    
+
     <RelativeLayout
         android:id="@+id/tabBar"
         android:layout_width="fill_parent"
@@ -33,6 +34,6 @@
             android:layout_marginLeft="8dp"
             android:background="@drawable/menu"
             android:padding="4dp" />
+    </RelativeLayout>
 
-	</RelativeLayout>
 </RelativeLayout>
