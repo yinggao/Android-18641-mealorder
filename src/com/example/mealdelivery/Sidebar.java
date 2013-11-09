@@ -80,6 +80,8 @@ public class Sidebar extends Activity {
         	    stack.push(options.get(position));
         	    Log.d("The contents of Stack is" , stack.toString());
         	    Intent myIntent;
+        	    TextView title = (TextView)findViewById(R.id.txtTitle);
+        	    title.setText(options.get(position));
         	    switch (position) {
         	    case 0:
         	    	myIntent = new Intent(Sidebar.this, Signin.class);
@@ -90,8 +92,6 @@ public class Sidebar extends Activity {
         	    	startActivity(myIntent);
         	    	break;
         	    }
-        	    TextView title = (TextView)findViewById(R.id.txtTitle);
-        	    title.setText(options.get(position));
             }
 
         });

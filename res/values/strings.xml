@@ -22,6 +22,7 @@
     <color name="text_bg">#E1E3E5</color>
     <color name="button_bg">#cccccc</color>
     <color name="button_text">#0099cc</color>
+    <color name="content_bg">#f5bf9b</color>
 
     <string-array name="category">
         <item>category1</item>
