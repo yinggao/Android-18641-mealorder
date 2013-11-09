@@ -1,8 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_height="match_parent"
     android:background="@color/content_bg" >
-    
+
+    <include
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/sidebar"
+        android:text="@string/home" />
+
+    <LinearLayout
+        android:id="@+id/signup_form"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/emailaddr"
+        android:layout_alignTop="@+id/username"
+        android:layout_marginLeft="136dp"
+        android:src="@drawable/camera" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="63dp"
+        android:layout_marginTop="120dp"
+        android:ellipsize="start"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="textPersonName" />
+
+    <requestFocus />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_below="@+id/username"
+        android:layout_marginTop="60dp"
+        android:ellipsize="start"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/emailaddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="60dp"
+        android:ellipsize="start"
+        android:ems="20"
+        android:hint="@string/emailaddress"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_below="@+id/emailaddr"
+        android:layout_marginTop="60dp"
+        android:ellipsize="start"
+        android:ems="20"
+        android:hint="@string/address"
+        android:inputType="textPostalAddress" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/address"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="107dp"
+        android:background="@drawable/button"
+        android:gravity="center"
+        android:text="@string/signup"
+        android:textColor="@color/button_text" />
 
 </RelativeLayout>

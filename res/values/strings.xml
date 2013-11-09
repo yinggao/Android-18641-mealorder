@@ -15,6 +15,8 @@
     <string name="search_hint">Search</string>
     <string name="order">order now</string>
     <string name="addtobag">Add to bag</string>
+    <string name="emailaddress">user@email.com</string>
+    <string name="address">address</string>
 
     <color name="background">#6CBDC4</color>
     <color name="sidebar_bg">#D88778</color>

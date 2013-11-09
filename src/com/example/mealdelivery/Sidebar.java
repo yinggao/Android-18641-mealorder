@@ -87,11 +87,23 @@ public class Sidebar extends Activity {
         	    	myIntent = new Intent(Sidebar.this, Signin.class);
         	    	startActivity(myIntent);
         	    	break;
+        	    case 1:
+        	    	myIntent = new Intent(Sidebar.this, Signup.class);
+        	    	startActivity(myIntent);
+        	    	break;
         	    case 2:
         	    	myIntent = new Intent(Sidebar.this, SearchByName.class);
         	    	startActivity(myIntent);
         	    	break;
         	    case 3:
+        	    	// TODO 
+        	    	// Nearby
+        	    	break;
+        	    case 4:
+        	    	myIntent = new Intent(Sidebar.this, Mine.class);
+        	    	startActivity(myIntent);
+        	    	break;
+        	    case 5:
         	    	myIntent = new Intent(Sidebar.this, RestaurantDetail.class);
         	    	startActivity(myIntent);
         	    	break;

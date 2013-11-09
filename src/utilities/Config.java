@@ -11,9 +11,9 @@ public class Config {
 		options.add("Signin");
 		options.add("Signup");
 		options.add("Search");
+		options.add("Nearby");
+		options.add("Mine");
 		options.add("Detail");
-		options.add("Test5");
-		options.add("Test6");
 		
 		return options;
 
