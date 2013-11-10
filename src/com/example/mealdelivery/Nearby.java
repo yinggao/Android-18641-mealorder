@@ -1,6 +1,5 @@
 package com.example.mealdelivery;
 
-<<<<<<< HEAD
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;

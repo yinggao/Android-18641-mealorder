@@ -24,7 +24,7 @@
             android:background="@drawable/text_bg" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/username_bg"
@@ -51,7 +51,7 @@
             android:background="@drawable/text_bg" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/password_bg"
@@ -59,7 +59,8 @@
             android:layout_alignRight="@+id/password_bg"
             android:ellipsize="start"
             android:ems="10"
-            android:hint="@string/password" >
+            android:hint="@string/password"
+            android:inputType="textPassword" >
 
             <requestFocus android:layout_width="wrap_content" />
         </EditText>
@@ -76,7 +77,8 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/button"
             android:text="@string/signin"
-            android:textColor="@color/button_text" />
+            android:textColor="@color/button_text" 
+            android:onClick="signinMethod" />
 
         <Button
             android:id="@+id/button2"
@@ -86,7 +88,8 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/button"
             android:text="@string/signup"
-            android:textColor="@color/button_text" />
+            android:textColor="@color/button_text" 
+            android:onClick="signupMethod" />
     </RelativeLayout>
 
 </LinearLayout>
