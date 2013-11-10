@@ -1,115 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
 
-    <include
-        android:id="@+id/txtTitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/sidebar"
-        android:text="@string/home" />
+    <TextView
+        android:id="@+id/logo_dragon"
+        android:layout_width="500dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:background="@drawable/dragon" />
 
     <RelativeLayout
-        android:id="@+id/signin_page"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:id="@+id/signin_form"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/username_bg"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/text_bg" />
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="100dp"
-            android:gravity="center"
-            android:orientation="vertical" >
+            android:layout_alignBottom="@+id/username_bg"
+            android:layout_alignLeft="@+id/username_bg"
+            android:layout_alignRight="@+id/username_bg"
+            android:ellipsize="start"
+            android:ems="10"
+            android:hint="@string/username" >
 
-            <TextView
-                android:id="@+id/logo_dragon"
-                android:layout_width="500dp"
-                android:layout_height="400dp"
-                android:layout_gravity="center"
-                android:background="@drawable/dragon" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/username_bg"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="80dp"
-                    android:background="@drawable/text_bg" />
-
-                <EditText
-                    android:id="@+id/editText1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/username_bg"
-                    android:layout_alignLeft="@+id/username_bg"
-                    android:layout_alignRight="@+id/username_bg"
-                    android:ellipsize="start"
-                    android:ems="10"
-                    android:hint="@string/username" >
-
-                    <requestFocus android:layout_width="wrap_content" />
-
-                </EditText>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/password_form"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/password_bg"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/text_bg" />
-
-                <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/password_bg"
-                    android:layout_alignLeft="@+id/password_bg"
-                    android:layout_alignRight="@+id/password_bg"
-                    android:ellipsize="start"
-                    android:ems="10"
-                    android:hint="@string/password" >
-
-                    <requestFocus android:layout_width="wrap_content" />
-
-                </EditText>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-                <Button
-                    android:id="@+id/button1"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button"
-                    android:textColor="@color/button_text"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/signin" />
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="172dp"
-                    android:background="@drawable/button"
-                    android:textColor="@color/button_text"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/signup" />
-            </RelativeLayout>
-        </LinearLayout>
+            <requestFocus android:layout_width="wrap_content" />
+        </EditText>
     </RelativeLayout>
 
-</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/password_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/password_bg"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/text_bg" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/password_bg"
+            android:layout_alignLeft="@+id/password_bg"
+            android:layout_alignRight="@+id/password_bg"
+            android:ellipsize="start"
+            android:ems="10"
+            android:hint="@string/password" >
+
+            <requestFocus android:layout_width="wrap_content" />
+        </EditText>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button"
+            android:text="@string/signin"
+            android:textColor="@color/button_text" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="172dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button"
+            android:text="@string/signup"
+            android:textColor="@color/button_text" />
+    </RelativeLayout>
+
+</LinearLayout>

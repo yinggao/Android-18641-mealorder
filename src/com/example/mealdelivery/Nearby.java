@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-public class Signin extends Sidebar {
+public class Nearby extends Sidebar {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -12,7 +12,7 @@ public class Signin extends Sidebar {
 
 		LayoutInflater inflater = getLayoutInflater();
 
-		inflater.inflate(R.layout.signin,
+		inflater.inflate(R.layout.nearby,
 				(ViewGroup) findViewById(R.id.container));
 	}
 }

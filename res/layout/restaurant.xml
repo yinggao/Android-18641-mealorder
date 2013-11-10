@@ -1,325 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
 
-    <include
-        android:id="@+id/txtTitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/sidebar"
-        android:text="@string/search" />
+    <RelativeLayout
+        android:id="@+id/restaurant_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="52dp"
+            android:text="Restaurant Name \n(TODO)"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/name_text"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/descrption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/name"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:text="Address:xxxxxxxxxx\nPhone:xxxxxxxxx\nHours Today: xxxxxxxxx\nEmail:xxxxxxx\n(TODO)"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/picture"
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/name"
+            android:background="@drawable/egg" />
+    </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/restaurant_detail"
+        android:id="@+id/restaurant_options"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="horizontal" >
 
-        <RelativeLayout
-            android:id="@+id/restaurant_info"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/direction"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:background="@drawable/showmap" />
+
+        <TextView
+            android:id="@+id/addfavorite"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:background="@drawable/addfavorite" />
+
+        <TextView
+            android:id="@+id/call"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:background="@drawable/call" />
+
+        <TextView
+            android:id="@+id/voice"
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:background="@drawable/voice" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button"
+            android:gravity="center"
+            android:text="@string/order"
+            android:textColor="@color/button_text" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="36dp"
-                android:layout_marginTop="52dp"
-                android:text="Restaurant Name \n(TODO)"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/name_text"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/descrption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/name"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="30dp"
-                android:text="Address:xxxxxxxxxx\nPhone:xxxxxxxxx\nHours Today: xxxxxxxxx\nEmail:xxxxxxx\n(TODO)"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/picture"
-                android:layout_width="200dp"
-                android:layout_height="180dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/name"
-                android:background="@drawable/egg" />
-        </RelativeLayout>
+    <ScrollView
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical" >
 
         <LinearLayout
-            android:id="@+id/restaurant_options"
+            android:id="@+id/dish_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/direction"
-                android:layout_width="80dp"
-                android:layout_height="70dp"
-                android:background="@drawable/showmap" />
+            <RelativeLayout
+                android:id="@+id/dish1"
+                android:layout_width="400dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/content_bg" >
 
-            <TextView
-                android:id="@+id/addfavorite"
-                android:layout_width="60dp"
-                android:layout_height="70dp"
-                android:background="@drawable/addfavorite" />
+                <TextView
+                    android:id="@+id/dish_pic1"
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/dish" />
 
-            <TextView
-                android:id="@+id/call"
-                android:layout_width="80dp"
-                android:layout_height="70dp"
-                android:background="@drawable/call" />
+                <TextView
+                    android:id="@+id/dish_rate1_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignLeft="@+id/dish_pic1"
+                    android:layout_below="@+id/dish_pic1"
+                    android:background="@drawable/rate" />
 
-            <TextView
-                android:id="@+id/voice"
-                android:layout_width="80dp"
-                android:layout_height="65dp"
-                android:background="@drawable/voice" />
-            
-            <Button
-                    android:id="@+id/button1"
-                    android:layout_width="110dp"
+                <TextView
+                    android:id="@+id/dish_rate1_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/dish_pic1"
+                    android:layout_toRightOf="@+id/dish_rate1_1"
+                    android:background="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/dish_rate1_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/dish_pic1"
+                    android:layout_toRightOf="@+id/dish_rate1_2"
+                    android:background="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/dish_name1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button"
-                    android:textColor="@color/button_text"
-                    android:gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/order" />
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toRightOf="@+id/dish_rate1_3"
+                    android:text="Dish name (TODO)"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/dish_info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/dish_name1"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/dish_name1"
+                    android:layout_marginTop="20dp"
+                    android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
+                    android:textStyle="italic" />
+
+                <CheckBox
+                    android:id="@+id/checkBox1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/dish_rate1_3"
+                    android:layout_alignRight="@+id/dish_name1"
+                    android:text="@string/addtobag" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dish2"
+                android:layout_width="400dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/content_bg" >
+
+                <TextView
+                    android:id="@+id/dish_pic2"
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/dish" />
+
+                <TextView
+                    android:id="@+id/dish_rate2_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignLeft="@+id/dish_pic2"
+                    android:layout_below="@+id/dish_pic2"
+                    android:background="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/dish_rate2_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/dish_pic2"
+                    android:layout_toRightOf="@+id/dish_rate2_1"
+                    android:background="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/dish_rate2_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/dish_pic2"
+                    android:layout_toRightOf="@+id/dish_rate2_2"
+                    android:background="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/dish_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toRightOf="@+id/dish_rate2_3"
+                    android:text="Dish name (TODO)"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/dish_info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/dish_name2"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/dish_name2"
+                    android:layout_marginTop="20dp"
+                    android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
+                    android:textStyle="italic" />
+
+                <CheckBox
+                    android:id="@+id/checkBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/dish_rate2_3"
+                    android:layout_alignRight="@+id/dish_name2"
+                    android:text="@string/addtobag" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/dist3"
+                android:layout_width="400dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/content_bg" >
+
+                <TextView
+                    android:id="@+id/dish_pic3"
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/dish" />
+
+                <TextView
+                    android:id="@+id/dish_rate3_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignLeft="@+id/dish_pic3"
+                    android:layout_below="@+id/dish_pic3"
+                    android:background="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/dish_rate3_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/dish_pic3"
+                    android:layout_toRightOf="@+id/dish_rate3_1"
+                    android:background="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/dish_rate3_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/dish_pic3"
+                    android:layout_toRightOf="@+id/dish_rate3_2"
+                    android:background="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/dish_name3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_toRightOf="@+id/dish_rate3_3"
+                    android:text="Dish name (TODO)"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/dish_info3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/dish_name3"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/dish_name3"
+                    android:layout_marginTop="20dp"
+                    android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
+                    android:textStyle="italic" />
+
+                <CheckBox
+                    android:id="@+id/checkBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/dish_rate3_3"
+                    android:layout_alignRight="@+id/dish_name3"
+                    android:text="@string/addtobag" />
+            </RelativeLayout>
         </LinearLayout>
+    </ScrollView>
 
-        <ScrollView
-            android:id="@+id/ScrollView01"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scrollbars="vertical" >
-
-            <LinearLayout
-                android:id="@+id/dish_list"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <RelativeLayout
-                    android:id="@+id/dish1"
-                    android:layout_width="400dp"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/content_bg" >
-
-                    <TextView
-                        android:id="@+id/dish_pic1"
-                        android:layout_width="150dp"
-                        android:layout_height="120dp"
-                        android:background="@drawable/dish" />
-
-                    <TextView
-                        android:id="@+id/dish_rate1_1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignLeft="@+id/dish_pic1"
-                        android:layout_below="@+id/dish_pic1"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_rate1_2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@+id/dish_pic1"
-                        android:layout_toRightOf="@+id/dish_rate1_1"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_rate1_3"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@+id/dish_pic1"
-                        android:layout_toRightOf="@+id/dish_rate1_2"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_name1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="21dp"
-                        android:layout_marginTop="18dp"
-                        android:layout_toRightOf="@+id/dish_rate1_3"
-                        android:text="Dish name (TODO)"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/dish_info1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/dish_name1"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@+id/dish_name1"
-                        android:layout_marginTop="20dp"
-                        android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
-                        android:textStyle="italic" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/dish_rate1_3"
-                        android:layout_alignRight="@+id/dish_name1"
-                        android:text="@string/addtobag" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/dish2"
-                    android:layout_width="400dp"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/content_bg" >
-
-                    <TextView
-                        android:id="@+id/dish_pic2"
-                        android:layout_width="150dp"
-                        android:layout_height="120dp"
-                        android:background="@drawable/dish" />
-
-                    <TextView
-                        android:id="@+id/dish_rate2_1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignLeft="@+id/dish_pic2"
-                        android:layout_below="@+id/dish_pic2"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_rate2_2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@+id/dish_pic2"
-                        android:layout_toRightOf="@+id/dish_rate2_1"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_rate2_3"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@+id/dish_pic2"
-                        android:layout_toRightOf="@+id/dish_rate2_2"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_name2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="21dp"
-                        android:layout_marginTop="18dp"
-                        android:layout_toRightOf="@+id/dish_rate2_3"
-                        android:text="Dish name (TODO)"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/dish_info2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/dish_name2"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@+id/dish_name2"
-                        android:layout_marginTop="20dp"
-                        android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
-                        android:textStyle="italic" />
-
-                    <CheckBox
-                        android:id="@+id/checkBox2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/dish_rate2_3"
-                        android:layout_alignRight="@+id/dish_name2"
-                        android:text="@string/addtobag" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/dist3"
-                    android:layout_width="400dp"
-                    android:layout_height="180dp"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/content_bg" >
-
-                    <TextView
-                        android:id="@+id/dish_pic3"
-                        android:layout_width="150dp"
-                        android:layout_height="120dp"
-                        android:background="@drawable/dish" />
-
-                    <TextView
-                        android:id="@+id/dish_rate3_1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_alignLeft="@+id/dish_pic3"
-                        android:layout_below="@+id/dish_pic3"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_rate3_2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@+id/dish_pic3"
-                        android:layout_toRightOf="@+id/dish_rate3_1"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_rate3_3"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@+id/dish_pic3"
-                        android:layout_toRightOf="@+id/dish_rate3_2"
-                        android:background="@drawable/rate" />
-
-                    <TextView
-                        android:id="@+id/dish_name3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="21dp"
-                        android:layout_marginTop="18dp"
-                        android:layout_toRightOf="@+id/dish_rate3_3"
-                        android:text="Dish name (TODO)"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/dish_info3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/dish_name3"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@+id/dish_name3"
-                        android:layout_marginTop="20dp"
-                        android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
-                        android:textStyle="italic" />
-                    
-                    <CheckBox
-                        android:id="@+id/checkBox3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/dish_rate3_3"
-                        android:layout_alignRight="@+id/dish_name3"
-                        android:text="@string/addtobag" />
-                </RelativeLayout>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

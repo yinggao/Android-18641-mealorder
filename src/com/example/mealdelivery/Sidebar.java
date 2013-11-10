@@ -2,7 +2,9 @@ package com.example.mealdelivery;
 
 
 import java.util.ArrayList;
+
 import android.content.Intent;
+
 import java.util.Stack;
 
 import com.example.mealdelivery.SidebarView.SizeCallback;
@@ -85,7 +87,7 @@ public class Sidebar extends Activity {
         	    switch (position) {
         	    case 0:
         	    	myIntent = new Intent(Sidebar.this, Signin.class);
-        	    	startActivity(myIntent);
+        			startActivity(myIntent);
         	    	break;
         	    case 1:
         	    	myIntent = new Intent(Sidebar.this, Signup.class);
@@ -98,6 +100,8 @@ public class Sidebar extends Activity {
         	    case 3:
         	    	// TODO 
         	    	// Nearby
+        	    	myIntent = new Intent(Sidebar.this, Nearby.class);
+        	    	startActivity(myIntent);
         	    	break;
         	    case 4:
         	    	myIntent = new Intent(Sidebar.this, Mine.class);
