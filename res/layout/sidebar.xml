@@ -36,5 +36,14 @@
             android:background="@drawable/menu"
             android:padding="4dp" />
     </RelativeLayout>
+    
+    
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/tabBar" >
+    </RelativeLayout>
+    
 
 </RelativeLayout>

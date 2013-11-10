@@ -3,12 +3,18 @@ package com.example.mealdelivery;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
-public class RestaurantDetail extends Activity {
+public class RestaurantDetail extends Sidebar {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.restaurant);
 
-		Intent myIntent = getIntent();
+		getIntent();
+
+		LayoutInflater inflater = getLayoutInflater();
+
+		inflater.inflate(R.layout.restaurant,
+				(ViewGroup) findViewById(R.id.container));
 	}
 }

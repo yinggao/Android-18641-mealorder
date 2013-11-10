@@ -1,5 +1,6 @@
 package com.example.mealdelivery;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,16 +24,25 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-public class Nearby extends Activity {
+public class Nearby extends Sidebar {
 
 	@SuppressLint("ShowToast")
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.nearby);
+
+		getIntent();
+
+		LayoutInflater inflater = getLayoutInflater();
+
+		inflater.inflate(R.layout.nearby, (ViewGroup) findViewById(R.id.container));
+
 		
 
 		// Get a handle to the Map Fragment
