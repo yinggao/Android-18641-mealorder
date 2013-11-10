@@ -37,4 +37,6 @@
         <item>category5</item>
     </string-array>
 
+    <string name="title_activity_neaby">Neaby</string>
+
 </resources>

@@ -96,8 +96,8 @@ public class Sidebar extends Activity {
         	    	startActivity(myIntent);
         	    	break;
         	    case 3:
-        	    	// TODO 
-        	    	// Nearby
+        	    	myIntent = new Intent(Sidebar.this, Nearby.class);
+        	    	startActivity(myIntent);
         	    	break;
         	    case 4:
         	    	myIntent = new Intent(Sidebar.this, Mine.class);
