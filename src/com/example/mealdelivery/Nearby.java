@@ -89,8 +89,8 @@ public class Nearby extends Sidebar {
 		}//end for addressNames
 	}//end on create
 }
-//xlg is wrong!
+//xlg is wrong? No!
 
 
-//fsfsadfdfasaf
+//fsfsdfsdfsadfsdfasfsdfasfsafsadfdfasaf
 
