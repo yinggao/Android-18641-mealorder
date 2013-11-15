@@ -52,15 +52,16 @@ public class Nearby extends Sidebar {
 		}
 
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		String bestProvider = locationManager.getBestProvider(new Criteria(),false);
+		String bestProvider = locationManager.getBestProvider(new Criteria(),true);
 
+		//locationManager.
 		Location mylocation = locationManager.getLastKnownLocation(bestProvider);
 
 		map.setMyLocationEnabled(true);
 		LatLng mylocLatLng = null;
-		if( mylocation != null) {
+		if( mylocation != null) {//if can not get my location
 			mylocLatLng = new LatLng(mylocation.getLatitude(), mylocation.getLongitude());
-			map.moveCamera(CameraUpdateFactory.newLatLngZoom(mylocLatLng, 13));
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(mylocLatLng, 15));
 		}
 
 		
