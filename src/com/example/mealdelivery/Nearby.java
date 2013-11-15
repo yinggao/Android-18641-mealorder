@@ -92,10 +92,6 @@ public class Nearby extends Sidebar {
 //xlg is wrong? No!
 
 
-<<<<<<< HEAD
 //fsfsdfsdfsadfsdfasfsdfasfsafsadfdfasaf
-=======
-//sadsadasdadsadaasdasdas
-//asdasdsadasdsada
->>>>>>> 92b1fbb81bbb08c2a91b1141040abc8b293b7d2c
+
 
