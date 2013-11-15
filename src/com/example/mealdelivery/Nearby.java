@@ -58,9 +58,9 @@ public class Nearby extends Sidebar {
 
 		map.setMyLocationEnabled(true);
 		LatLng mylocLatLng = null;
-		if( mylocation != null) {
+		if( mylocation != null) {//if can not get my location
 			mylocLatLng = new LatLng(mylocation.getLatitude(), mylocation.getLongitude());
-			map.moveCamera(CameraUpdateFactory.newLatLngZoom(mylocLatLng, 13));
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(mylocLatLng, 15));
 		}
 
 		
