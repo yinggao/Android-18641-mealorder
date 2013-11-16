@@ -1,6 +1,5 @@
 package com.example.mealdelivery;
 
-<<<<<<< HEAD
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +21,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

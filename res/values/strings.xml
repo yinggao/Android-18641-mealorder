@@ -17,6 +17,11 @@
     <string name="addtobag">Add to bag</string>
     <string name="emailaddress">user@email.com</string>
     <string name="address">address</string>
+    <string name="start_record">start</string>
+    <string name="stop_record">stop</string>
+    <string name="cancel">cancel</string>
+    <string name="send">send</string>
+    <string name="check">check</string>
 
     <color name="background">#6CBDC4</color>
     <color name="sidebar_bg">#D88778</color>

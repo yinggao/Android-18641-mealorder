@@ -3,23 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <include
-        layout="@layout/sidebar"
-        android:id="@+id/txtTitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/nearby" />
-    
-        <!--EditText
-        android:id="@+id/loan_term"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/loan_amount"
-        android:layout_below="@+id/loan_amount"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="@string/loan_term" /-->
 
     <fragment
         android:id="@+id/map"
@@ -27,8 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp" />
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>
 
