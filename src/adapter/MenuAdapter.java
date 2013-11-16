@@ -27,7 +27,7 @@ public class MenuAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         RegardingTypeHolder holder = null;
-       
+
         if(row == null)
         {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
