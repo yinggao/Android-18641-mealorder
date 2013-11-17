@@ -6,10 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import javax.security.auth.callback.Callback;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.location.Address;
@@ -23,12 +27,15 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 public class Nearby extends Sidebar {
 
+	
 	@SuppressLint("ShowToast")
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -45,7 +52,7 @@ public class Nearby extends Sidebar {
 		
 
 		// Get a handle to the Map Fragment
-		GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		final GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		if (map == null) {
 			Toast.makeText(this, "Unable to load map", Toast.LENGTH_LONG);
 			return;
@@ -58,40 +65,54 @@ public class Nearby extends Sidebar {
 		Location mylocation = locationManager.getLastKnownLocation(bestProvider);
 
 		map.setMyLocationEnabled(true);
+		
 		LatLng mylocLatLng = null;
 		if( mylocation != null) {//if can not get my location
 			mylocLatLng = new LatLng(mylocation.getLatitude(), mylocation.getLongitude());
 			map.moveCamera(CameraUpdateFactory.newLatLngZoom(mylocLatLng, 15));
 		}
+		
+		
+		map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+			Geocoder geocoder = new Geocoder(Nearby.this, Locale.US);
+			@Override
+			public void onMapLoaded() {
+				List<String> addressNames = new ArrayList<String>(Arrays.asList("Orient Express", "CMU, pittsburgh", "Little Asia", "Lulu's Noodles"));
+				for(String addressName : addressNames) {
+					List<Address> addresses = null;
+					try {
+						addresses = geocoder.getFromLocationName(addressName, 10);
+						//geocoder.
+						//addresses = geocoder.getFromLocationName(addressName, 1);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+			
+					if (addresses != null && addresses.size() != 0) {
+						//Address address = addresses.get(0);
+						for(Address address:addresses){
+							Marker marker = map.addMarker(new MarkerOptions()
+									.title(addressName)
+									.snippet(address.getSubThoroughfare() + " " + address.getThoroughfare())
+									.position(new LatLng(address.getLatitude(), address.getLongitude())));
+						}//end for address
+					}//end if addresses
+				}//end for addressNames
+			}
+		});
 
 		
-		Geocoder geocoder = new Geocoder(this, Locale.US);
-		List<String> addressNames = new ArrayList<String>(Arrays.asList("Orient Express", "CMU, pittsburgh", "Little Asia", "Lulu's Noodles"));
-		for(String addressName : addressNames) {
-			List<Address> addresses = null;
-			try {
-				addresses = geocoder.getFromLocationName(addressName, 10,  mylocLatLng.latitude-5, mylocLatLng.longitude-5, mylocLatLng.latitude+5, mylocLatLng.longitude+5);
-				//geocoder.
-				//addresses = geocoder.getFromLocationName(addressName, 1);
-			} catch (IOException e) {
-				e.printStackTrace();
+		map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+			@Override
+			public void onInfoWindowClick(Marker marker) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(Nearby.this, RestaurantDetail.class);
+				//Log.d("title", marker.getTitle());
+				//TODO: Put restaurant information into Intent
+				startActivity(intent);
 			}
-	
-			if (addresses != null && addresses.size() != 0) {
-				//Address address = addresses.get(0);
-				for(Address address:addresses){
-					map.addMarker(new MarkerOptions()
-							.title(addressName)
-							.snippet(address.getSubThoroughfare() + " " + address.getThoroughfare())
-							.position(new LatLng(address.getLatitude(), address.getLongitude())));
-				}//end for address
-			}//end if addresses
-		}//end for addressNames
+		});
 	}//end on create
 }
-//xlg is wrong? No!
-
-
-//fsfsdfsdfsadfsdfasfsdfasfsafsadfdfasaf
 
 
