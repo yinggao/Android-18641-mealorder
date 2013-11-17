@@ -72,7 +72,8 @@
             android:id="@+id/voice"
             android:layout_width="80dp"
             android:layout_height="65dp"
-            android:background="@drawable/voice" />
+            android:background="@drawable/voice"
+            android:onClick="onClickVoice" />
 
         <Button
             android:id="@+id/button1"
@@ -84,6 +85,12 @@
             android:text="@string/order"
             android:textColor="@color/button_text" />
     </LinearLayout>
+    
+    <RelativeLayout
+        android:id="@+id/popup_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/ScrollView01"
