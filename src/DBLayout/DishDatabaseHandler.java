@@ -21,7 +21,7 @@ public class DishDatabaseHandler extends SQLiteOpenHelper {
  
     // Contacts Table Columns names
     private static final String KEY_DISH_ID = "dish_id";
-    private static final String KEY_REST_ID = "restaurant_id";
+    private static final String KEY_REST_ID = "rest_id";
     private static final String KEY_NAME = "dish_name";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_AUDIO_PATH = "audio_path";
@@ -36,9 +36,9 @@ public class DishDatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         
         String CREATE_INPUTDATA_TABLE = "CREATE TABLE " + TABLE_NAME + "("
-                + KEY_DISH_ID + " TEXT," +  KEY_REST_ID + "TEXT,"
-                + KEY_NAME + "TEXT," + KEY_DESCRIPTION + " TEXT,"
-                + KEY_AUDIO_PATH + "TEXT," + KEY_PHOTO_PATH + "TEXT,"
+                + KEY_DISH_ID + " INTEGER," +  KEY_REST_ID + " INTEGER,"
+                + KEY_NAME + " TEXT," + KEY_DESCRIPTION + " TEXT,"
+                + KEY_AUDIO_PATH + " TEXT," + KEY_PHOTO_PATH + " TEXT,"
                 + "PRIMARY KEY (KEY_DISH_ID, KEY_REST_ID)" + ")";
         db.execSQL(CREATE_INPUTDATA_TABLE);
     }

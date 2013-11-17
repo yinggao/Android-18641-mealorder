@@ -3,13 +3,11 @@ package DBLayout;
 public class FavoriteListContainer {
 	
 	private String restId;
-	private String rank;
-	private String addDate;
+	private String email;
 	
-	public FavoriteListContainer(String restId, String rank, String addDate) {
+	public FavoriteListContainer(String restId, String email) {
 		this.restId = restId;
-		this.rank = rank;
-		this.addDate = addDate;
+		this.email = email;
 	}
 
 	public String getRestId() {
@@ -20,19 +18,12 @@ public class FavoriteListContainer {
 		this.restId = restId;
 	}
 
-	public String getRank() {
-		return rank;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setRank(String rank) {
-		this.rank = rank;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getAddDate() {
-		return addDate;
-	}
-
-	public void setAddDate(String addDate) {
-		this.addDate = addDate;
-	}
 }

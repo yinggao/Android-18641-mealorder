@@ -19,7 +19,7 @@ public class HistoryListDatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "HistoryList";
  
     // Contacts Table Columns names
-    private static final String KEY_EMAIL = "emailrest_id";
+    private static final String KEY_EMAIL = "email";
     private static final String KEY_VISIT_DATE = "visit_date";
     private static final String KEY_REST_ID = "rest_id";
  
@@ -33,8 +33,8 @@ public class HistoryListDatabaseHandler extends SQLiteOpenHelper {
         
         String CREATE_INPUTDATA_TABLE = "CREATE TABLE " + TABLE_NAME + "("
                 + KEY_EMAIL + " TEXT," + KEY_VISIT_DATE + " TEXT,"
-                + KEY_REST_ID + "TEXT," + "PRIMARY KEY (KEY_VISIT_DATE, "
-                + "KEY_REST_ID)" + ")";
+                + KEY_REST_ID + "INTEGER," + "PRIMARY KEY (KEY_VISIT_DATE, "
+                + "KEY_REST_ID, KEY_EMAIL)" + ")";
         db.execSQL(CREATE_INPUTDATA_TABLE);
     }
  

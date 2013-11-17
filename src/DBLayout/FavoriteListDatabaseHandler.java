@@ -21,8 +21,7 @@ public class FavoriteListDatabaseHandler extends SQLiteOpenHelper {
  
     // Contacts Table Columns names
     private static final String KEY_REST_ID = "rest_id";
-    private static final String KEY_RANK = "rank";
-    private static final String KEY_ADD_DATE = "add_date";
+    private static final String KEY_EMAIL = "email";
  
     public FavoriteListDatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,8 +32,8 @@ public class FavoriteListDatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         
         String CREATE_INPUTDATA_TABLE = "CREATE TABLE " + TABLE_NAME + "("
-                + KEY_REST_ID + " TEXT PRIMARY KEY," + KEY_RANK + " TEXT,"
-                + KEY_ADD_DATE + "TEXT" + ")";
+                + KEY_REST_ID + " INTEGER," + KEY_EMAIL + " TEXT,"
+                + "PRIMARY KEY (KEY_EMAIL, KEY_REST_ID)" + ")";
         db.execSQL(CREATE_INPUTDATA_TABLE);
     }
  
@@ -57,8 +56,7 @@ public class FavoriteListDatabaseHandler extends SQLiteOpenHelper {
  
         ContentValues values = new ContentValues();
         values.put(KEY_REST_ID, favoriteListData.getRestId());
-        values.put(KEY_RANK, favoriteListData.getRank());
-        values.put(KEY_ADD_DATE, favoriteListData.getAddDate());
+        values.put(KEY_EMAIL, favoriteListData.getEmail());
  
         // Inserting Row
         db.insert(TABLE_NAME, null, values);
@@ -69,14 +67,13 @@ public class FavoriteListDatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         
         Cursor cursor = db.query(TABLE_NAME, new String[] { KEY_REST_ID,
-        		KEY_RANK, KEY_ADD_DATE}, KEY_REST_ID + "=?", new String[] { restId },
+        		KEY_EMAIL}, KEY_REST_ID, new String[] { restId },
         		null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
  
         FavoriteListContainer favoriteListData = new FavoriteListContainer(
-        		cursor.getString(0), cursor.getString(1),
-        		cursor.getString(2));
+        		cursor.getString(0), cursor.getString(1));
 
         return favoriteListData;
     }
@@ -86,18 +83,17 @@ public class FavoriteListDatabaseHandler extends SQLiteOpenHelper {
  
         ContentValues values = new ContentValues();
         values.put(KEY_REST_ID, favoriteListData.getRestId());
-        values.put(KEY_RANK, favoriteListData.getRank());
-        values.put(KEY_ADD_DATE, favoriteListData.getAddDate());
+        values.put(KEY_EMAIL, favoriteListData.getEmail());
  
         // updating row
         return db.update(TABLE_NAME, values, KEY_REST_ID + " = ?",
                 new String[] { favoriteListData.getRestId() });
     }
 
-    public void deleteData(FavoriteListContainer favoriteListData) {
+    public void deleteData(String email, String restId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, KEY_REST_ID + " = ?",
-                new String[] { favoriteListData.getRestId() });
+        db.delete(TABLE_NAME, KEY_REST_ID + " = ?" + "AND"
+        + KEY_EMAIL + " = ?", new String[] { restId, email });
         db.close();
     }
  
