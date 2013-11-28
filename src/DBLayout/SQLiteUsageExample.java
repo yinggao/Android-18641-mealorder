@@ -1,4 +1,6 @@
-package com.example.assigement2;
+package DBLayout;
+
+import java.util.ArrayList;
 
 import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
@@ -13,26 +15,19 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-public class SomeActivity extends Activity {
+public class SQLiteUsageExample extends Activity {
 	
-	public final static String PURCHASE_PRICE = "com.example.myfirstapp.PURCHASE_PRICE";
-	public final static String MORTGAGE_TERM  = "com.example.myfirstapp.MORTGATE_TERM";
-	public final static String INTEREST_RATE  = "com.example.myfirstapp.INTEREST_RATE";
-	public final static String FIRST_PAYMENT_DATE  = "com.example.myfirstapp.FIRST_PAYMENT_DATE";
-    private InputDatabaseHandler db;
     private DragonBroDatabaseHandler dbdb;
     
+    /*
+     * The onCreate function demonstrate how to use
+     * SQLite database in our app.
+     */
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        EditText mInterestRate = (EditText)findViewById(R.id.interest_rate);
-        mInterestRate.addTextChangedListener(watcher0to100);
-        
-		db = new InputDatabaseHandler(this);
+
 		dbdb = new DragonBroDatabaseHandler(this);
-		dbdb.initializeDatabase();
-		dbdb.initializeDatabase();
 		Log.d("GetData: ", dbdb.getStudentData("muyangy@andrew.cmu.edu"));
 		Log.d("getRestaurantCount: ", dbdb.getRestaurantCount());
 		Log.d("getStudentCount: ", dbdb.getStudentCount());
@@ -50,23 +45,23 @@ public class SomeActivity extends Activity {
 		StudentContainer std = new StudentContainer("apple@aa.com", "123", null, null, null, null, null);
 		dbdb.addStudent(std);
 		dbdb.passwordCheck("apple@aa.com", "123");
-		StudentContainer std = new StudentContainer("apple@aa.com", "123", "jack", "jone", null, null, null);
+		StudentContainer std1 = new StudentContainer("apple@aa.com", "123", "jack", "jone", null, null, null);
 		dbdb.updateStudentInfo(std);
-		StudentContainer std = dbdb.getStudentInfo("muyangy@andrew.cmu.edu");
+		StudentContainer std2 = dbdb.getStudentInfo("muyangy@andrew.cmu.edu");
 		Log.d("getStudentCount: ", dbdb.getStudentCount());
 		Log.d("getStudent: ", dbdb.getStudent());
-		FavoriteListContainer favList = new FavoriteListContainer("5", "yinggao@andrew.cmu.edu");
-		dbdb.addToFavoriteList(favList);
+		FavoriteListContainer favList1 = new FavoriteListContainer("5", "yinggao@andrew.cmu.edu");
+		dbdb.addToFavoriteList(favList1);
 		Log.d("getFavoriteList: ", dbdb.getFavoriteList());
-		FavoriteListContainer favList = new FavoriteListContainer("5", "yinggao@andrew.cmu.edu");
-		dbdb.deleteFromFavoriteList(favList);
+		FavoriteListContainer favList2 = new FavoriteListContainer("5", "yinggao@andrew.cmu.edu");
+		dbdb.deleteFromFavoriteList(favList2);
 		Log.d("getFavoriteList: ", dbdb.getFavoriteList());
 		ArrayList<String> al = dbdb.getFavoriteList("yinggao@andrew.cmu.edu");
-		HistoryListContainer historyList = new HistoryListContainer("muyangy@andrew.cmu.edu", "2013.11.22", "5");
-		dbdb.addToHistoryList(historyList);
+		HistoryListContainer historyList1 = new HistoryListContainer("muyangy@andrew.cmu.edu", "2013.11.22", "5");
+		dbdb.addToHistoryList(historyList1);
 		Log.d("getHistoryList: ", dbdb.getHistoryList());
-		HistoryListContainer historyList = new HistoryListContainer("muyangy@andrew.cmu.edu", "2013.11.22", "5");
-		dbdb.deleteFromHistoryList(historyList);
+		HistoryListContainer historyList2 = new HistoryListContainer("muyangy@andrew.cmu.edu", "2013.11.22", "5");
+		dbdb.deleteFromHistoryList(historyList2);
 		Log.d("getHistoryList: ", dbdb.getHistoryList());
 		ArrayList<HistoryListContainer> hl = dbdb.getHistoryList("muyangy@andrew.cmu.edu");
 		RestaurantContainer rest = new RestaurantContainer("10", "ChuanXiangHui", "some place, pittsburgh, PA, 15213",
@@ -90,46 +85,10 @@ public class SomeActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+//        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
     
-    /** Called when the user clicks the calculate button */
-    public void calculate(View view) {
-    	Intent intent = new Intent(this, DisplayResult.class);
-    	
-    	EditText purchase_price = (EditText) findViewById(R.id.purchase_price);
-    	String message_purchase_price = purchase_price.getText().toString();
-    	intent.putExtra(PURCHASE_PRICE, message_purchase_price);
-
-    	EditText mortgage_term = (EditText) findViewById(R.id.mortgage_term);
-    	String message_mortgage_term = mortgage_term.getText().toString();
-    	intent.putExtra(MORTGAGE_TERM, message_mortgage_term);
-    	
-    	EditText interest_rate = (EditText) findViewById(R.id.interest_rate);
-    	String message_interest_rate = interest_rate.getText().toString();
-    	intent.putExtra(INTEREST_RATE, message_interest_rate);
-
-    	DatePicker datePicker = (DatePicker) findViewById(R.id.dp);
-    	Integer day = datePicker.getDayOfMonth();
-    	Integer month = datePicker.getMonth();
-    	Integer year = datePicker.getYear();
-    	String message_first_payment_date = day.toString() + " " + month.toString()
-    			+ " " + year.toString(); 
-    	intent.putExtra(FIRST_PAYMENT_DATE, message_first_payment_date);
-    	    	
-        db.addInputData(new InputContainer(1, message_purchase_price,
-        		message_mortgage_term, message_interest_rate)); 
-		  Log.d("Reading: ", "Reading a data from DB.."); 
-		  InputContainer data = db.getData(1);       
-		  String log = "Id: "+data.getId()+" ,Loan: " + data.getLoanAmount() +
-		" ,Term: " + data.getTermInYear() + " ,Interest: " +
-				  data.getInterestRate();
-		  Log.d("Data: ", log);
-    	
-
-    	startActivity(intent);
-    }
     
     TextWatcher watcher0to100 = new TextWatcher() {
 		
