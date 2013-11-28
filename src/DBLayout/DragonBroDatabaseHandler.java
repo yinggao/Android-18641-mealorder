@@ -182,9 +182,9 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
      * @param password
      * @return true if authenticated, false otherwise
      */
-    public boolean checkExist(String email, String password) {
+    public boolean passwordCheck(String email, String password) {
     	SQLiteDatabase db = this.getReadableDatabase();
-    	boolean checkResult = StudentDatabaseHandler.checkExist(db, email, password);
+    	boolean checkResult = StudentDatabaseHandler.passwordCheck(db, email, password);
     	db.close();
     	return checkResult;
     	
@@ -198,7 +198,7 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     }
     
     public boolean login(String email, String password) {
-    	if (checkExist(email, password)) {
+    	if (passwordCheck(email, password)) {
     		SQLiteDatabase db = this.getReadableDatabase();
     		CurrentUserDatabaseHandler.setCurrentUser(db, email);
     		db.close();
@@ -215,6 +215,7 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     /**
      * Create new student
      * @param studentInfo
+     * @return true if add is successful false otherwise - if student already exists in database, then return false
      */
     public boolean addStudent(StudentContainer studentInfo) {
     	SQLiteDatabase db = this.getReadableDatabase();
@@ -226,159 +227,199 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	db.close();
 		return addResult;
     }
-//    
-//    /**
-//     * Update student information
-//     * @param studentInfo
-//     */
-//    public void updateStudentInfo(StudentContainer studentInfo) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	StudentDatabaseHandler.updateStudentInfo(db, studentInfo);
-//    }
-//    
-//    /**
-//     * Get student's information
-//     * @param email
-//     * @return
-//     */
-//    public StudentContainer getStudentInfo(String email) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	if (CurrentUserDatabaseHandler.isCurrentUser(email)) {
-//    		return StudentDatabaseHandler.getStudentInfo(db, email);
-//    	}
-//    	return null;
-//    }
-//    
-//    /**
-//     * Add restaurant to favorite list
-//     * @param favoriteList
-//     */
-//    public void addToFavoriteList(FavoriteListContainer favoriteList) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	FavoriteListDatabaseHandler.addToFavoriteList(db, favoriteList);
-//    }
-//    
-//    /**
-//     * Delete restaurant from favorite list
-//     * @param favoriteList
-//     */
-//    public void deleteFromFavoriteList(FavoriteListContainer favoriteList) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	FavoriteListDatabaseHandler.deleteFromFavoriteList(db, favoriteList);
-//    }
-//    
-//    /**
-//     * Get all favorite restaurant for one student
-//     * @param email
-//     * @return
-//     */
-//    public ArrayList<FavoriteListContainer> getFavoriteList(String email) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	return FavoriteListDatabaseHandler.getFavoriteList(db, email);
-//    }
-//    
-//    /**
-//     * Add restaurant and visit date to favorite list
-//     * @param historyList
-//     */
-//    public void addToHistoryList(HistoryListContainer historyList) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	HistoryListContainer.addToHistoryList(db, historyList);
-//    }
-//    
-//    /**
-//     * Delete restaurant and visit date from favorite list
-//     * @param historyList
-//     */
-//    public void deleteFromHistoryList(HistoryListContainer historyList) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	HistoryListContainer.deleteFromHistoryList(db, historyList);
-//    }
-//    
-//    /**
-//     * Get all visited restaurant for one student
-//     * @param email
-//     */
-//    public ArrayList<HistoryListContainer> getHistoryList(String email) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	return HistoryListContainer.getHistoryList(db, email);
-//    }
-//    
-//    /**
-//     * Add restaurant
-//     * @param restaurant
-//     */
-//    public void addRestaurant(RestaurantContainer restaurant) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	RestaurantDatabaseHandler.addRestaurant(db, restaurant);
-//    }
-//    
-//    /**
-//     * Delete restaurant
-//     * @param restaurant
-//     */
-//    public void deleteRestaurant(RestaurantContainer restaurant) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	RestaurantDatabaseHandler.deleteRestaurant(db, restaurant);
-//    }
-//    
-//    /**
-//     * Get total number of restaurants
-//     * @return
-//     */
-//    public int getRestaurantNum() {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	return DishDatabaseHandler.getRestaurantNum(db);
-//    }
-//    
-//    /**
-//     * get restaurant information
-//     * @param restId
-//     * @return
-//     */
-//    public RestaurantContainer getRestaurantInfo(String restId) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	return RestaurantDatabaseHandler.getRestaurantInfo(db, restId);
-//    }
-//    
-//    /**
-//     * Add dish to a restaurant
-//     * @param dish
-//     */
-//    public void addDish(DishContainer dish) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	DishDatabaseHandler.addDish(db, dish);
-//    }
-//    
-//    /**
-//     * Delete dish from restaurant
-//     * @param dish
-//     */
-//    public void deleteDish(DishContainer dish) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	DishDatabaseHandler.deleteDish(db, dish);
-//    }
-//    
-//    /**
-//     * Get total number of dishes in a restaurant
-//     * @param restId
-//     * @return
-//     */
-//    public int getDishNum(String restId) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	return DishDatabaseHandler.getDishNum(db, restId);
-//    }
-//    
-//    /**
-//     * Get dish information
-//     * @param restId
-//     * @param dishId
-//     * @return
-//     */
-//    public DishContainer getDishInfo(String restId, String dishId) {
-//    	SQLiteDatabase db = this.getReadableDatabase();
-//    	return DishDatabaseHandler.getDishInfo(db, restId, dishId);
-//    }
+    
+    /**
+     * Update student information
+     * @param studentInfo
+     * @return true if add is successful false otherwise - if student does not exists in database, then return false
+     */
+    public boolean updateStudentInfo(StudentContainer studentInfo) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	boolean updateResult = false;
+    	if (StudentDatabaseHandler.existStudent(db, studentInfo.getEmail())) {
+    		StudentDatabaseHandler.updateStudentInfo(db, studentInfo);
+    		updateResult = true;
+    	}
+    	db.close();
+		return updateResult;
+    }
+    
+    /**
+     * Get student's information
+     * @param email
+     * @return
+     */
+    public StudentContainer getStudentInfo(String email) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+   		return StudentDatabaseHandler.getStudentInfo(db, email);
+    }
+    
+    /**
+     * Add restaurant to favorite list
+     * @param favoriteList
+     */
+    public void addToFavoriteList(FavoriteListContainer favoriteList) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	if (!FavoriteListDatabaseHandler.isExist(db, favoriteList)) {
+    		FavoriteListDatabaseHandler.addToFavoriteList(db, favoriteList);
+    		
+    	}
+    	db.close();
+    }
+    
+    /**
+     * Delete restaurant from favorite list
+     * @param favoriteList
+     */
+    public void deleteFromFavoriteList(FavoriteListContainer favoriteList) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	if (FavoriteListDatabaseHandler.isExist(db, favoriteList)) {
+    		FavoriteListDatabaseHandler.deleteFromFavoriteList(db, favoriteList);
+    	}
+    	db.close();
+    }
+    
+    /**
+     * Get all favorite restaurant for one student
+     * @param email
+     * @return
+     */
+    public ArrayList<String> getFavoriteList(String email) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<String> retval = FavoriteListDatabaseHandler.getFavoriteList(db, email);
+    	db.close();
+    	return retval;
+    }
+    
+    /**
+     * Add restaurant and visit date to favorite list
+     * @param historyList
+     */
+    public void addToHistoryList(HistoryListContainer historyList) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	if (!HistoryListDatabaseHandler.isExist(db, historyList)) {
+    		HistoryListDatabaseHandler.addToHistoryList(db, historyList);
+    	}
+    	db.close();
+    }
+    
+    /**
+     * Delete restaurant and visit date from favorite list
+     * @param historyList
+     */
+    public void deleteFromHistoryList(HistoryListContainer historyList) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	if (HistoryListDatabaseHandler.isExist(db, historyList)) {
+    		HistoryListDatabaseHandler.deleteFromFavoriteList(db, historyList);
+    	}
+    	db.close();
+    }
+    
+    /**
+     * Get all visited restaurant for one student
+     * @param email
+     */
+    public ArrayList<HistoryListContainer> getHistoryList(String email) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<HistoryListContainer> retval = HistoryListDatabaseHandler.getHistoryList(db, email);
+    	db.close();
+    	return retval;
+    }
+    
+    /**
+     * Add restaurant
+     * @param restaurant
+     */
+    public void addRestaurant(RestaurantContainer restaurant) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	if (!RestaurantDatabaseHandler.isExist(db, restaurant.getRestId())) {
+    		RestaurantDatabaseHandler.addRestaurant(db, restaurant);
+    	}
+    	db.close();
+    }
+    
+    /**
+     * Delete restaurant
+     * @param restaurant
+     */
+    public void deleteRestaurant(String restId) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	if (RestaurantDatabaseHandler.isExist(db, restId)) {
+    		RestaurantDatabaseHandler.deleteRestaurant(db, restId);
+    	}
+    	db.close();
+    }
+    
+    /**
+     * Get total number of restaurants
+     * @return
+     */
+    public int getRestaurantNum() {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	int retval = RestaurantDatabaseHandler.getRestaurantNum(db);
+    	db.close();
+    	return retval;
+    	
+    }
+    
+    /**
+     * get restaurant information
+     * @param restId
+     * @return
+     */
+    public RestaurantContainer getRestaurantInfo(String restId) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	RestaurantContainer retval = RestaurantDatabaseHandler.getRestaurantInfo(db, restId);
+    	db.close();
+    	return retval;
+    }
+    
+    /**
+     * Add dish to a restaurant
+     * @param dish
+     */
+    public void addDish(DishContainer dish) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	if (!DishDatabaseHandler.isExist(db, dish.getRestId(), dish.getDishId())) {
+    		DishDatabaseHandler.addDish(db, dish);
+    	}
+    	db.close();
+    }
+    
+    /**
+     * Delete dish from restaurant
+     * @param dish
+     */
+    public void deleteDish(String dishId, String restId) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	if (DishDatabaseHandler.isExist(db, restId, dishId)) {
+    		DishDatabaseHandler.deleteDish(db, restId, dishId);
+    	}
+    	db.close();
+    }
+    
+    /**
+     * Get total number of dishes in a restaurant
+     * @param restId
+     * @return
+     */
+    public int getDishNum(String restId) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	int retval = DishDatabaseHandler.getDishNum(db, restId);
+    	db.close();
+    	return retval;
+    }
+    
+    /**
+     * Get dish information
+     * @param restId
+     * @param dishId
+     * @return
+     */
+    public DishContainer getDishInfo(String dishId, String restId) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	return DishDatabaseHandler.getDishInfo(db, restId, dishId);
+    }
     
     /************************************************
      * Test function to check database initialization
@@ -475,7 +516,7 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	for (cursor.moveToFirst();!(cursor.isAfterLast());cursor.moveToNext()) {
     		result += cursor.getString(0) + " " + cursor.getString(1) + " " + cursor.getString(2)
         			+ " " + cursor.getString(3) + " " + cursor.getString(4) + " " + cursor.getString(5)
-        			+ " " + cursor.getString(6) + " \n";
+        			+ " " + cursor.getString(6) + " " + cursor.getString(7) + " \n";
     	}
     	return result;
     }

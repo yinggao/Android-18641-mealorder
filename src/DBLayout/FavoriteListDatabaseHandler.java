@@ -1,112 +1,50 @@
 package DBLayout;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-public class FavoriteListDatabaseHandler extends SQLiteOpenHelper {
+public class FavoriteListDatabaseHandler {
 
-	 
-    // All Static variables
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
- 
-    // Database Name
-    private static final String DATABASE_NAME = "DragonIsHungry";
- 
-    // Contacts table name
-    private static final String TABLE_NAME = "FavoriteList";
- 
-    // Contacts Table Columns names
-    private static final String KEY_REST_ID = "rest_id";
-    private static final String KEY_EMAIL = "email";
- 
-    public FavoriteListDatabaseHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
- 
-    // Creating Tables
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        
-        String CREATE_INPUTDATA_TABLE = "CREATE TABLE " + TABLE_NAME + "("
-                + KEY_REST_ID + " INTEGER," + KEY_EMAIL + " TEXT,"
-                + "PRIMARY KEY (KEY_EMAIL, KEY_REST_ID)" + ")";
-        db.execSQL(CREATE_INPUTDATA_TABLE);
-    }
- 
-    // Upgrading database
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
- 
-        // Create tables again
-        onCreate(db);
-    }
- 
-    /**
-     * All CRUD(Create, Read, Update, Delete) Operations
-     */
- 
-    void addData(FavoriteListContainer favoriteListData) {
-        SQLiteDatabase db = this.getWritableDatabase();
- 
-        ContentValues values = new ContentValues();
-        values.put(KEY_REST_ID, favoriteListData.getRestId());
-        values.put(KEY_EMAIL, favoriteListData.getEmail());
- 
-        // Inserting Row
-        db.insert(TABLE_NAME, null, values);
-        db.close(); // Closing database connection
-    }
- 
-    FavoriteListContainer getData(String restId) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        
-        Cursor cursor = db.query(TABLE_NAME, new String[] { KEY_REST_ID,
-        		KEY_EMAIL}, KEY_REST_ID, new String[] { restId },
-        		null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
- 
-        FavoriteListContainer favoriteListData = new FavoriteListContainer(
-        		cursor.getString(0), cursor.getString(1));
-
-        return favoriteListData;
-    }
-     
-    public int updateData(FavoriteListContainer favoriteListData) {
-        SQLiteDatabase db = this.getWritableDatabase();
- 
-        ContentValues values = new ContentValues();
-        values.put(KEY_REST_ID, favoriteListData.getRestId());
-        values.put(KEY_EMAIL, favoriteListData.getEmail());
- 
-        // updating row
-        return db.update(TABLE_NAME, values, KEY_REST_ID + " = ?",
-                new String[] { favoriteListData.getRestId() });
-    }
-
-    public void deleteData(String email, String restId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, KEY_REST_ID + " = ?" + "AND"
-        + KEY_EMAIL + " = ?", new String[] { restId, email });
-        db.close();
-    }
- 
- 
-    // Getting contacts Count
-    public int getDataCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
- 
-        // return count
-        return cursor.getCount();
-    }
- 
+	public static boolean isExist(SQLiteDatabase db, FavoriteListContainer favoriteList) {
+		Cursor cursor = db.query("FavoriteList", new String[] {"rest_id", "email"}, "rest_id" + "=?"
+				+ " AND " + "email" + "=?", new String[] { favoriteList.getRestId(),
+				favoriteList.getEmail() }, null, null,
+				null, null);
+		if (cursor == null) {
+			return false;
+		}
+		if (cursor.getCount() <= 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	public static void addToFavoriteList(SQLiteDatabase db, FavoriteListContainer favoriteList) {
+		ContentValues values = new ContentValues();
+		values.put("email", favoriteList.getEmail());
+		values.put("rest_id", favoriteList.getRestId());
+		
+		// Inserting Row
+		db.insert("FavoriteList", null, values);
+	}
+	
+	public static void deleteFromFavoriteList(SQLiteDatabase db, FavoriteListContainer favoriteList) {
+		db.delete("FavoriteList", "email" + " = ?" + " AND " + "rest_id" + " = ?", 
+				new String[] { favoriteList.getEmail(), favoriteList.getRestId() });
+	}
+	
+	public static ArrayList<String> getFavoriteList(SQLiteDatabase db, String email) {
+		Cursor cursor = db.query("FavoriteList", new String[] {"rest_id"}, "email" + " = ?", new String[] { email }, null, null, null);
+		ArrayList<String> favoriteList = new ArrayList<String>();
+		if (cursor != null) {
+			for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+				favoriteList.add(cursor.getString(0));
+			}
+		}
+		return favoriteList;
+	}
 }

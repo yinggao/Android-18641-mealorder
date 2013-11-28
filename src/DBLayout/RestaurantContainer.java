@@ -9,10 +9,11 @@ public class RestaurantContainer {
 	private String businessHour;
 	private String location;
 	private String category;
+	private String email;
 	
 	public RestaurantContainer(String restId, String name, String address,
 			String phone, String businessHour, String location,
-			String category) {
+			String category, String email) {
 		this.restId = restId;
 		this.name = name;
 		this.address = address;
@@ -20,6 +21,7 @@ public class RestaurantContainer {
 		this.businessHour = businessHour;
 		this.location = location;
 		this.category = category;
+		this.email = email;
 	}
 
 	public String getRestId() {
@@ -76,5 +78,13 @@ public class RestaurantContainer {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
