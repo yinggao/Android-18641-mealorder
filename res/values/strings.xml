@@ -22,6 +22,7 @@
     <string name="cancel">cancel</string>
     <string name="send">send</string>
     <string name="check">check</string>
+    <string name="Email">Email</string>
 
     <color name="background">#6CBDC4</color>
     <color name="sidebar_bg">#D88778</color>

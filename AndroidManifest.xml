@@ -66,6 +66,10 @@
             android:name="com.example.mealdelivery.Nearby"
             android:label="@string/title_activity_neaby" >
         </activity>
+        <activity
+            android:name="ws.remote.EMail"
+            android:label="@string/Email" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

@@ -395,6 +395,7 @@ containing a value of this type.
         public static final int neaby=0x7f0b0001;
     }
     public static final class string {
+        public static final int Email=0x7f06002f;
         public static final int action_settings=0x7f06001b;
         public static final int address=0x7f060029;
         public static final int addtobag=0x7f060027;
@@ -509,7 +510,7 @@ containing a value of this type.
         public static final int signup=0x7f060024;
         public static final int start_record=0x7f06002a;
         public static final int stop_record=0x7f06002b;
-        public static final int title_activity_neaby=0x7f06002f;
+        public static final int title_activity_neaby=0x7f060030;
         public static final int username=0x7f060021;
     }
     public static final class style {

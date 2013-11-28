@@ -234,6 +234,7 @@ int layout signup 0x7f03000b
 int layout voice_popup 0x7f03000c
 int menu main 0x7f0b0000
 int menu neaby 0x7f0b0001
+int string Email 0x7f06002f
 int string action_settings 0x7f06001b
 int string address 0x7f060029
 int string addtobag 0x7f060027
@@ -280,7 +281,7 @@ int string signin 0x7f060023
 int string signup 0x7f060024
 int string start_record 0x7f06002a
 int string stop_record 0x7f06002b
-int string title_activity_neaby 0x7f06002f
+int string title_activity_neaby 0x7f060030
 int string username 0x7f060021
 int style AppBaseTheme 0x7f0a0000
 int style AppTheme 0x7f0a0001

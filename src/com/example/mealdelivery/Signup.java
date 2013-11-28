@@ -14,8 +14,7 @@ public class Signup extends Sidebar {
 
 		LayoutInflater inflater = getLayoutInflater();
 
-		inflater.inflate(R.layout.signup,
-				(ViewGroup) findViewById(R.id.container));
+		inflater.inflate(R.layout.signup,(ViewGroup) findViewById(R.id.container));
 	}
 	
 	public void signupMethod(View view) {
