@@ -3,9 +3,8 @@ package com.example.mealdelivery;
 
 import java.util.ArrayList;
 
+import DBLayout.DragonBroDatabaseHandler;
 import android.content.Intent;
-
-import java.util.Stack;
 
 import com.example.mealdelivery.SidebarView.SizeCallback;
 
@@ -14,14 +13,16 @@ import adapter.MenuAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,8 +32,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 @SuppressLint("NewApi")
-public class Sidebar extends Activity {
+public class Sidebar extends Activity implements OnGestureListener {
 	SidebarView scrollView;
+	View scrollView1;
     MenuAdapter menuAdapter;
     View menu;
     View app;
@@ -45,23 +47,23 @@ public class Sidebar extends Activity {
     boolean loadingFinished = true;
     boolean redirect = false;
     AlertDialog.Builder alert;
+    private DragonBroDatabaseHandler dbdb;
+    private GestureDetector detector; 
 
     @SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        dbdb = new DragonBroDatabaseHandler(this);
         if( Build.VERSION.SDK_INT >= 9){
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
             StrictMode.setThreadPolicy(policy); 
         }
-        
         LayoutInflater inflater = LayoutInflater.from(this);
         scrollView = (SidebarView) inflater.inflate(R.layout.sidebar_list_menu, null);
         setContentView(scrollView);
+        detector = new GestureDetector(this); // used in onTouchEvent functio to capture event
 
-        final Stack stack=new Stack();
         menu = inflater.inflate(R.layout.sidebar_scroll_menu, null);
         app = inflater.inflate(R.layout.sidebar, null);
         //webView =(WebView) app.findViewById(R.id.webView);
@@ -75,43 +77,48 @@ public class Sidebar extends Activity {
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Context context = view.getContext();
                 menuOut = true;
                 scrollSideBarVeiw(scrollView, menu);
         		menuOut = false;
-        	    stack.push(options.get(position));
-        	    Log.d("The contents of Stack is" , stack.toString());
         	    Intent myIntent;
         	    TextView title = (TextView)findViewById(R.id.txtTitle);
         	    title.setText(options.get(position));
         	    switch (position) {
-        	    case 0:
-        	    	myIntent = new Intent(Sidebar.this, Signin.class);
-        			startActivity(myIntent);
-        	    	break;
-        	    case 1:
-        	    	myIntent = new Intent(Sidebar.this, Signup.class);
-        	    	startActivity(myIntent);
-        	    	break;
-        	    case 2:
-        	    	myIntent = new Intent(Sidebar.this, SearchByName.class);
-        	    	startActivity(myIntent);
-        	    	break;
-        	    case 3:
-        	    	myIntent = new Intent(Sidebar.this, Nearby.class);
-        	    	startActivity(myIntent);
-        	    	break;
-        	    case 4:
-        	    	myIntent = new Intent(Sidebar.this, Mine.class);
-        	    	startActivity(myIntent);
-        	    	break;
-        	    case 5:
-        	    	myIntent = new Intent(Sidebar.this, RestaurantDetail.class);
-        	    	startActivity(myIntent);
-        	    	break;
-        	    }
+	        	    case 0:
+	        	    	myIntent = new Intent(Sidebar.this, Signin.class);
+	        			startActivity(myIntent);
+	        	    	break;
+	        	    case 1:
+	        	    	myIntent = new Intent(Sidebar.this, Signup.class);
+	        	    	startActivity(myIntent);
+	        	    	break;
+	        	    case 2:
+	        	    	myIntent = new Intent(Sidebar.this, SearchByName.class);
+	        	    	startActivity(myIntent);
+	        	    	break;
+	        	    case 3:
+	        	    	myIntent = new Intent(Sidebar.this, Nearby.class);
+	        	    	startActivity(myIntent);
+	        	    	break;
+	        	    case 4:
+	        	    	myIntent = new Intent(Sidebar.this, Mine.class);
+	        	    	startActivity(myIntent);
+	        	    	break;
+	        	    case 5:
+	        	    	myIntent = new Intent(Sidebar.this, RestaurantDetail.class);
+	        	    	startActivity(myIntent);
+	        	    	break;
+		            case 6:
+		    	    	myIntent = new Intent(Sidebar.this, Shake.class);
+		    	    	startActivity(myIntent);
+		    	    	break;
+			        case 7:
+			        	dbdb.logout();
+				    	myIntent = new Intent(Sidebar.this, Signin.class);
+				    	startActivity(myIntent);
+				    	break;
+			    }
             }
-
         });
         
         btnSlide = (Button) tabBar.findViewById(R.id.BtnSlide);
@@ -147,9 +154,7 @@ public class Sidebar extends Activity {
         }
 
         @Override
-        public void onClick(View v) {
-            Context context = menu.getContext();
-            
+        public void onClick(View v) {            
             int menuWidth = menu.getMeasuredWidth();
 
             // Ensure menu is visible
@@ -205,7 +210,6 @@ public class Sidebar extends Activity {
     
     //scroll the page
     private void scrollSideBarVeiw(SidebarView scrollView, View menu) {
-    	 Context context = menu.getContext();
          
          int menuWidth = menu.getMeasuredWidth();
 
@@ -227,11 +231,54 @@ public class Sidebar extends Activity {
          menuOut = false;
     }
     
+    @Override  
+    public boolean onTouchEvent(MotionEvent event) {  
+    	// catch touch event and trigger corresponding gesture function 
+        return this.detector.onTouchEvent(event);  
+    }  
         
     @Override
     protected void onResume() {
     	super.onResume();
-    	
     }
+
+
+	@Override
+	public boolean onDown(MotionEvent arg0) {
+		return false;
+	}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY) {
+        if (e1.getX() - e2.getX() > 120) { // left fling, hide menu
+        	scrollView.smoothScrollTo(menu.getMeasuredWidth(), 0); 
+            return true;  
+        } else if (e1.getX() - e2.getX() < -120) { // right fling, show menu
+        	scrollView.smoothScrollTo(0, 0); 
+            return true;  
+        }  
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {}
+
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY) {
+		return false;
+	}
+
+
+	@Override
+	public void onShowPress(MotionEvent e) {}
+
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e) {
+		return false;
+	}
 }
 

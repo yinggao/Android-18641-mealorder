@@ -12,7 +12,7 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
 	 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
  
     // Database Name
     private static final String DATABASE_NAME = "DragonIsHungry";
@@ -46,7 +46,7 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	String CREATE_DISH_TABLE = "CREATE TABLE Dish (dish_id TEXT, rest_id TEXT, dish_name TEXT, description TEXT, audio_path TEXT, photo_path TEXT, PRIMARY KEY (dish_id, rest_id))";
     	String CREATE_FAVORITE_LIST_TABLE = "CREATE TABLE FavoriteList (rest_id TEXT, email TEXT, PRIMARY KEY (rest_id, email))";
     	String CREATE_HISHTORY_LIST_TABLE = "CREATE TABLE HistoryList (email TEXT, visit_date TEXT, rest_id TEXT, PRIMARY KEY (email, visit_date, rest_id))";
-    	String CREATE_RESTAURANT_TABLE = "CREATE TABLE Restaurant (rest_id TEXT PRIMARY KEY, name TEXT, address TEXT, phone TEXT, businesss_hour TEXT, location TEXT, category TEXT, email TEXT)";
+    	String CREATE_RESTAURANT_TABLE = "CREATE TABLE Restaurant (rest_id TEXT PRIMARY KEY, name TEXT, address TEXT, phone TEXT, businesss_hour TEXT, location TEXT, category TEXT, email TEXT, rate TEXT)";
     	String CREATE_STUDENT_TABLE = "CREATE TABLE Student (email TEXT PRIMARY KEY, password TEXT, first_name TEXT, last_name TEXT, address TEXT, phone TEXT, photo_path TEXT)";
     	String CREATE_CURRENT_USER_TABLE = "CREATE TABLE CurrentUser (id TEXT PRIMARY KEY, email TEXT)";
     	db.execSQL(CREATE_DISH_TABLE);
@@ -150,19 +150,19 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     }
     
     private void initializeRestaurant(SQLiteDatabase db) {
-    	String addData = "INSERT INTO Restaurant VALUES('1','Skibo Coffee House','5000 Forbes Avenue, Pittsburgh, PA 15213','(412)268-1803','',NULL,'Cafe', 'dragonishungrytest@gmail.com')";
+    	String addData = "INSERT INTO Restaurant VALUES('1','Skibo Coffee House','5000 Forbes Avenue, Pittsburgh, PA 15213','(412)268-1803','',NULL,'Cafe', 'dragonishungrytest@gmail.com', '1')";
     	db.execSQL(addData);
-    	addData = "INSERT INTO Restaurant VALUES('2','El Gallo de Oro','5000 Forbes Avenue, Pittsburgh, PA 15213',NULL,'Mon.-Fri. 10:30每22:00',NULL,'Cafe', 'dragonishungrytest@gmail.com')";
+    	addData = "INSERT INTO Restaurant VALUES('2','El Gallo de Oro','5000 Forbes Avenue, Pittsburgh, PA 15213',NULL,'Mon.-Fri. 10:30每22:00',NULL,'Cafe', 'dragonishungrytest@gmail.com', '2')";
     	db.execSQL(addData);
-    	addData = "INSERT INTO Restaurant VALUES('3','Tartans Pavilion','5000 Forbes Avenue, Pittsburgh, PA 15213',NULL,'Mon.-Fri. 11:00每23:00',NULL,'Cafe', 'dragonishungrytest@gmail.com')";
+    	addData = "INSERT INTO Restaurant VALUES('3','Tartans Pavilion','5000 Forbes Avenue, Pittsburgh, PA 15213',NULL,'Mon.-Fri. 11:00每23:00',NULL,'Cafe', 'dragonishungrytest@gmail.com', '1')";
     	db.execSQL(addData);
-    	addData = "INSERT INTO Restaurant VALUES('4','Carnegie Mellon Cafe','5000 Forbes Avenue, Pittsburgh, PA 15213','(412)268-2139',NULL,NULL,'Cafe', 'dragonishungrytest@gmail.com')";
+    	addData = "INSERT INTO Restaurant VALUES('4','Carnegie Mellon Cafe','5000 Forbes Avenue, Pittsburgh, PA 15213','(412)268-2139',NULL,NULL,'Cafe', 'dragonishungrytest@gmail.com', '2')";
     	db.execSQL(addData);
-    	addData = "INSERT INTO Restaurant VALUES('5','Orient Express','4609 Forbes Avenue, Pittsburgh, PA 15213','(412)622-7232',NULL,NULL,'Chinese', 'dragonishungrytest@gmail.com')";
+    	addData = "INSERT INTO Restaurant VALUES('5','Orient Express','4609 Forbes Avenue, Pittsburgh, PA 15213','(412)622-7232',NULL,NULL,'Chinese', 'dragonishungrytest@gmail.com', '1')";
     	db.execSQL(addData);
-    	addData = "INSERT INTO Restaurant VALUES('6','Starbucks','417 South Craig Street, Pittsburgh, PA 15213','(412)687-2494','Mon.-Sun. 05:30每21:00',NULL,'Cafe', 'dragonishungrytest@gmail.com')";
+    	addData = "INSERT INTO Restaurant VALUES('6','Starbucks','417 South Craig Street, Pittsburgh, PA 15213','(412)687-2494','Mon.-Sun. 05:30每21:00',NULL,'Cafe', 'dragonishungrytest@gmail.com', '1')";
     	db.execSQL(addData);
-    	addData = "INSERT INTO Restaurant VALUES('7','Yuva India Restaurant','412 South Craig Street, Pittsburgh, PA 15213','(412)681-5700','Mon.-Fri. 11:30每14:30 17:00每22:30',NULL,'Indian', 'dragonishungrytest@gmail.com')";
+    	addData = "INSERT INTO Restaurant VALUES('7','Yuva India Restaurant','412 South Craig Street, Pittsburgh, PA 15213','(412)681-5700','Mon.-Fri. 11:30每14:30 17:00每22:30',NULL,'Indian', 'dragonishungrytest@gmail.com', '3')";
     	db.execSQL(addData);
     }
     
@@ -196,6 +196,12 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
 //    	return false;
     }
     
+    /**
+     * Login
+     * @param email
+     * @param password
+     * @return
+     */
     public boolean login(String email, String password) {
     	if (passwordCheck(email, password)) {
     		SQLiteDatabase db = this.getReadableDatabase();
@@ -206,6 +212,19 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	return false;
     }
     
+    /**
+     * Log out
+     */
+    public void logout() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		CurrentUserDatabaseHandler.setCurrentUser(db, null);
+		db.close();
+    }
+    
+    /**
+     * Get email of current user. If no user, return null
+     * @return
+     */
     public String getCurrentUser() {
     	SQLiteDatabase db = this.getReadableDatabase();
     	return CurrentUserDatabaseHandler.getCurrentUser(db);
@@ -241,6 +260,19 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	}
     	db.close();
 		return updateResult;
+    }
+    
+    /**
+     * Check whether one student account exists
+     * @param email
+     * @return
+     */
+    public boolean existStudent(String email) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	boolean retval = false;
+    	retval = StudentDatabaseHandler.existStudent(db, email);
+    	db.close();
+		return retval;
     }
     
     /**
@@ -374,12 +406,36 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     }
     
     /**
-     * get all restaurants address
+     * get all restaurants information
      * @return
      */
-    public ArrayList<RestaurantContainer> getAllRestaurantsAddress() {
+    public ArrayList<RestaurantContainer> getAllRestaurantsInfo() {
     	SQLiteDatabase db = this.getReadableDatabase();
-    	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getAllRestaurantsAddress(db);
+    	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getAllRestaurantsInfo(db);
+    	db.close();
+    	return retval;
+    }
+    
+    /**
+     * Get restaurants whose name like name parameter
+     * @param name
+     * @return
+     */
+    public ArrayList<RestaurantContainer> getRestaurantsFromName(String name) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getRestaurantsFromName(db, name);
+    	db.close();
+    	return retval;
+    }
+    
+    /**
+     * Get restaurants whose category match parameter
+     * @param category
+     * @return
+     */
+    public ArrayList<RestaurantContainer> getRestaurantsFromCategory(String category) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getRestaurantsFromCategory(db, category);
     	db.close();
     	return retval;
     }
@@ -416,6 +472,13 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     public int getDishNum(String restId) {
     	SQLiteDatabase db = this.getReadableDatabase();
     	int retval = DishDatabaseHandler.getDishNum(db, restId);
+    	db.close();
+    	return retval;
+    }
+    
+    public ArrayList<DishContainer> getDishesInfo(String restId) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<DishContainer> retval = DishDatabaseHandler.getDishesInfo(db, restId);
     	db.close();
     	return retval;
     }

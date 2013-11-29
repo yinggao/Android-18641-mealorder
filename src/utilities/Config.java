@@ -14,7 +14,8 @@ public class Config {
 		options.add("Nearby");
 		options.add("Mine");
 		options.add("Detail");
-		
+		options.add("Shake");
+		options.add("Signout");
 		return options;
 
 	}

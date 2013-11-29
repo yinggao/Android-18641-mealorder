@@ -1,10 +1,10 @@
 package DBLayout;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class DishDatabaseHandler {
 //
@@ -173,5 +173,17 @@ public class DishDatabaseHandler {
 		}
 		cursor.moveToFirst();
 		return new DishContainer(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+	}
+	
+	public static ArrayList<DishContainer> getDishesInfo(SQLiteDatabase db, String restId) {
+		Cursor cursor = db.query("Dish", new String[] { "dish_id", "rest_id", "dish_name", "description", "audio_path", "photo_path"},
+				"rest_id" + "=?", new String[] { restId }, null, null, null);
+		ArrayList<DishContainer> dishesList = new ArrayList<DishContainer>();
+		if (cursor != null) {
+			for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+				dishesList.add(new DishContainer(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5)));
+			}
+		}
+		return dishesList;
 	}
 }
