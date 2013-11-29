@@ -139,7 +139,7 @@
                     android:textStyle="italic" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <!--RelativeLayout
                 android:id="@+id/result_list2"
                 android:layout_width="400dp"
                 android:layout_height="180dp"
@@ -320,7 +320,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
                     android:textStyle="italic" />
-            </RelativeLayout>
+            </RelativeLayout-->
         </LinearLayout>
     </ScrollView>
 

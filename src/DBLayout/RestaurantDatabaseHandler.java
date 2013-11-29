@@ -1,10 +1,10 @@
 package DBLayout;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class RestaurantDatabaseHandler {
 
@@ -57,6 +57,18 @@ public class RestaurantDatabaseHandler {
 		cursor.moveToFirst();
 		return new RestaurantContainer(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
 				cursor.getString(6), cursor.getString(7));
-		
+	}
+	
+	public static ArrayList<RestaurantContainer> getAllRestaurantsAddress(SQLiteDatabase db) {
+		Cursor cursor = db.query("Restaurant", new String[] { "rest_id", "name", "address", "phone", "businesss_hour",
+				"location", "category", "email" }, null, null, null, null, null);
+		ArrayList<RestaurantContainer> addressList = new ArrayList<RestaurantContainer>();
+		if (cursor != null) {
+			for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+				addressList.add(new RestaurantContainer(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
+						cursor.getString(6), cursor.getString(7)));
+			}
+		}
+		return addressList;
 	}
 }
