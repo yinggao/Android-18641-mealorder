@@ -31,9 +31,13 @@ public class Signup extends Sidebar {
 
 		LayoutInflater inflater = getLayoutInflater();
 
+<<<<<<< HEAD
 		inflater.inflate(R.layout.signup,
 				(ViewGroup) findViewById(R.id.container));
 		dbdb = new DragonBroDatabaseHandler(this);		
+=======
+		inflater.inflate(R.layout.signup,(ViewGroup) findViewById(R.id.container));
+>>>>>>> 7bdb81c665505f6661d432f66647f7d5fa0be7ad
 	}
 	
 	public void signinMethod(View view) {

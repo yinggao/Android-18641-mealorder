@@ -1,5 +1,6 @@
 package DBLayout;
 
+
 import java.util.ArrayList;
 
 import DBLayout.DishContainer;
@@ -10,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+
 
 public class SQLiteUsageExample extends Activity {
 	

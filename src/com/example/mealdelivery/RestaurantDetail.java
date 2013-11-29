@@ -1,10 +1,13 @@
 package com.example.mealdelivery;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import ws.remote.EMail;
 
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -89,10 +92,19 @@ public class RestaurantDetail extends Sidebar {
 				sendBtn.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View view) {
-			            new EMail().withRcipients("test@test.com")
-		                   .withSubject("Order meal")
-		                   .withBody("I want this this and that")
-		                   .send();
+						Intent email = new Intent(RestaurantDetail.this, EMail.class);
+						List<String> list = new ArrayList<String>();
+						list.add("test@test.com");
+						String[] mailList = new String[list.size()];
+						mailList = list.toArray(mailList);
+						email.putExtra("Rcipients", mailList);
+						email.putExtra("Subject", "Order meals from XXXXX");
+						email.putExtra("Body", "I want this this and taht");
+						startActivity(email);
+//			            new EMail().withRcipients("test@test.com")
+//		                   .withSubject("Order meal")
+//		                   .withBody("I want this this and that")
+//		                   .send();
 					}
 				});
 

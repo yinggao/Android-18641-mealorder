@@ -406,6 +406,7 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     }
     
     /**
+<<<<<<< HEAD
      * get all restaurants information
      * @return
      */
@@ -436,6 +437,14 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     public ArrayList<RestaurantContainer> getRestaurantsFromCategory(String category) {
     	SQLiteDatabase db = this.getReadableDatabase();
     	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getRestaurantsFromCategory(db, category);
+=======
+     * get all restaurants address
+     * @return
+     */
+    public ArrayList<RestaurantContainer> getAllRestaurantsAddress() {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getAllRestaurantsAddress(db);
+>>>>>>> 7bdb81c665505f6661d432f66647f7d5fa0be7ad
     	db.close();
     	return retval;
     }
