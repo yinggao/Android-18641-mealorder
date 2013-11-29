@@ -5,15 +5,11 @@ import java.util.ArrayList;
 import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.widget.DatePicker;
-import android.widget.EditText;
 
 public class SQLiteUsageExample extends Activity {
 	
@@ -65,7 +61,7 @@ public class SQLiteUsageExample extends Activity {
 		Log.d("getHistoryList: ", dbdb.getHistoryList());
 		ArrayList<HistoryListContainer> hl = dbdb.getHistoryList("muyangy@andrew.cmu.edu");
 		RestaurantContainer rest = new RestaurantContainer("10", "ChuanXiangHui", "some place, pittsburgh, PA, 15213",
-				null, null, null, "chinese", "waht@gmail.com");
+				null, null, null, "chinese", "waht@gmail.com", "4");
 		dbdb.addRestaurant(rest);
 		Log.d("getRestaurant: ", dbdb.getRestaurant());
 		dbdb.deleteRestaurant("10");

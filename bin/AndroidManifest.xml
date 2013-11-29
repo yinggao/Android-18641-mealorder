@@ -14,13 +14,16 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> 
 
     <!--
          The following two permissions are not required to use
 	     Google Maps Android API v2, but are recommended.
     -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:required="false" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:required="false" />
 
     <!--
         This notifies external services of the requirement. In particular, 
@@ -30,6 +33,13 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+    
+    <!--
+         Using camera feature is recommended, but not required.
+    -->
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false" />
+    
 
     <application
         android:allowBackup="true"
@@ -66,7 +76,10 @@
             android:name="com.example.mealdelivery.Nearby"
             android:label="@string/title_activity_neaby" >
         </activity>
-
+		<activity
+            android:name="com.example.mealdelivery.Shake"
+            android:label="Shake" >
+        </activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

@@ -234,26 +234,27 @@ containing a value of this type.
         public static final int rate=0x7f020029;
         public static final int searchbar_bg=0x7f02002a;
         public static final int searchbar_icon=0x7f02002b;
-        public static final int showinmap=0x7f02002c;
-        public static final int showmap=0x7f02002d;
-        public static final int text_bg=0x7f02002e;
-        public static final int textbg=0x7f02002f;
-        public static final int voice=0x7f020030;
+        public static final int shake_screen=0x7f02002c;
+        public static final int showinmap=0x7f02002d;
+        public static final int showmap=0x7f02002e;
+        public static final int text_bg=0x7f02002f;
+        public static final int textbg=0x7f020030;
+        public static final int voice=0x7f020031;
     }
     public static final class id {
         public static final int BtnSlide=0x7f05006e;
         public static final int ScrollView01=0x7f050008;
         public static final int ScrollView02=0x7f05001e;
-        public static final int action_settings=0x7f050081;
+        public static final int action_settings=0x7f050086;
         public static final int addfavorite=0x7f050036;
-        public static final int address=0x7f05007b;
+        public static final int address=0x7f050080;
         public static final int background=0x7f05006b;
         public static final int button1=0x7f050039;
-        public static final int button2=0x7f050079;
         public static final int calander1=0x7f05000b;
         public static final int calander2=0x7f050014;
         public static final int call=0x7f050037;
-        public static final int check=0x7f05007e;
+        public static final int camera=0x7f05007c;
+        public static final int check=0x7f050083;
         public static final int checkBox1=0x7f05003d;
         public static final int checkBox2=0x7f05003f;
         public static final int checkBox3=0x7f050047;
@@ -281,9 +282,9 @@ containing a value of this type.
         public static final int dish_rate3_1=0x7f050042;
         public static final int dish_rate3_2=0x7f050043;
         public static final int dish_rate3_3=0x7f050044;
-        public static final int dismiss=0x7f050080;
+        public static final int dismiss=0x7f050085;
         public static final int dist3=0x7f050040;
-        public static final int emailaddr=0x7f05007a;
+        public static final int errinput=0x7f050074;
         public static final int favorite1=0x7f050020;
         public static final int favorite2=0x7f050028;
         public static final int favorite_dish_info1=0x7f050026;
@@ -301,6 +302,7 @@ containing a value of this type.
         public static final int favorite_form2=0x7f050027;
         public static final int favorite_list=0x7f05001f;
         public static final int favorite_pic=0x7f05001c;
+        public static final int firstname=0x7f05007e;
         public static final int history1=0x7f05000c;
         public static final int history2=0x7f050015;
         public static final int history_form1=0x7f05000a;
@@ -308,6 +310,7 @@ containing a value of this type.
         public static final int history_list=0x7f050009;
         public static final int hybrid=0x7f050004;
         public static final int imageView1=0x7f050006;
+        public static final int lastname=0x7f05007f;
         public static final int link=0x7f050005;
         public static final int list=0x7f050072;
         public static final int logo_dragon=0x7f050073;
@@ -316,11 +319,12 @@ containing a value of this type.
         public static final int name=0x7f050031;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
-        public static final int password=0x7f050078;
-        public static final int password_bg=0x7f050077;
-        public static final int password_form=0x7f050076;
+        public static final int password=0x7f050079;
+        public static final int password_bg=0x7f050078;
+        public static final int password_form=0x7f050077;
+        public static final int phonenumber=0x7f05007d;
         public static final int picture=0x7f050033;
-        public static final int pop_element=0x7f05007c;
+        public static final int pop_element=0x7f050081;
         public static final int popup_container=0x7f05003a;
         public static final int restaurant_info=0x7f050030;
         public static final int restaurant_info1=0x7f050055;
@@ -360,16 +364,18 @@ containing a value of this type.
         public static final int search_icon=0x7f05004a;
         public static final int search_list=0x7f05004e;
         public static final int search_query=0x7f05004b;
-        public static final int send=0x7f05007f;
+        public static final int send=0x7f050084;
         public static final int show_in_map=0x7f05004d;
+        public static final int signinbutton=0x7f05007a;
+        public static final int signupbutton=0x7f05007b;
         public static final int spinner2=0x7f05004c;
-        public static final int start_record=0x7f05007d;
+        public static final int start_record=0x7f050082;
         public static final int tabBar=0x7f05006c;
         public static final int terrain=0x7f050003;
         public static final int top=0x7f050070;
         public static final int txtTitle=0x7f05006d;
-        public static final int username=0x7f050075;
-        public static final int username_bg=0x7f050074;
+        public static final int username=0x7f050076;
+        public static final int username_bg=0x7f050075;
         public static final int voice=0x7f050038;
     }
     public static final class integer {
@@ -383,12 +389,13 @@ containing a value of this type.
         public static final int nearby=0x7f030004;
         public static final int restaurant=0x7f030005;
         public static final int search=0x7f030006;
-        public static final int sidebar=0x7f030007;
-        public static final int sidebar_list_menu=0x7f030008;
-        public static final int sidebar_scroll_menu=0x7f030009;
-        public static final int signin=0x7f03000a;
-        public static final int signup=0x7f03000b;
-        public static final int voice_popup=0x7f03000c;
+        public static final int shake=0x7f030007;
+        public static final int sidebar=0x7f030008;
+        public static final int sidebar_list_menu=0x7f030009;
+        public static final int sidebar_scroll_menu=0x7f03000a;
+        public static final int signin=0x7f03000b;
+        public static final int signup=0x7f03000c;
+        public static final int voice_popup=0x7f03000d;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -496,11 +503,14 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f060013;
         public static final int emailaddress=0x7f060028;
+        public static final int firstname=0x7f060030;
         public static final int hello_world=0x7f06001c;
         public static final int home=0x7f060020;
+        public static final int lastname=0x7f06002f;
         public static final int nearby=0x7f06001e;
         public static final int order=0x7f060026;
         public static final int password=0x7f060022;
+        public static final int phonenumber=0x7f060031;
         public static final int search=0x7f06001d;
         public static final int search_hint=0x7f060025;
         public static final int send=0x7f06002d;
@@ -509,7 +519,7 @@ containing a value of this type.
         public static final int signup=0x7f060024;
         public static final int start_record=0x7f06002a;
         public static final int stop_record=0x7f06002b;
-        public static final int title_activity_neaby=0x7f06002f;
+        public static final int title_activity_neaby=0x7f060032;
         public static final int username=0x7f060021;
     }
     public static final class style {
