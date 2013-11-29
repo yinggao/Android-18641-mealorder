@@ -36,11 +36,11 @@
     <color name="name_text">#E3745F</color>
 
     <string-array name="category">
-        <item>category1</item>
-        <item>category2</item>
-        <item>category3</item>
-        <item>category4</item>
-        <item>category5</item>
+        <item>Cafe</item>
+        <item>Chinese</item>
+        <item>Indian</item>
+        <!--item>category4</item>
+        <item>category5</item-->
     </string-array>
 
     <string name="title_activity_neaby">Neaby</string>

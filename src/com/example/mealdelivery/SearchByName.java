@@ -5,6 +5,7 @@
 package com.example.mealdelivery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import DBLayout.DragonBroDatabaseHandler;
 import DBLayout.RestaurantContainer;
@@ -15,19 +16,25 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.renderscript.Type;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView;
 //import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class SearchByName extends Sidebar {
 	DragonBroDatabaseHandler dbdb = null;
+	ArrayList<RestaurantContainer> allRestaurant = new ArrayList<RestaurantContainer>();//Contain all search results, use to communicate with map
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -35,14 +42,10 @@ public class SearchByName extends Sidebar {
 
 		LayoutInflater inflater = getLayoutInflater();
 		inflater.inflate(R.layout.search,(ViewGroup) findViewById(R.id.container));
-
-		
 		
 		LinearLayout searchList = (LinearLayout)findViewById(R.id.search_list);
-		//ArrayList<View> searchResults = new ArrayList<View>();
-		
 		dbdb = new DragonBroDatabaseHandler(this);
-		ArrayList<RestaurantContainer> allRestaurant = dbdb.getAllRestaurantsAddress();
+		allRestaurant = dbdb.getAllRestaurantsAddress();
 		//get the first 10 restaurants
 		int NO = 1;
 		
@@ -118,23 +121,42 @@ public class SearchByName extends Sidebar {
 
 			searchList.addView(restaurantLayout);
 			
+			NO++;
+			if(NO>10){
+				break;
+			}
 
 		}
-		//searchList.
 		
-			
-		
-		
-		
-		
-		
+		//Add on click
 		TextView show_in_map = (TextView) findViewById(R.id.show_in_map);
 		show_in_map.setOnClickListener(new OnClickListener() {
 		    public void onClick(View v) {
 		    	Intent intent = new Intent(SearchByName.this, Nearby.class);
+		    	
+		    	intent.putExtra("AllRestaurant", allRestaurant);
 				//TODO: put search result into inteng
 				startActivity(intent);
 		    }
+		});
+		
+		final Spinner categorySelect = (Spinner) findViewById(R.id.categorySelect);
+		categorySelect.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				String option = (String) categorySelect.getSelectedItem();
+				Log.d("option", "" + option);
+				layoutByCategory(option);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				return;
+			}
+			
 		});
 		
 				
@@ -150,4 +172,9 @@ public class SearchByName extends Sidebar {
 //		});
 	}
 	
+	void layoutByCategory(String category){
+		LinearLayout searchList = (LinearLayout)findViewById(R.id.search_list);
+		//Clear previous search result
+		searchList.removeAllViews();
+	}
 }
