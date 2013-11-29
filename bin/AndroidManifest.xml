@@ -76,18 +76,14 @@
             android:name="com.example.mealdelivery.Nearby"
             android:label="@string/title_activity_neaby" >
         </activity>
-<<<<<<< HEAD
 		<activity
             android:name="com.example.mealdelivery.Shake"
             android:label="Shake" >
         </activity>
-=======
         <activity
             android:name="ws.remote.EMail"
             android:label="@string/Email" >
         </activity>
-
->>>>>>> 7bdb81c665505f6661d432f66647f7d5fa0be7ad
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

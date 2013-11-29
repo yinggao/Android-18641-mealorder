@@ -56,7 +56,6 @@ public class RestaurantDatabaseHandler {
 		}
 		cursor.moveToFirst();
 		return new RestaurantContainer(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
-<<<<<<< HEAD
 				cursor.getString(6), cursor.getString(7), cursor.getString(8));
 	}
 	
@@ -96,22 +95,19 @@ public class RestaurantDatabaseHandler {
 			}
 		}
 		return restaurantsList;
-=======
-				cursor.getString(6), cursor.getString(7));
 	}
 	
 	public static ArrayList<RestaurantContainer> getAllRestaurantsAddress(SQLiteDatabase db) {
 		Cursor cursor = db.query("Restaurant", new String[] { "rest_id", "name", "address", "phone", "businesss_hour",
-				"location", "category", "email" }, null, null, null, null, null);
-		ArrayList<RestaurantContainer> addressList = new ArrayList<RestaurantContainer>();
+				"location", "category", "email", "rate"}, null, null, null, null, null);
+		ArrayList<RestaurantContainer> restaurantsList = new ArrayList<RestaurantContainer>();
 		if (cursor != null) {
 			for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-				addressList.add(new RestaurantContainer(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
-						cursor.getString(6), cursor.getString(7)));
+				restaurantsList.add(new RestaurantContainer(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
+						cursor.getString(6), cursor.getString(7), cursor.getString(8)));
 			}
 		}
-		return addressList;
->>>>>>> 7bdb81c665505f6661d432f66647f7d5fa0be7ad
+		return restaurantsList;
 	}
 	
 	

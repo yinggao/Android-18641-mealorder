@@ -42,7 +42,7 @@ public class SearchByName extends Sidebar {
 		//ArrayList<View> searchResults = new ArrayList<View>();
 		
 		dbdb = new DragonBroDatabaseHandler(this);
-		ArrayList<RestaurantContainer> allRestaurant = dbdb.getAllRestaurantsAddress();
+		ArrayList<RestaurantContainer> allRestaurant = dbdb.getAllRestaurantsInfo();
 		//get the first 10 restaurants
 		int NO = 1;
 		
