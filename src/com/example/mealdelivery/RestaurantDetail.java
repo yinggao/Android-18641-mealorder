@@ -6,13 +6,19 @@
 package com.example.mealdelivery;
 
 import java.io.File;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import ws.remote.EMail;
 
 import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
+import DBLayout.FavoriteListContainer;
+import DBLayout.HistoryListContainer;
 import DBLayout.RestaurantContainer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -20,6 +26,8 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +49,7 @@ public class RestaurantDetail extends Sidebar {
 	private static final String OUTPUT_FILE = "/sdcard/recordoutput.3gpp";
 	private MediaPlayer mediaPlayer;
 	private MediaRecorder recorder;
+	private String restIDstr=null;
 	List<String> dishBag = new ArrayList<String>();
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,7 @@ public class RestaurantDetail extends Sidebar {
 			RestaurantContainer restaurant = dbdb.getRestaurantInfo(String
 					.valueOf(restaurantID));
 			showInfo(restaurant);
+			restIDstr = String.valueOf(restaurantID);
 		}
 
 		final TextView btnVoicePop = (TextView) findViewById(R.id.voice);
@@ -170,9 +180,19 @@ public class RestaurantDetail extends Sidebar {
 					body.append(i+"." + dishName+"\n");
 					i++;
 				}
-				
 				email.putExtra("Body", body.toString());
+				dbdb.addToHistoryList(new HistoryListContainer(dbdb.getCurrentUser(),
+						 dateToString(new Date()), restIDstr));
 				startActivity(email);
+			}
+		});
+		
+		TextView addfavorite = (TextView) findViewById(R.id.addfavorite);
+		addfavorite.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) { 
+				dbdb.addToFavoriteList(new FavoriteListContainer(restIDstr, dbdb.getCurrentUser()));
 			}
 		});
 
@@ -360,5 +380,10 @@ public class RestaurantDetail extends Sidebar {
 
 			dishList.addView(dishLayout);
 		}
+	}
+	
+	public String dateToString(Date date) {
+		SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yyyy");
+		return formater.format(date);
 	}
 }
