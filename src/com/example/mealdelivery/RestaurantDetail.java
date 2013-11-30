@@ -6,14 +6,15 @@
 package com.example.mealdelivery;
 
 import java.io.File;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.android.gms.games.Player;
-import com.google.android.gms.internal.fi;
 import ws.remote.EMail;
-import DBLayout.DragonBroDatabaseHandler;
 import DBLayout.DishContainer;
+import DBLayout.DragonBroDatabaseHandler;
+import DBLayout.FavoriteListContainer;
+import DBLayout.HistoryListContainer;
 import DBLayout.RestaurantContainer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -26,7 +27,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -45,15 +45,13 @@ public class RestaurantDetail extends Sidebar {
 	private MediaPlayer mediaPlayer;
 	private MediaPlayer vPlayer;
 	private MediaRecorder recorder;
+	private String restIDstr=null;
 	private Boolean hasRecord = false;
 	private TextView btnListen;
 	private Button checkBtn;
-	private List<String> dishBag;
+	private List<String> dishBag = new ArrayList<String>();
 	private Boolean isPlaying = false;
 
-	// // TODO get params from intent
-	// private String restID = "1";
-	private String dishID = "1";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,6 +71,7 @@ public class RestaurantDetail extends Sidebar {
 			RestaurantContainer restaurant = dbdb.getRestaurantInfo(String
 					.valueOf(restaurantID));
 			showInfo(restaurant);
+			restIDstr = String.valueOf(restaurantID);
 		}
 
 		final String toEmail = dbdb.getRestaurantInfo(
@@ -81,33 +80,6 @@ public class RestaurantDetail extends Sidebar {
 		final TextView btnVoicePop = (TextView) findViewById(R.id.voice);
 
 		final TextView btnFeedback = (TextView) findViewById(R.id.feedback);
-
-		// TODO: since .xml is hard code right now, change id
-		btnListen = (TextView) findViewById(R.id.dish_listen1);
-		btnListen.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				String dishVoiceFile = dbdb.getDishInfo(dishID,
-						String.valueOf(restaurantID)).getAudioPath();
-				// TODO hard code dishVoiceFile same as record! Please delete
-				// it!!
-				dishVoiceFile = OUTPUT_FILE;
-
-				try {
-					if (isPlaying) {
-						btnListen.setBackgroundResource(R.drawable.listen);
-						stopPlayingDescription();
-					} else {
-						btnListen.setBackgroundResource(R.drawable.listen_stop);
-						playDescription(dishVoiceFile);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
-		});
 
 		btnFeedback.setOnClickListener(new View.OnClickListener() {
 
@@ -256,9 +228,19 @@ public class RestaurantDetail extends Sidebar {
 					body.append(i + "." + dishName + "\n");
 					i++;
 				}
-
 				email.putExtra("Body", body.toString());
+				dbdb.addToHistoryList(new HistoryListContainer(dbdb.getCurrentUser(),
+						 dateToString(new Date()), restIDstr));
 				startActivity(email);
+			}
+		});
+		
+		TextView addfavorite = (TextView) findViewById(R.id.addfavorite);
+		addfavorite.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) { 
+				dbdb.addToFavoriteList(new FavoriteListContainer(restIDstr, dbdb.getCurrentUser()));
 			}
 		});
 
@@ -437,10 +419,59 @@ public class RestaurantDetail extends Sidebar {
 					TypedValue.COMPLEX_UNIT_DIP, 20, getResources()
 							.getDisplayMetrics());
 			params.setMargins(0, marginTop, 0, 0);
-
+			int dishInfoID = View.generateViewId();
+			dishInfo.setId(dishInfoID);
 			dishInfo.setText(dish.getDescription());
 			dishInfo.setTypeface(null, Typeface.ITALIC);
 			dishInfo.setLayoutParams(params);
+			
+			// Listen description
+			TextView linstenBtn = new TextView(this);
+			params = new RelativeLayout.LayoutParams(
+					RelativeLayout.LayoutParams.WRAP_CONTENT,
+					RelativeLayout.LayoutParams.WRAP_CONTENT);
+			params.addRule(RelativeLayout.ALIGN_LEFT, dishNameID);
+			params.addRule(RelativeLayout.BELOW, dishInfoID);
+			marginTop = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 20, getResources()
+							.getDisplayMetrics());
+			params.setMargins(0, marginTop, 0, 0);
+			linstenBtn.setLayoutParams(params);
+			width = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 50, getResources()
+							.getDisplayMetrics());
+			heigth = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 50, getResources()
+							.getDisplayMetrics());
+			linstenBtn.getLayoutParams().width = width;
+			linstenBtn.getLayoutParams().height = heigth;
+			linstenBtn.setBackgroundResource(R.drawable.listen);
+			
+			final String dishID = dish.getDishId();
+			linstenBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					String dishVoiceFile = dbdb.getDishInfo(dishID,
+							String.valueOf(restIDstr)).getAudioPath();
+					// TODO hard code dishVoiceFile same as record! Please delete
+					// it!!
+					dishVoiceFile = OUTPUT_FILE;
+
+					try {
+						if (isPlaying) {
+							btnListen.setBackgroundResource(R.drawable.listen);
+							stopPlayingDescription();
+						} else {
+							btnListen.setBackgroundResource(R.drawable.listen_stop);
+							playDescription(dishVoiceFile);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+			});
+			
 
 			// Add Check Box
 			CheckBox checkBox = new CheckBox(RestaurantDetail.this);
@@ -472,8 +503,14 @@ public class RestaurantDetail extends Sidebar {
 			dishLayout.addView(dishName);
 			dishLayout.addView(dishInfo);
 			dishLayout.addView(checkBox);
+			dishLayout.addView(linstenBtn);
 
 			dishList.addView(dishLayout);
 		}
+	}
+	
+	public String dateToString(Date date) {
+		SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yyyy");
+		return formater.format(date);
 	}
 }

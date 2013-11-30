@@ -61,11 +61,15 @@ public class Signup extends Activity {
 			passwordText.setText("");
 		} else {
 			errinput.setText("");
-        	if (fileUri != null) {
+			StudentContainer newStudent;
+        	if (fileUri != null) {//If user took a photo
         		fileUri = renamePhoto(userName);
+    			newStudent = new StudentContainer(userName, password,
+    					firstName, lastName, address, phoneNumber, fileUri.toString());
+        	} else {// no photo
+    			newStudent = new StudentContainer(userName, password,
+    					firstName, lastName, address, phoneNumber, null);
         	}
-			StudentContainer newStudent = new StudentContainer(userName, password,
-					firstName, lastName, address, phoneNumber, fileUri.toString());
 			dbdb.addStudent(newStudent);
 			dbdb.login(userName, password);
 			Intent intent = new Intent(this, SearchByName.class);			

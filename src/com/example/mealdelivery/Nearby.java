@@ -3,6 +3,7 @@ package com.example.mealdelivery;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,6 +16,8 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import entities.Map;
 
 import DBLayout.RestaurantContainer;
 import android.location.Address;
@@ -37,6 +40,7 @@ public class Nearby extends Sidebar {
 
 	ArrayList<RestaurantContainer> allRestaurant = null;
 	String[] addressNames = null;
+	HashMap<Marker, String> markerAndRestIDMap = new HashMap<Marker, String>();
 	
 	@SuppressWarnings("unchecked")
 	@SuppressLint("ShowToast")
@@ -98,6 +102,7 @@ public class Nearby extends Sidebar {
 									.title(restaurant.getName())
 									.snippet(restaurant.getAddress())
 									.position(new LatLng(address.getLatitude(), address.getLongitude())));
+							markerAndRestIDMap.put(marker, restaurant.getRestId());
 						}//end for address
 					}//end if addresses
 				}//end for addressNames
@@ -108,10 +113,8 @@ public class Nearby extends Sidebar {
 		map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 			@Override
 			public void onInfoWindowClick(Marker marker) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(Nearby.this, RestaurantDetail.class);
-				//Log.d("title", marker.getTitle());
-				//TODO: Put restaurant information into Intent
+				intent.putExtra("RestaurantID", Integer.parseInt(markerAndRestIDMap.get(marker)));
 				startActivity(intent);
 			}
 		});
