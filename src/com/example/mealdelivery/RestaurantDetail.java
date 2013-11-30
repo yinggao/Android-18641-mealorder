@@ -10,10 +10,6 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import com.google.android.gms.games.Player;
-import com.google.android.gms.internal.fi;
 import ws.remote.EMail;
 import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
@@ -26,14 +22,11 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -510,6 +503,7 @@ public class RestaurantDetail extends Sidebar {
 			dishLayout.addView(dishName);
 			dishLayout.addView(dishInfo);
 			dishLayout.addView(checkBox);
+			dishLayout.addView(linstenBtn);
 
 			dishList.addView(dishLayout);
 		}
