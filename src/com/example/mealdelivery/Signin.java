@@ -2,25 +2,21 @@ package com.example.mealdelivery;
 
 
 import DBLayout.DragonBroDatabaseHandler;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Signin extends Sidebar {
+public class Signin extends Activity {
 	private DragonBroDatabaseHandler dbdb;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getIntent();
 
-		LayoutInflater inflater = getLayoutInflater();
-
-		inflater.inflate(R.layout.signin,
-				(ViewGroup) findViewById(R.id.container));
+		setContentView(R.layout.signin);
 		
 		dbdb = new DragonBroDatabaseHandler(this);
 

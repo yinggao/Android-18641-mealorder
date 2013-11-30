@@ -85,34 +85,24 @@ public class Sidebar extends Activity implements OnGestureListener {
         	    title.setText(options.get(position));
         	    switch (position) {
 	        	    case 0:
-	        	    	myIntent = new Intent(Sidebar.this, Signin.class);
-	        			startActivity(myIntent);
 	        	    	break;
 	        	    case 1:
-	        	    	myIntent = new Intent(Sidebar.this, Signup.class);
-	        	    	startActivity(myIntent);
-	        	    	break;
-	        	    case 2:
 	        	    	myIntent = new Intent(Sidebar.this, SearchByName.class);
 	        	    	startActivity(myIntent);
 	        	    	break;
-	        	    case 3:
+	        	    case 2:
 	        	    	myIntent = new Intent(Sidebar.this, Nearby.class);
 	        	    	startActivity(myIntent);
 	        	    	break;
+	        	    case 3:
+		    	    	myIntent = new Intent(Sidebar.this, Shake.class);
+		    	    	startActivity(myIntent);
+		    	    	break;
 	        	    case 4:
 	        	    	myIntent = new Intent(Sidebar.this, Mine.class);
 	        	    	startActivity(myIntent);
 	        	    	break;
 	        	    case 5:
-	        	    	myIntent = new Intent(Sidebar.this, RestaurantDetail.class);
-	        	    	startActivity(myIntent);
-	        	    	break;
-		            case 6:
-		    	    	myIntent = new Intent(Sidebar.this, Shake.class);
-		    	    	startActivity(myIntent);
-		    	    	break;
-			        case 7:
 			        	dbdb.logout();
 				    	myIntent = new Intent(Sidebar.this, Signin.class);
 				    	startActivity(myIntent);

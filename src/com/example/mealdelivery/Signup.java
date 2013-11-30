@@ -4,20 +4,19 @@ import java.io.File;
 
 import DBLayout.DragonBroDatabaseHandler;
 import DBLayout.StudentContainer;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Signup extends Sidebar {
+public class Signup extends Activity {
 	private DragonBroDatabaseHandler dbdb;
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -29,10 +28,7 @@ public class Signup extends Sidebar {
 
 		getIntent();
 
-		LayoutInflater inflater = getLayoutInflater();
-
-		inflater.inflate(R.layout.signup,
-				(ViewGroup) findViewById(R.id.container));
+		setContentView(R.layout.signup);
 		dbdb = new DragonBroDatabaseHandler(this);		
 	}
 	
