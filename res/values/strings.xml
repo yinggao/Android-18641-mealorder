@@ -13,7 +13,7 @@
     <string name="signin">Sign in</string>
     <string name="signup">Sign up</string>
     <string name="search_hint">Search</string>
-    <string name="order">order now</string>
+    <string name="order">Order</string>
     <string name="addtobag">Add to bag</string>
     <string name="emailaddress">user@email.com</string>
     <string name="address">address</string>
@@ -22,6 +22,10 @@
     <string name="cancel">cancel</string>
     <string name="send">send</string>
     <string name="check">check</string>
+    <string name="call">Call</string>
+    <string name="get_direction">Direction</string>
+    <string name="addtofavorite">Add</string>
+    <string name="voice">Voice</string>
 
     <color name="background">#6CBDC4</color>
     <color name="sidebar_bg">#D88778</color>

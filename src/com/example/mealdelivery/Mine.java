@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class Mine extends Sidebar {
@@ -31,15 +32,28 @@ public class Mine extends Sidebar {
 		    }
 		});
 		
-		TextView favorite_dish_pic1 = (TextView) findViewById(R.id.favorite_dish_pic1);
-		
-		favorite_dish_pic1.setOnClickListener(new OnClickListener() {
-		    public void onClick(View v) {
+		RelativeLayout his_list1 = (RelativeLayout) findViewById(R.id.history1);
+		his_list1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 		    	Intent intent = new Intent(Mine.this, RestaurantDetail.class);
 				//TODO: Put restaurant information into Intent
 				startActivity(intent);
-		    }
+			}
 		});
+		
+		RelativeLayout fav_list1 = (RelativeLayout) findViewById(R.id.favorite1);
+		fav_list1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+		    	Intent intent = new Intent(Mine.this, RestaurantDetail.class);
+				//TODO: Put restaurant information into Intent
+				startActivity(intent);
+			}
+		});
+
 
 	}
 
