@@ -80,6 +80,18 @@ public class SearchByName extends Sidebar {
 			}
 		});
 		
+
+//		RelativeLayout rest_list1 = (RelativeLayout) findViewById(R.id.result_list1);
+//		rest_list1.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//		    	Intent intent = new Intent(SearchByName.this, RestaurantDetail.class);
+//				//TODO: Put restaurant information into Intent
+//				startActivity(intent);
+//			}
+//		});
+
 		Button search_button = (Button) findViewById(R.id.search_button);
 		search_button.setOnClickListener(new OnClickListener() {
 			

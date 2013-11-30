@@ -3,30 +3,21 @@ package com.example.mealdelivery;
 
 import java.util.ArrayList;
 
-import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
 import DBLayout.HistoryListContainer;
 import DBLayout.RestaurantContainer;
-import android.R.layout;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable.Orientation;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class Mine extends Sidebar {
 	DragonBroDatabaseHandler dbdb = null;
@@ -44,32 +35,9 @@ public class Mine extends Sidebar {
 				(ViewGroup) findViewById(R.id.container));
 		
 		layout();
-		
-
-		
-//		TextView rest_pic1 = (TextView) findViewById(R.id.rest_pic1);
-//		
-//		rest_pic1.setOnClickListener(new OnClickListener() {
-//		    public void onClick(View v) {
-//		    	Intent intent = new Intent(Mine.this, RestaurantDetail.class);
-//				//TODO: Put restaurant information into Intent
-//				startActivity(intent);
-//		    }
-//		});
-//		
-//		TextView favorite_rest_pic1 = (TextView) findViewById(R.id.favorite_rest_pic1);
-//		
-//		favorite_rest_pic1.setOnClickListener(new OnClickListener() {
-//		    public void onClick(View v) {
-//		    	Intent intent = new Intent(Mine.this, RestaurantDetail.class);
-//				//TODO: Put restaurant information into Intent
-//				startActivity(intent);
-//		    }
-//		});
 
 	}
 	
-	@SuppressWarnings("deprecation")
 	@SuppressLint("NewApi")
 	void layout() {
 		ArrayList<HistoryListContainer> historyRests = dbdb.getHistoryList(dbdb.getCurrentUser());
