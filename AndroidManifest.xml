@@ -14,13 +14,16 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> 
 
     <!--
          The following two permissions are not required to use
 	     Google Maps Android API v2, but are recommended.
     -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:required="false" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        android:required="false" />
 
     <!--
         This notifies external services of the requirement. In particular, 
@@ -30,6 +33,13 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+    
+    <!--
+         Using camera feature is recommended, but not required.
+    -->
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false" />
+    
 
     <application
         android:allowBackup="true"
@@ -39,23 +49,28 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.mealdelivery.SearchByName"
-            android:label="SearchByName" >
+            android:label="SearchByName"
+            android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name="com.example.mealdelivery.RestaurantDetail"
-            android:label="RestaurantDetail" >
+            android:label="RestaurantDetail"
+            android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name="com.example.mealdelivery.Mine"
-            android:label="Mine" >
+            android:label="Mine"
+            android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name="com.example.mealdelivery.Signup"
-            android:label="SignUp" >
+            android:label="SignUp"
+            android:screenOrientation="portrait"  >
         </activity>
         <activity
             android:name="com.example.mealdelivery.Signin"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,9 +79,19 @@
         </activity>
         <activity
             android:name="com.example.mealdelivery.Nearby"
-            android:label="@string/title_activity_neaby" >
+            android:label="@string/title_activity_neaby"
+            android:screenOrientation="portrait"  >
         </activity>
-
+		<activity
+            android:name="com.example.mealdelivery.Shake"
+            android:label="Shake"
+            android:screenOrientation="portrait"  >
+        </activity>
+        <activity
+            android:name="ws.remote.EMail"
+            android:label="@string/Email"
+            android:screenOrientation="portrait"  >
+        </activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

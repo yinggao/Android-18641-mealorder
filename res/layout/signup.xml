@@ -4,13 +4,14 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/emailaddr"
+        android:id="@+id/camera"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignRight="@+id/phonenumber"
         android:layout_alignTop="@+id/username"
-        android:layout_marginLeft="136dp"
-        android:src="@drawable/camera" />
+        android:layout_marginLeft="50dp"
+        android:src="@drawable/camera"
+        android:onClick="takePhoto" />
 
     <EditText
         android:id="@+id/username"
@@ -22,7 +23,7 @@
         android:layout_marginTop="120dp"
         android:ellipsize="start"
         android:ems="10"
-        android:hint="@string/username"
+        android:hint="@string/emailaddress"
         android:inputType="textPersonName" />
 
     <requestFocus />
@@ -33,38 +34,62 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/username"
         android:layout_below="@+id/username"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:ellipsize="start"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword" />
-
+    
     <EditText
-        android:id="@+id/emailaddr"
+        android:id="@+id/firstname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/username"
         android:layout_below="@+id/password"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
+        android:ellipsize="start"
+        android:ems="10"
+        android:hint="@string/firstname"
+        android:inputType="textPersonName" />
+    
+    <EditText
+        android:id="@+id/lastname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_below="@+id/firstname"
+        android:layout_marginTop="20dp"
+        android:ellipsize="start"
+        android:ems="10"
+        android:hint="@string/lastname"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_below="@+id/lastname"
+        android:layout_marginTop="20dp"
         android:ellipsize="start"
         android:ems="20"
-        android:hint="@string/emailaddress"
-        android:inputType="textEmailAddress" />
+        android:hint="@string/phonenumber"
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/username"
-        android:layout_below="@+id/emailaddr"
-        android:layout_marginTop="60dp"
+        android:layout_below="@+id/phonenumber"
+        android:layout_marginTop="20dp"
         android:ellipsize="start"
         android:ems="20"
         android:hint="@string/address"
         android:inputType="textPostalAddress" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/signupbutton"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/address"
@@ -75,5 +100,28 @@
         android:text="@string/signup"
         android:textColor="@color/button_text"
         android:onClick="signupMethod" />
-
+    
+    <Button
+        android:id="@+id/signinbutton"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signupbutton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        android:gravity="center"
+        android:text="@string/signin"
+        android:textColor="@color/button_text"
+        android:onClick="signinMethod" />
+    
+    <TextView
+        android:id="@+id/errinput"
+        android:layout_width="600dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#FF0000"
+        android:layout_below="@+id/signinbutton"
+        android:textSize="30sp" />
 </RelativeLayout>

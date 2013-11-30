@@ -196,6 +196,12 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
 //    	return false;
     }
     
+    /**
+     * Login
+     * @param email
+     * @param password
+     * @return
+     */
     public boolean login(String email, String password) {
     	if (passwordCheck(email, password)) {
     		SQLiteDatabase db = this.getReadableDatabase();
@@ -206,6 +212,19 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	return false;
     }
     
+    /**
+     * Log out
+     */
+    public void logout() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		CurrentUserDatabaseHandler.setCurrentUser(db, null);
+		db.close();
+    }
+    
+    /**
+     * Get email of current user. If no user, return null
+     * @return
+     */
     public String getCurrentUser() {
     	SQLiteDatabase db = this.getReadableDatabase();
     	return CurrentUserDatabaseHandler.getCurrentUser(db);
@@ -387,12 +406,36 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     }
     
     /**
-     * get all restaurants address
+     * get all restaurants information
      * @return
      */
     public ArrayList<RestaurantContainer> getAllRestaurantsInfo() {
     	SQLiteDatabase db = this.getReadableDatabase();
     	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getAllRestaurantsInfo(db);
+    	db.close();
+    	return retval;
+    }
+    
+    /**
+     * Get restaurants whose name like name parameter
+     * @param name
+     * @return
+     */
+    public ArrayList<RestaurantContainer> getRestaurantsFromName(String name) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getRestaurantsFromName(db, name);
+    	db.close();
+    	return retval;
+    }
+    
+    /**
+     * Get restaurants whose category match parameter
+     * @param category
+     * @return
+     */
+    public ArrayList<RestaurantContainer> getRestaurantsFromCategory(String category) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<RestaurantContainer> retval = RestaurantDatabaseHandler.getRestaurantsFromCategory(db, category);
     	db.close();
     	return retval;
     }
@@ -429,6 +472,13 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     public int getDishNum(String restId) {
     	SQLiteDatabase db = this.getReadableDatabase();
     	int retval = DishDatabaseHandler.getDishNum(db, restId);
+    	db.close();
+    	return retval;
+    }
+    
+    public ArrayList<DishContainer> getDishesInfo(String restId) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	ArrayList<DishContainer> retval = DishDatabaseHandler.getDishesInfo(db, restId);
     	db.close();
     	return retval;
     }

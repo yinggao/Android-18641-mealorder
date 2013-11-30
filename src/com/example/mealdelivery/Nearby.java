@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import DBLayout.RestaurantContainer;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -34,7 +35,10 @@ import android.widget.Toast;
 
 public class Nearby extends Sidebar {
 
+	ArrayList<RestaurantContainer> allRestaurant = null;
+	String[] addressNames = null;
 	
+	@SuppressWarnings("unchecked")
 	@SuppressLint("ShowToast")
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -42,7 +46,7 @@ public class Nearby extends Sidebar {
 		
 		super.onCreate(savedInstanceState);
 
-		getIntent();
+		allRestaurant = (ArrayList<RestaurantContainer>) getIntent().getSerializableExtra("AllRestaurant");
 
 		LayoutInflater inflater = getLayoutInflater();
 
@@ -76,11 +80,11 @@ public class Nearby extends Sidebar {
 			Geocoder geocoder = new Geocoder(Nearby.this, Locale.US);
 			@Override
 			public void onMapLoaded() {
-				List<String> addressNames = new ArrayList<String>(Arrays.asList("Orient Express", "CMU, pittsburgh", "Little Asia", "Lulu's Noodles"));
-				for(String addressName : addressNames) {
+				//List<String> addressNames = new ArrayList<String>(Arrays.asList("Orient Express", "CMU, pittsburgh", "Little Asia", "Lulu's Noodles"));
+				for(RestaurantContainer restaurant : allRestaurant) {
 					List<Address> addresses = null;
 					try {
-						addresses = geocoder.getFromLocationName(addressName, 10);
+						addresses = geocoder.getFromLocationName(restaurant.getAddress(), 10);
 						//geocoder.
 						//addresses = geocoder.getFromLocationName(addressName, 1);
 					} catch (IOException e) {
@@ -91,8 +95,8 @@ public class Nearby extends Sidebar {
 						//Address address = addresses.get(0);
 						for(Address address:addresses){
 							Marker marker = map.addMarker(new MarkerOptions()
-									.title(addressName)
-									.snippet(address.getSubThoroughfare() + " " + address.getThoroughfare())
+									.title(restaurant.getName())
+									.snippet(restaurant.getAddress())
 									.position(new LatLng(address.getLatitude(), address.getLongitude())));
 						}//end for address
 					}//end if addresses
