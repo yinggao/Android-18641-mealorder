@@ -119,6 +119,7 @@ public class SearchByName extends Sidebar {
 		for (RestaurantContainer restaurant : allRestaurant) {
 			// restaurant layout
 			RelativeLayout restaurantLayout = new RelativeLayout(this);
+			restaurantLayout.setId(Integer.valueOf(restaurant.getRestId()));
 			// change to dp unit
 			int width = (int) TypedValue.applyDimension(
 					TypedValue.COMPLEX_UNIT_DIP, 400, getResources()
@@ -194,10 +195,9 @@ public class SearchByName extends Sidebar {
 			// add Onclick listener
 			restaurantLayout.setOnClickListener(new OnClickListener() {
 				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(SearchByName.this,
-							RestaurantDetail.class);
-					// TODO: Put restaurant information into Intent/
+				public void onClick(View view) {
+					Intent intent = new Intent(SearchByName.this, RestaurantDetail.class);
+					intent.putExtra("RestaurantID",view.getId());
 					startActivity(intent);
 				}
 			});// End of onclick listener

@@ -18,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="36dp"
             android:layout_marginTop="52dp"
-            android:text="Restaurant Name \n(TODO)"
+            android:text="Restaurant Name\n"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/name_text"
             android:textStyle="bold" />
@@ -31,7 +31,7 @@
             android:layout_below="@+id/name"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
-            android:text="Address:xxxxxxxxxx\nPhone:xxxxxxxxx\nHours Today: xxxxxxxxx\nEmail:xxxxxxx\n(TODO)"
+            android:text="Address:\nPhone:\nHours Today:\nEmail:\n"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -76,7 +76,7 @@
             android:onClick="onClickVoice" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/order_button"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -174,7 +174,7 @@
                     android:text="@string/addtobag" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <!-- RelativeLayout
                 android:id="@+id/dish2"
                 android:layout_width="400dp"
                 android:layout_height="180dp"
@@ -310,7 +310,7 @@
                     android:layout_alignBottom="@+id/dish_rate3_3"
                     android:layout_alignRight="@+id/dish_name3"
                     android:text="@string/addtobag" />
-            </RelativeLayout>
+            </RelativeLayout -->
         </LinearLayout>
     </ScrollView>
 
