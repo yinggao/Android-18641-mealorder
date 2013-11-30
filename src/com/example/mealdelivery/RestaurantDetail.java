@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,9 +59,6 @@ public class RestaurantDetail extends Sidebar {
 	private List<String> dishBag = new ArrayList<String>();
 	private Boolean isPlaying = false;
 
-	// // TODO get params from intent
-	// private String restID = "1";
-	private String dishID = "1";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,33 +87,6 @@ public class RestaurantDetail extends Sidebar {
 		final TextView btnVoicePop = (TextView) findViewById(R.id.voice);
 
 		final TextView btnFeedback = (TextView) findViewById(R.id.feedback);
-
-		// TODO: since .xml is hard code right now, change id
-		btnListen = (TextView) findViewById(R.id.dish_listen1);
-		btnListen.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				String dishVoiceFile = dbdb.getDishInfo(dishID,
-						String.valueOf(restaurantID)).getAudioPath();
-				// TODO hard code dishVoiceFile same as record! Please delete
-				// it!!
-				dishVoiceFile = OUTPUT_FILE;
-
-				try {
-					if (isPlaying) {
-						btnListen.setBackgroundResource(R.drawable.listen);
-						stopPlayingDescription();
-					} else {
-						btnListen.setBackgroundResource(R.drawable.listen_stop);
-						playDescription(dishVoiceFile);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
-		});
 
 		btnFeedback.setOnClickListener(new View.OnClickListener() {
 
@@ -457,10 +426,59 @@ public class RestaurantDetail extends Sidebar {
 					TypedValue.COMPLEX_UNIT_DIP, 20, getResources()
 							.getDisplayMetrics());
 			params.setMargins(0, marginTop, 0, 0);
-
+			int dishInfoID = View.generateViewId();
+			dishInfo.setId(dishInfoID);
 			dishInfo.setText(dish.getDescription());
 			dishInfo.setTypeface(null, Typeface.ITALIC);
 			dishInfo.setLayoutParams(params);
+			
+			// Listen description
+			TextView linstenBtn = new TextView(this);
+			params = new RelativeLayout.LayoutParams(
+					RelativeLayout.LayoutParams.WRAP_CONTENT,
+					RelativeLayout.LayoutParams.WRAP_CONTENT);
+			params.addRule(RelativeLayout.ALIGN_LEFT, dishNameID);
+			params.addRule(RelativeLayout.BELOW, dishInfoID);
+			marginTop = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 20, getResources()
+							.getDisplayMetrics());
+			params.setMargins(0, marginTop, 0, 0);
+			linstenBtn.setLayoutParams(params);
+			width = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 50, getResources()
+							.getDisplayMetrics());
+			heigth = (int) TypedValue.applyDimension(
+					TypedValue.COMPLEX_UNIT_DIP, 50, getResources()
+							.getDisplayMetrics());
+			linstenBtn.getLayoutParams().width = width;
+			linstenBtn.getLayoutParams().height = heigth;
+			linstenBtn.setBackgroundResource(R.drawable.listen);
+			
+			final String dishID = dish.getDishId();
+			linstenBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					String dishVoiceFile = dbdb.getDishInfo(dishID,
+							String.valueOf(restIDstr)).getAudioPath();
+					// TODO hard code dishVoiceFile same as record! Please delete
+					// it!!
+					dishVoiceFile = OUTPUT_FILE;
+
+					try {
+						if (isPlaying) {
+							btnListen.setBackgroundResource(R.drawable.listen);
+							stopPlayingDescription();
+						} else {
+							btnListen.setBackgroundResource(R.drawable.listen_stop);
+							playDescription(dishVoiceFile);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				}
+			});
+			
 
 			// Add Check Box
 			CheckBox checkBox = new CheckBox(RestaurantDetail.this);
