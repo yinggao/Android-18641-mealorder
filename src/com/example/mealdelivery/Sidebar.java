@@ -69,7 +69,7 @@ public class Sidebar extends Activity implements OnGestureListener {
         //webView =(WebView) app.findViewById(R.id.webView);
         ViewGroup tabBar = (ViewGroup) app.findViewById(R.id.tabBar);
         
-        options = Config.createOptions();
+        options = Config.createOptions(dbdb.getCurrentUser());
         menuAdapter = new MenuAdapter(this,R.layout.link, options);
         ListView listView = (ListView) menu.findViewById(R.id.list);
         //ViewUtils.initListView(this, listView, "Menu ", 8, android.R.layout.simple_list_item_1);
@@ -108,8 +108,11 @@ public class Sidebar extends Activity implements OnGestureListener {
 				    	startActivity(myIntent);
 				    	break;
 			    }
+        	    dragOut();
             }
         });
+        
+        
         
         btnSlide = (Button) tabBar.findViewById(R.id.BtnSlide);
        
@@ -219,6 +222,11 @@ public class Sidebar extends Activity implements OnGestureListener {
             
          }
          menuOut = false;
+    }
+    
+    public void dragOut() {
+    	scrollView.smoothScrollTo(menu.getMeasuredWidth(), 0); 
+    	//scrollView.smoothScrollTo(0, 0); 
     }
     
     @Override  

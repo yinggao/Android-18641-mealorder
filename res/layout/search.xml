@@ -20,7 +20,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="150dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/searchbar_bg" />
+            android:background="@drawable/searchbar_bg"/>
 
         <TextView
             android:id="@+id/search_icon"
@@ -40,7 +40,10 @@
             android:layout_toRightOf="@+id/search_icon"
             android:ellipsize="start"
             android:ems="10"
-            android:hint="@string/search_hint" >
+            android:hint="@string/search_hint"
+            android:lines="1"
+            android:maxLength="30"
+            android:singleLine="true" >
 
             <requestFocus />
         </EditText>
