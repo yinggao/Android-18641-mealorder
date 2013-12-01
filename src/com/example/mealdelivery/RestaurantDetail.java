@@ -18,6 +18,7 @@ import DBLayout.HistoryListContainer;
 import DBLayout.RestaurantContainer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Path.Direction;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -241,6 +242,16 @@ public class RestaurantDetail extends Sidebar {
 			@Override
 			public void onClick(View v) { 
 				dbdb.addToFavoriteList(new FavoriteListContainer(restIDstr, dbdb.getCurrentUser()));
+			}
+		});
+		
+		TextView nearBy = (TextView) findViewById(R.id.direction);
+		nearBy.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(RestaurantDetail.this, Nearby.class);
+				startActivity(intent);
 			}
 		});
 

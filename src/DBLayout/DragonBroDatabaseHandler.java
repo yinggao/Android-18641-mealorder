@@ -146,6 +146,8 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	db.execSQL(addData);
     	addData = "INSERT INTO Student VALUES('guest@andrew.cmu.edu','guest',NULL,NULL,NULL,NULL,NULL)";
     	db.execSQL(addData);
+    	addData = "INSERT INTO Student VALUES('admin','123',NULL,NULL,NULL,NULL,NULL)";
+    	db.execSQL(addData);
     }
     
     private void initializeRestaurant(SQLiteDatabase db) {

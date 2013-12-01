@@ -60,13 +60,11 @@ public class Shake extends Sidebar implements SensorEventListener {
         if (sensorType == Sensor.TYPE_ACCELEROMETER){
             if (Math.abs(values[0]) > 14 || Math.abs(values[1]) > 14 || Math.abs(values[2]) > 14){
             	Random generator = new Random();
-            	int i = generator.nextInt(dbdb.getRestaurantNum());
-    	    	startActivity(new Intent(this, RestaurantDetail.class));
-//            	TextView textView = (TextView)findViewById(R.id.showmessage);
-//                SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss E");
-//    	    	Intent myIntent = new Intent(this, Nearby.class);
-//    	    	startActivity(myIntent);
-//                textView.setText(f.format(new Date()) + "手机摇动了..." + " Random number: " + i);                
+            	sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
+        		int id = generator.nextInt(dbdb.getRestaurantNum());
+            	Intent intent  = new Intent(Shake.this, RestaurantDetail.class);
+            	intent.putExtra("RestaurantID",id);
+    	    	startActivity(intent);              
             }
         }
 	}
