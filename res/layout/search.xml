@@ -20,7 +20,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="150dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/searchbar_bg" />
+            android:background="@drawable/searchbar_bg"/>
 
         <TextView
             android:id="@+id/search_icon"
@@ -40,13 +40,16 @@
             android:layout_toRightOf="@+id/search_icon"
             android:ellipsize="start"
             android:ems="10"
-            android:hint="@string/search_hint" >
+            android:hint="@string/search_hint"
+            android:lines="1"
+            android:maxLength="30"
+            android:singleLine="true" >
 
             <requestFocus />
         </EditText>
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/categorySelect"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/search"
@@ -63,6 +66,16 @@
             android:layout_below="@+id/search"
             android:layout_marginTop="18dp"
             android:background="@drawable/showinmap" />
+
+        <Button
+            android:id="@+id/search_button"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/search"
+            android:layout_alignTop="@+id/search"
+            android:text="@string/search" />
+
     </RelativeLayout>
 
     <ScrollView
@@ -78,7 +91,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <!-->RelativeLayout
                 android:id="@+id/result_list1"
                 android:layout_width="400dp"
                 android:layout_height="180dp"
@@ -137,7 +150,7 @@
                     android:layout_marginTop="20dp"
                     android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
                     android:textStyle="italic" />
-            </RelativeLayout>
+            </RelativeLayout-->
 
             <!--RelativeLayout
                 android:id="@+id/result_list2"

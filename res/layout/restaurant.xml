@@ -18,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="36dp"
             android:layout_marginTop="52dp"
-            android:text="Restaurant Name \n(TODO)"
+            android:text="Restaurant Name\n"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/name_text"
             android:textStyle="bold" />
@@ -31,7 +31,7 @@
             android:layout_below="@+id/name"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
-            android:text="Address:xxxxxxxxxx\nPhone:xxxxxxxxx\nHours Today: xxxxxxxxx\nEmail:xxxxxxx\n(TODO)"
+            android:text="Address:\nPhone:\nHours Today:\nEmail:\n"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -54,43 +54,43 @@
             android:id="@+id/direction"
             android:layout_width="80dp"
             android:layout_height="70dp"
-            android:background="@drawable/showmap" />
+            android:background="@drawable/showmap"
+            android:gravity="bottom|center_horizontal"
+            android:textColor="@color/button_text" />
 
         <TextView
             android:id="@+id/addfavorite"
             android:layout_width="60dp"
-            android:layout_height="70dp"
-            android:background="@drawable/addfavorite" />
+            android:layout_height="60dp"
+            android:background="@drawable/addfavorite"
+            android:layout_marginRight="8dp" />
 
         <TextView
-            android:id="@+id/call"
-            android:layout_width="80dp"
+            android:id="@+id/feedback"
+            android:layout_width="60dp"
             android:layout_height="70dp"
-            android:background="@drawable/call" />
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/feedback"
+            android:gravity="bottom|center_horizontal"
+            android:textColor="@color/button_text" />
 
         <TextView
             android:id="@+id/voice"
             android:layout_width="80dp"
             android:layout_height="65dp"
             android:background="@drawable/voice"
-            android:onClick="onClickVoice" />
+            android:gravity="bottom|center_horizontal"
+            android:onClick="onClickVoice"
+            android:textColor="@color/button_text" />
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/button"
-            android:gravity="center"
-            android:text="@string/order"
+        <TextView
+            android:id="@+id/order_button"
+            android:layout_width="75dp"
+            android:layout_height="70dp"
+            android:background="@drawable/order"
+            android:gravity="bottom|center_horizontal"
             android:textColor="@color/button_text" />
     </LinearLayout>
-    
-    <RelativeLayout
-        android:id="@+id/popup_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </RelativeLayout>
 
     <ScrollView
         android:id="@+id/ScrollView01"
@@ -105,7 +105,7 @@
             android:gravity="center"
             android:orientation="vertical" >
 
-            <RelativeLayout
+            <!-- RelativeLayout
                 android:id="@+id/dish1"
                 android:layout_width="400dp"
                 android:layout_height="180dp"
@@ -165,6 +165,15 @@
                     android:text="Description  xxxxxxxxxxxxxxxx (TODO)"
                     android:textStyle="italic" />
 
+                <TextView
+                    android:id="@+id/dish_listen1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/dish_info1"
+                    android:layout_alignLeft="@+id/dish_name1"
+                    android:layout_marginTop="20dp"
+					android:background="@drawable/listen" />
+
                 <CheckBox
                     android:id="@+id/checkBox1"
                     android:layout_width="wrap_content"
@@ -172,9 +181,9 @@
                     android:layout_alignBottom="@+id/dish_rate1_3"
                     android:layout_alignRight="@+id/dish_name1"
                     android:text="@string/addtobag" />
-            </RelativeLayout>
+            </RelativeLayout -->
 
-            <RelativeLayout
+            <!-- RelativeLayout
                 android:id="@+id/dish2"
                 android:layout_width="400dp"
                 android:layout_height="180dp"
@@ -310,7 +319,7 @@
                     android:layout_alignBottom="@+id/dish_rate3_3"
                     android:layout_alignRight="@+id/dish_name3"
                     android:text="@string/addtobag" />
-            </RelativeLayout>
+            </RelativeLayout -->
         </LinearLayout>
     </ScrollView>
 

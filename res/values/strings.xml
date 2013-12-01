@@ -13,7 +13,7 @@
     <string name="signin">Sign in</string>
     <string name="signup">Sign up</string>
     <string name="search_hint">Search</string>
-    <string name="order">order now</string>
+    <string name="order">Order</string>
     <string name="addtobag">Add to bag</string>
     <string name="emailaddress">user@email.com</string>
     <string name="address">address</string>
@@ -22,10 +22,15 @@
     <string name="cancel">Cancel</string>
     <string name="send">send</string>
     <string name="check">check</string>
+    <string name="get_direction">Direction</string>
+    <string name="addtofavorite">Add</string>
+    <string name="voice">Voice</string>
     <string name="lastname">Last name</string>
     <string name="firstname">First name</string>
     <string name="phonenumber">1234567890</string>
     <string name="Email">Email</string>
+    
+    
     <color name="background">#6CBDC4</color>
     <color name="sidebar_bg">#D88778</color>
     <color name="header_background">#F8F6DE</color>
@@ -38,11 +43,11 @@
     <color name="name_text">#E3745F</color>
 
     <string-array name="category">
-        <item>category1</item>
-        <item>category2</item>
-        <item>category3</item>
-        <item>category4</item>
-        <item>category5</item>
+        <item>Cafe</item>
+        <item>Chinese</item>
+        <item>Indian</item>
+        <!--item>category4</item>
+        <item>category5</item-->
     </string-array>
 
     <string name="title_activity_neaby">Neaby</string>

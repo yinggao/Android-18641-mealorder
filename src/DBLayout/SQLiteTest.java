@@ -1,14 +1,22 @@
 package DBLayout;
 
+<<<<<<< HEAD:src/DBLayout/SQLiteTest.java
+=======
+import java.util.ArrayList;
+
+>>>>>>> 243518fdb8e8772b31a1cf5d003c0448c5e0505f:src/DBLayout/SQLiteUsageExample.java
 import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
-
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
 
 public class SQLiteTest extends Activity {
 	

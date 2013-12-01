@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/background" >
+
+    <RelativeLayout
+        android:id="@+id/tabBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/header_background"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/signup"
+            android:textColor="@color/header_text"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/camera"
@@ -10,8 +32,8 @@
         android:layout_alignRight="@+id/phonenumber"
         android:layout_alignTop="@+id/username"
         android:layout_marginLeft="50dp"
-        android:src="@drawable/camera"
-        android:onClick="takePhoto" />
+        android:onClick="takePhoto"
+        android:src="@drawable/camera" />
 
     <EditText
         android:id="@+id/username"
@@ -39,7 +61,7 @@
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword" />
-    
+
     <EditText
         android:id="@+id/firstname"
         android:layout_width="wrap_content"
@@ -51,7 +73,7 @@
         android:ems="10"
         android:hint="@string/firstname"
         android:inputType="textPersonName" />
-    
+
     <EditText
         android:id="@+id/lastname"
         android:layout_width="wrap_content"
@@ -97,10 +119,10 @@
         android:layout_marginTop="107dp"
         android:background="@drawable/button"
         android:gravity="center"
+        android:onClick="signupMethod"
         android:text="@string/signup"
-        android:textColor="@color/button_text"
-        android:onClick="signupMethod" />
-    
+        android:textColor="@color/button_text" />
+
     <Button
         android:id="@+id/signinbutton"
         android:layout_width="110dp"
@@ -110,18 +132,19 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/button"
         android:gravity="center"
+        android:onClick="signinMethod"
         android:text="@string/signin"
-        android:textColor="@color/button_text"
-        android:onClick="signinMethod" />
-    
+        android:textColor="@color/button_text" />
+
     <TextView
         android:id="@+id/errinput"
         android:layout_width="600dp"
         android:layout_height="40dp"
+        android:layout_below="@+id/signinbutton"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="#FF0000"
-        android:layout_below="@+id/signinbutton"
         android:textSize="30sp" />
+
 </RelativeLayout>
