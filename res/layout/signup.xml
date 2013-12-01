@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/camera"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignRight="@+id/phonenumber"
         android:layout_alignTop="@+id/username"
         android:layout_marginLeft="50dp"

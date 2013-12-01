@@ -9,14 +9,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
 
-	 
     // All Static variables
     // Database Version
     private static final int DATABASE_VERSION = 9;
- 
+
     // Database Name
     private static final String DATABASE_NAME = "DragonIsHungry";
- 
+
     // Contacts table name
 //    private static final String TABLE_NAME = "Student";
  

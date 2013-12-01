@@ -1,8 +1,5 @@
 package DBLayout;
 
-
-import java.util.ArrayList;
-
 import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
 import android.app.Activity;
@@ -13,7 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 
 
-public class SQLiteUsageExample extends Activity {
+public class SQLiteTest extends Activity {
 	
     private DragonBroDatabaseHandler dbdb;
     
@@ -44,8 +41,8 @@ public class SQLiteUsageExample extends Activity {
 		dbdb.addStudent(std);
 		dbdb.passwordCheck("apple@aa.com", "123");
 		StudentContainer std1 = new StudentContainer("apple@aa.com", "123", "jack", "jone", null, null, null);
-		dbdb.updateStudentInfo(std);
-		StudentContainer std2 = dbdb.getStudentInfo("muyangy@andrew.cmu.edu");
+		dbdb.updateStudentInfo(std1);
+		dbdb.getStudentInfo("muyangy@andrew.cmu.edu");
 		Log.d("getStudentCount: ", dbdb.getStudentCount());
 		Log.d("getStudent: ", dbdb.getStudent());
 		FavoriteListContainer favList1 = new FavoriteListContainer("5", "yinggao@andrew.cmu.edu");
@@ -54,14 +51,14 @@ public class SQLiteUsageExample extends Activity {
 		FavoriteListContainer favList2 = new FavoriteListContainer("5", "yinggao@andrew.cmu.edu");
 		dbdb.deleteFromFavoriteList(favList2);
 		Log.d("getFavoriteList: ", dbdb.getFavoriteList());
-		ArrayList<String> al = dbdb.getFavoriteList("yinggao@andrew.cmu.edu");
+		dbdb.getFavoriteList("yinggao@andrew.cmu.edu");
 		HistoryListContainer historyList1 = new HistoryListContainer("muyangy@andrew.cmu.edu", "2013.11.22", "5");
 		dbdb.addToHistoryList(historyList1);
 		Log.d("getHistoryList: ", dbdb.getHistoryList());
 		HistoryListContainer historyList2 = new HistoryListContainer("muyangy@andrew.cmu.edu", "2013.11.22", "5");
 		dbdb.deleteFromHistoryList(historyList2);
 		Log.d("getHistoryList: ", dbdb.getHistoryList());
-		ArrayList<HistoryListContainer> hl = dbdb.getHistoryList("muyangy@andrew.cmu.edu");
+		dbdb.getHistoryList("muyangy@andrew.cmu.edu");
 		RestaurantContainer rest = new RestaurantContainer("10", "ChuanXiangHui", "some place, pittsburgh, PA, 15213",
 				null, null, null, "chinese", "waht@gmail.com", "4");
 		dbdb.addRestaurant(rest);
@@ -70,14 +67,14 @@ public class SQLiteUsageExample extends Activity {
 		Log.d("getRestaurant: ", dbdb.getRestaurant());
 		Integer intval = dbdb.getRestaurantNum();
 		Log.d("getRestaurantNum: ", intval.toString());
-		RestaurantContainer rc = dbdb.getRestaurantInfo("1");
+		dbdb.getRestaurantInfo("1");
 		DishContainer dish = new DishContainer("5", "1", "Pig", "Not so bad", null, null);
 		dbdb.addDish(dish);
 		Log.d("getDish: ", dbdb.getDish());
 		dbdb.deleteDish("5", "1");
 		Log.d("getDish: ", dbdb.getDish());
 		dbdb.getDishNum("1");
-		DishContainer dc = dbdb.getDishInfo("1", "1");
+		dbdb.getDishInfo("1", "1");
 	}
 
     @Override
