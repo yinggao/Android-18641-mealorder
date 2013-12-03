@@ -25,30 +25,34 @@
             android:typeface="sans" />
     </RelativeLayout>
 
-    <ImageView
+    <com.example.mealdelivery.PhotoView
         android:id="@+id/camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="210dp"
         android:layout_alignRight="@+id/phonenumber"
         android:layout_alignTop="@+id/username"
-        android:layout_marginLeft="50dp"
-        android:onClick="takePhoto"
-        android:src="@drawable/camera" />
-
+        android:layout_marginLeft="50dp" />
+   
     <EditText
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/username"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="63dp"
+        android:layout_marginLeft="110dp"
         android:layout_marginTop="120dp"
         android:ellipsize="start"
         android:ems="10"
         android:hint="@string/emailaddress"
         android:inputType="textPersonName" />
-
-    <requestFocus />
+    
+    <TextView
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/username"
+            android:layout_marginLeft="1dp"
+        	android:layout_marginTop="120dp"
+            android:text="Email:"
+            android:textSize="22sp" />
 
     <EditText
         android:id="@+id/password"
@@ -62,6 +66,14 @@
         android:hint="@string/password"
         android:inputType="textPassword" />
 
+    <TextView
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/password"
+        android:layout_marginLeft="1dp"
+        android:text="Password:"
+        android:textSize="22sp" />
+    
     <EditText
         android:id="@+id/firstname"
         android:layout_width="wrap_content"
@@ -74,6 +86,14 @@
         android:hint="@string/firstname"
         android:inputType="textPersonName" />
 
+    <TextView
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/firstname"
+        android:layout_marginLeft="1dp"
+        android:text="FirstName:"
+        android:textSize="22sp" />
+    
     <EditText
         android:id="@+id/lastname"
         android:layout_width="wrap_content"
@@ -86,6 +106,14 @@
         android:hint="@string/lastname"
         android:inputType="textPersonName" />
 
+    <TextView
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/lastname"
+        android:layout_marginLeft="1dp"
+        android:text="LastName:"
+        android:textSize="22sp" />    
+    
     <EditText
         android:id="@+id/phonenumber"
         android:layout_width="wrap_content"
@@ -98,6 +126,14 @@
         android:hint="@string/phonenumber"
         android:inputType="phone" />
 
+    <TextView
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/phonenumber"
+        android:layout_marginLeft="1dp"
+        android:text="Phone:"
+        android:textSize="22sp" />    
+    
     <EditText
         android:id="@+id/address"
         android:layout_width="wrap_content"
@@ -110,6 +146,14 @@
         android:hint="@string/address"
         android:inputType="textPostalAddress" />
 
+    <TextView
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/address"
+        android:layout_marginLeft="1dp"
+        android:text="Address:"
+        android:textSize="22sp" /> 
+    
     <Button
         android:id="@+id/signupbutton"
         android:layout_width="110dp"

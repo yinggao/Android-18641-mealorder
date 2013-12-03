@@ -257,7 +257,7 @@ containing a value of this type.
         public static final int BtnSlide=0x7f050027;
         public static final int ScrollView01=0x7f050008;
         public static final int ScrollView02=0x7f05000c;
-        public static final int action_settings=0x7f050041;
+        public static final int action_settings=0x7f050040;
         public static final int addfavorite=0x7f050015;
         public static final int address=0x7f05003b;
         public static final int background=0x7f050024;
@@ -268,7 +268,6 @@ containing a value of this type.
         public static final int descrption=0x7f050011;
         public static final int direction=0x7f050014;
         public static final int dish_list=0x7f050019;
-        public static final int dismiss=0x7f050040;
         public static final int errinput=0x7f05002e;
         public static final int favorite_list=0x7f05000d;
         public static final int favorite_pic=0x7f05000a;

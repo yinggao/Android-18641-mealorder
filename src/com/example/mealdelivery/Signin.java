@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Signin extends Activity {
 	private DragonBroDatabaseHandler dbdb;
@@ -29,16 +30,19 @@ public class Signin extends Activity {
 		String password = passwordText.getText().toString();
 		if (!dbdb.existStudent(userName)) {
 			TextView errText = (TextView)findViewById(R.id.errinput);
-			errText.setText("User doesn't exist!");
+//			errText.setText("User doesn't exist!");
+			Toast.makeText(getApplicationContext(), "User doesn't exist, sign up?", Toast.LENGTH_SHORT).show();
 			passwordText.setText("");
 		}
 		else if (!dbdb.login(userName, password)) {
 			TextView errText = (TextView)findViewById(R.id.errinput);
-			errText.setText("Password is wrong!");
+//			errText.setText("Password is wrong!");
+			Toast.makeText(getApplicationContext(), "Password is wrong!", Toast.LENGTH_SHORT).show();
 			passwordText.setText("");
 		} else {
 			TextView errText = (TextView)findViewById(R.id.errinput);
-			errText.setText("");
+//			errText.setText("");
+//			Toast.makeText(getApplicationContext(), "User doesn't exist, sign up?", Toast.LENGTH_SHORT).show();
 			//Build a new intent
 			Intent intent = new Intent(this, SearchByName.class);
 			startActivity(intent);

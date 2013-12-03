@@ -4,42 +4,46 @@
  */
 package com.example.mealdelivery;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+
+import entities.ImageLoader;
 
 import DBLayout.DragonBroDatabaseHandler;
 import DBLayout.RestaurantContainer;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.renderscript.Type;
+import android.os.Environment;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.AdapterView;
-//import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+//import android.view.ViewGroup;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
 public class SearchByName extends Sidebar {
 	DragonBroDatabaseHandler dbdb = null;
 	ArrayList<RestaurantContainer> allRestaurant = new ArrayList<RestaurantContainer>();//Contain all search results, use to communicate with map
-
+	private ImageLoader imageLoader;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		imageLoader = ImageLoader.getInstance();
 		getIntent();
 
 		LayoutInflater inflater = getLayoutInflater();
@@ -58,7 +62,6 @@ public class SearchByName extends Sidebar {
 				Intent intent = new Intent(SearchByName.this, Nearby.class);
 
 				intent.putExtra("AllRestaurant", allRestaurant);
-				// TODO: put search result into inteng
 				startActivity(intent);
 			}
 		});
@@ -69,7 +72,6 @@ public class SearchByName extends Sidebar {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 				String option = (String) categorySelect.getSelectedItem();
 				searchByCategory(option);
 			}
@@ -79,25 +81,12 @@ public class SearchByName extends Sidebar {
 				return;
 			}
 		});
-		
-
-//		RelativeLayout rest_list1 = (RelativeLayout) findViewById(R.id.result_list1);
-//		rest_list1.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//		    	Intent intent = new Intent(SearchByName.this, RestaurantDetail.class);
-//				//TODO: Put restaurant information into Intent
-//				startActivity(intent);
-//			}
-//		});
 
 		Button search_button = (Button) findViewById(R.id.search_button);
 		search_button.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				EditText search_query = (EditText) findViewById(R.id.search_query);
 				String name = search_query.getText().toString();
 				searchByName(name);
@@ -147,7 +136,7 @@ public class SearchByName extends Sidebar {
 			restaurantLayout.setLayoutParams(linearParams);
 
 			// Restaurant picture
-			TextView restaurant_pic = new TextView(this);
+			ImageView restaurant_pic = new ImageView(this);
 			int RestaurantPicID = View.generateViewId();
 			restaurant_pic.setId(RestaurantPicID);
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -162,8 +151,20 @@ public class SearchByName extends Sidebar {
 							.getDisplayMetrics());
 			restaurant_pic.getLayoutParams().width = width;
 			restaurant_pic.getLayoutParams().height = heigth;
-			restaurant_pic.setBackgroundResource(R.drawable.egg);
-
+			String photoFilePath = getRestaurantPhoto(restaurant.getRestId());
+			if (photoFilePath != null) {
+				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
+				if (bitmap == null) {
+					bitmap = BitmapFactory.decodeFile(photoFilePath);
+//					bitmap = ImageLoader.decodeSampledBitmapFromResource(
+//							photoFilePath, columnWidth);
+					imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
+				}
+				restaurant_pic.setImageBitmap(bitmap);
+			} else {
+				restaurant_pic.setBackgroundResource(R.drawable.egg);
+			}
+			
 			// Restaurant Name
 			TextView restaurantName = new TextView(this);
 			int restaurantNameID = View.generateViewId();
@@ -222,5 +223,24 @@ public class SearchByName extends Sidebar {
 			}
 
 		}
+	}
+	
+	private String getRestaurantPhoto(String id) {
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                  Environment.DIRECTORY_PICTURES), "RestaurantPhoto");
+
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                Log.d("RestaurantPhoto", "failed to create directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+            "rest_" + id + ".jpg");
+        
+        return mediaFile.toString();
 	}
 }

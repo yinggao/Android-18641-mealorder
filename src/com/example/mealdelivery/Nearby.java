@@ -56,8 +56,6 @@ public class Nearby extends Sidebar {
 
 		inflater.inflate(R.layout.nearby, (ViewGroup) findViewById(R.id.container));
 
-		
-
 		// Get a handle to the Map Fragment
 		final GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		if (map == null) {

@@ -1,30 +1,39 @@
 package com.example.mealdelivery;
 
 
+import java.io.File;
 import java.util.ArrayList;
+
+import entities.ImageLoader;
 
 import DBLayout.DragonBroDatabaseHandler;
 import DBLayout.HistoryListContainer;
 import DBLayout.RestaurantContainer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class Mine extends Sidebar {
 	DragonBroDatabaseHandler dbdb = null;
+	private ImageLoader imageLoader;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		imageLoader = ImageLoader.getInstance();
 		dbdb = new DragonBroDatabaseHandler(this);
 
 		//getIntent();
@@ -86,7 +95,7 @@ public class Mine extends Sidebar {
 			restLayout.setLayoutParams(linearParams);
 
 			// Restaurant picture
-			TextView rest_pic = new TextView(this);
+			ImageView rest_pic = new ImageView(this);
 			int RestaurantPicID = View.generateViewId();
 			rest_pic.setId(RestaurantPicID);
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -101,7 +110,19 @@ public class Mine extends Sidebar {
 							.getDisplayMetrics());
 			rest_pic.getLayoutParams().width = width;
 			rest_pic.getLayoutParams().height = heigth;
-			rest_pic.setBackgroundResource(R.drawable.egg);
+			String photoFilePath = getRestaurantPhoto(restaurant.getRestId());
+			if (photoFilePath != null) {
+				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
+				if (bitmap == null) {
+					bitmap = BitmapFactory.decodeFile(photoFilePath);
+//					bitmap = ImageLoader.decodeSampledBitmapFromResource(
+//							photoFilePath, columnWidth);
+					imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
+				}
+				rest_pic.setImageBitmap(bitmap);
+			} else {
+				rest_pic.setBackgroundResource(R.drawable.egg);
+			}
 
 			// Restaurant Name
 			TextView restName = new TextView(this);
@@ -179,7 +200,7 @@ public class Mine extends Sidebar {
 			restLayout.setLayoutParams(linearParams);
 
 			// Restaurant picture
-			TextView rest_pic = new TextView(this);
+			ImageView rest_pic = new ImageView(this);
 			int RestaurantPicID = View.generateViewId();
 			rest_pic.setId(RestaurantPicID);
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -194,7 +215,19 @@ public class Mine extends Sidebar {
 							.getDisplayMetrics());
 			rest_pic.getLayoutParams().width = width;
 			rest_pic.getLayoutParams().height = heigth;
-			rest_pic.setBackgroundResource(R.drawable.egg);
+			String photoFilePath = getRestaurantPhoto(restaurant.getRestId());
+			if (photoFilePath != null) {
+				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
+				if (bitmap == null) {
+					bitmap = BitmapFactory.decodeFile(photoFilePath);
+//					bitmap = ImageLoader.decodeSampledBitmapFromResource(
+//							photoFilePath, columnWidth);
+					imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
+				}
+				rest_pic.setImageBitmap(bitmap);
+			} else {
+				rest_pic.setBackgroundResource(R.drawable.egg);
+			}
 
 			// Restaurant Name
 			TextView restName = new TextView(this);
@@ -246,10 +279,27 @@ public class Mine extends Sidebar {
 					startActivity(intent);
 				}
 			});// End of onclick listener
-
 			//historyForm.addView(restLayout);
 			favoriteList.addView(restLayout);
 		}//end history favorite list
 	}
+	
+	private String getRestaurantPhoto(String id) {
 
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                  Environment.DIRECTORY_PICTURES), "RestaurantPhoto");
+
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                Log.d("RestaurantPhoto", "failed to create directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+            "rest_" + id + ".jpg");
+        
+        return mediaFile.toString();
+	}
 }

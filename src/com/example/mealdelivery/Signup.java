@@ -6,6 +6,8 @@ import DBLayout.DragonBroDatabaseHandler;
 import DBLayout.StudentContainer;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,15 +15,15 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Signup extends Activity {
+public class Signup extends Activity implements Listener{
 	private DragonBroDatabaseHandler dbdb;
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	private Uri fileUri;
+	private static String filePath;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,6 +32,10 @@ public class Signup extends Activity {
 
 		setContentView(R.layout.signup);
 		dbdb = new DragonBroDatabaseHandler(this);		
+		PhotoView photoView = (PhotoView)findViewById(R.id.camera);
+		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.camera);
+		photoView.setImageBitmap(bitmap); 
+		photoView.addListener(this);
 	}
 	
 	public void signinMethod(View view) {
@@ -77,18 +83,7 @@ public class Signup extends Activity {
 		}
 	}
 
-	public void takePhoto(View view) {
-		if (ExistSDCard()) {
-	    	// create Intent to take a picture and return control to the calling application
-	        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	        
-	        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-	        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-	
-	        // start the image capture Intent
-	        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-		}
-    }
+
 	
 	 /** Create a file Uri for saving an image or video */
     private static Uri getOutputMediaFileUri(int type){
@@ -118,6 +113,7 @@ public class Signup extends Activity {
         if (type == MEDIA_TYPE_IMAGE){
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
             "IMG_temp" + ".jpg");
+            filePath = mediaFile.toString();
         } else {
             return null;
         }
@@ -128,9 +124,9 @@ public class Signup extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // Image captured and saved to fileUri specified in the Intent
-            	ImageView image = (ImageView)findViewById(R.id.camera);
-            	image.setImageURI(fileUri);
+            	PhotoView photoView = (PhotoView)findViewById(R.id.camera);
+            	Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        		photoView.setImageBitmap(bitmap); 
             } else if (resultCode == RESULT_CANCELED) {
                 // User cancelled the image capture
             } else {
@@ -167,5 +163,20 @@ public class Signup extends Activity {
 		return true;  
 	} else  
 		return false;  
+	}
+
+	@Override
+	public void informed() {
+		if (ExistSDCard()) {
+	    	// create Intent to take a picture and return control to the calling application
+	        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	        
+	        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+	        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+	
+	        // start the image capture Intent
+	        startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+		}
+		
 	}
 }

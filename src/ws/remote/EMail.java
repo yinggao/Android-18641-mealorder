@@ -21,7 +21,7 @@ public class EMail extends Activity {
 	private String[] recipients=null;
 	private String subject=null;
 	private String body=null;
-	
+	private boolean hasAudio = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,6 +29,7 @@ public class EMail extends Activity {
 		setRecipients(intent.getStringArrayExtra("Rcipients"));
 		setSubject(intent.getStringExtra("Subject"));
 		setBody(intent.getStringExtra("Body"));
+		hasAudio = intent.getBooleanExtra("HasAudio", false);
 		send();
 		finish();
 	}
@@ -51,9 +52,9 @@ public class EMail extends Activity {
 		if(body != null) {
 			sendEmail.putExtra(android.content.Intent.EXTRA_TEXT, body);
 		}
-		
-		sendEmail.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(attachement));
-		
+		if (hasAudio) {
+			sendEmail.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(attachement));
+		}
 		Intent testIntent = Intent.createChooser(sendEmail, "Choose an email client:");
 		startActivity(testIntent);//choose email client then start email intent
 		//startActivity(sendEmail);

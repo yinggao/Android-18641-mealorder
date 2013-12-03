@@ -3,26 +3,24 @@ package com.example.mealdelivery;
 
 import java.util.ArrayList;
 
-import DBLayout.DragonBroDatabaseHandler;
-import android.content.Intent;
-
-import com.example.mealdelivery.SidebarView.SizeCallback;
-
 import utilities.Config;
+import DBLayout.DragonBroDatabaseHandler;
+import DBLayout.RestaurantContainer;
 import adapter.MenuAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -30,6 +28,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.mealdelivery.SidebarView.SizeCallback;
 
 @SuppressLint("NewApi")
 public class Sidebar extends Activity implements OnGestureListener {
@@ -91,7 +91,10 @@ public class Sidebar extends Activity implements OnGestureListener {
 	        	    	startActivity(myIntent);
 	        	    	break;
 	        	    case 2:
+	        	    	ArrayList<RestaurantContainer> allRestaurant = new ArrayList<RestaurantContainer>();
+	        	    	allRestaurant = dbdb.getAllRestaurantsInfo();
 	        	    	myIntent = new Intent(Sidebar.this, Nearby.class);
+	        	    	myIntent.putExtra("AllRestaurant", allRestaurant);
 	        	    	startActivity(myIntent);
 	        	    	break;
 	        	    case 3:

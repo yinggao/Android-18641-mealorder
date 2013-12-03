@@ -6,10 +6,11 @@
 package com.example.mealdelivery;
 
 import java.io.File;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import ws.remote.EMail;
 import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
@@ -18,49 +19,60 @@ import DBLayout.HistoryListContainer;
 import DBLayout.RestaurantContainer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Path.Direction;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import entities.ImageLoader;
 
 @SuppressLint("SdCardPath")
 public class RestaurantDetail extends Sidebar {
 
 	private DragonBroDatabaseHandler dbdb = null;
-	private static final String OUTPUT_FILE = "/sdcard/recordoutput.3gpp";
+	private static final String OUTPUT_FILE = "/storage/emulated/0/Music/DishAudio/dish_order.3gpp";
+
 	private MediaPlayer mediaPlayer;
 	private MediaPlayer vPlayer;
 	private MediaRecorder recorder;
 	private String restIDstr=null;
 	private Boolean hasRecord = false;
-	private TextView btnListen;
 	private Button checkBtn;
 	private List<String> dishBag = new ArrayList<String>();
 	private Boolean isPlaying = false;
-
-
+	private PopupWindow popupWindow;
+	private ImageLoader imageLoader;
+	private int columnWidth;
+	
 	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 
 		getIntent();
 		dbdb = new DragonBroDatabaseHandler(this);
 		dishBag = new ArrayList<String>();
-
+		imageLoader = ImageLoader.getInstance();
+		
 		LayoutInflater inflater = getLayoutInflater();
 
 		inflater.inflate(R.layout.restaurant,
@@ -78,10 +90,9 @@ public class RestaurantDetail extends Sidebar {
 		final String toEmail = dbdb.getRestaurantInfo(
 				String.valueOf(restaurantID)).getEmail();
 
-		final TextView btnVoicePop = (TextView) findViewById(R.id.voice);
+		
 
 		final TextView btnFeedback = (TextView) findViewById(R.id.feedback);
-
 		btnFeedback.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -93,35 +104,35 @@ public class RestaurantDetail extends Sidebar {
 				String[] mailList = new String[list.size()];
 				mailList = list.toArray(mailList);
 				email.putExtra("Rcipients", mailList);
+				email.putExtra("HasAudio", false);
 				email.putExtra("Subject", "Give feedback");
 				email.putExtra("Body", "I like it......");
 				startActivity(email);
 			}
 		});
 
+		final TextView btnVoicePop = (TextView) findViewById(R.id.voice);
 		btnVoicePop.setOnClickListener(new View.OnClickListener() {
-
+				
 			@Override
 			public void onClick(View v) {
 				LayoutInflater layoutInflater = (LayoutInflater) RestaurantDetail.this
 						.getSystemService(LAYOUT_INFLATER_SERVICE);
 				View popupView = layoutInflater.inflate(R.layout.voice_popup,
 						(ViewGroup) findViewById(R.id.pop_element), false);
-				final PopupWindow popupWindow = new PopupWindow(popupView, 80,
+				popupWindow = new PopupWindow(popupView, 80,
 						400);
-
-				popupWindow.setOutsideTouchable(false);
+				popupWindow.setBackgroundDrawable(new BitmapDrawable());
+				popupWindow.setOutsideTouchable(true);
 				popupWindow.setFocusable(true);
+				popupWindow.setTouchInterceptor(customPopUpTouchListenr);
 
 				final Button startBtn = (Button) popupView
 						.findViewById(R.id.start_record);
-
-				checkBtn = (Button) popupView.findViewById(R.id.check);
-				Button sendBtn = (Button) popupView.findViewById(R.id.send);
-
 				startBtn.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View view) {
+						
 						hasRecord = true;
 						try {
 							if (mediaPlayer != null) {
@@ -129,7 +140,7 @@ public class RestaurantDetail extends Sidebar {
 							}
 							if (startBtn.getText().equals("stop")) {
 
-								startBtn.setText("start");
+								startBtn.setText("record");
 								stopRecording();
 
 							} else {
@@ -142,6 +153,7 @@ public class RestaurantDetail extends Sidebar {
 					}
 				});
 
+				checkBtn = (Button) popupView.findViewById(R.id.check);
 				checkBtn.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -159,6 +171,7 @@ public class RestaurantDetail extends Sidebar {
 					}
 				});
 
+				Button sendBtn = (Button) popupView.findViewById(R.id.send);
 				sendBtn.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -172,9 +185,11 @@ public class RestaurantDetail extends Sidebar {
 							String[] mailList = new String[list.size()];
 							mailList = list.toArray(mailList);
 							email.putExtra("Rcipients", mailList);
+							email.putExtra("HasAudio", true);
 							email.putExtra("Subject", "Order meals from XXXXX");
-							email.putExtra("Body", "I want this this and taht");
+							email.putExtra("Body", "I want this this and that");
 							startActivity(email);
+							hasRecord = false;
 							// new EMail().withRcipients("test@test.com")
 							// .withSubject("Order meal")
 							// .withBody("I want this this and that")
@@ -187,24 +202,24 @@ public class RestaurantDetail extends Sidebar {
 					}
 				});
 
-				// dismiss pop up window
-				Button btnDismiss = (Button) popupView
-						.findViewById(R.id.dismiss);
-				btnDismiss.setOnClickListener(new Button.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						try {
-							stopPlayingRecording();
-							stopPlayingDescription();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						// TODO Auto-generated method stub
-						popupWindow.dismiss();
-					}
-				});
+//				// dismiss pop up window
+//				Button btnDismiss = (Button) popupView
+//						.findViewById(R.id.dismiss);
+//				btnDismiss.setOnClickListener(new Button.OnClickListener() {
+//
+//					@Override
+//					public void onClick(View v) {
+//						try {
+//							stopPlayingRecording();
+//							stopPlayingDescription();
+//						} catch (Exception e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+//						// TODO Auto-generated method stub
+//						popupWindow.dismiss();
+//					}
+//				});
 
 				popupWindow.showAsDropDown(btnVoicePop, 0, 0);
 				// popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
@@ -221,6 +236,7 @@ public class RestaurantDetail extends Sidebar {
 				String[] mailList = new String[list.size()];
 				mailList = list.toArray(mailList);
 				email.putExtra("Rcipients", mailList);
+				email.putExtra("HasAudio", false);
 				email.putExtra("Subject", "Order meals from CMU");
 				StringBuilder body = new StringBuilder();
 				body.append("I want These dishes:\n");
@@ -242,6 +258,7 @@ public class RestaurantDetail extends Sidebar {
 			@Override
 			public void onClick(View v) { 
 				dbdb.addToFavoriteList(new FavoriteListContainer(restIDstr, dbdb.getCurrentUser()));
+				Toast.makeText(getBaseContext(), "Add to favorite list", Toast.LENGTH_SHORT).show();
 			}
 		});
 		
@@ -250,13 +267,25 @@ public class RestaurantDetail extends Sidebar {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(RestaurantDetail.this, Nearby.class);
-				startActivity(intent);
+    	    	ArrayList<RestaurantContainer> allRestaurant = new ArrayList<RestaurantContainer>();
+    	    	allRestaurant.add(dbdb.getRestaurantInfo(restIDstr));
+    	    	Intent intent = new Intent(RestaurantDetail.this, Nearby.class);
+    	    	intent.putExtra("AllRestaurant", allRestaurant);
+    	    	startActivity(intent);
 			}
 		});
 
 	}
 
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		   // TODO Auto-generated method stub
+		   if (popupWindow != null && popupWindow.isShowing()) {
+		   popupWindow.dismiss();
+		   }
+		   return super.onTouchEvent(event);
+		}
+	
 	private void beginRecording() throws Exception {
 		killMediaRecorder();
 		File outFile = new File(OUTPUT_FILE);
@@ -314,12 +343,15 @@ public class RestaurantDetail extends Sidebar {
 		}
 	}
 
-	private void playDescription(String voicePath) throws Exception {
-		killMediaPlayer(vPlayer);
+	private void playDescription(String voicePath, TextView linstenBtn) throws Exception {
+		final TextView linstenFianl = linstenBtn;
+		if (vPlayer != null) {
+			killMediaPlayer(vPlayer);
+		}
 		vPlayer = new MediaPlayer();
 		vPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 			public void onCompletion(MediaPlayer mp) {
-				btnListen.setBackgroundResource(R.drawable.listen);
+				linstenFianl.setBackgroundResource(R.drawable.listen);
 				isPlaying = false;
 			}
 		});
@@ -358,6 +390,21 @@ public class RestaurantDetail extends Sidebar {
 		info.setText(dishInfo);
 
 		layoutAllDishes(restaurant.getRestId());
+		ImageView rest_pic = (ImageView)findViewById(R.id.picture);
+		columnWidth = rest_pic.getWidth();
+		String photoFilePath = getRestaurantPhoto(restaurant.getRestId());
+		if (photoFilePath != null) {
+			Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
+			if (bitmap == null) {
+				bitmap = BitmapFactory.decodeFile(photoFilePath);
+//				bitmap = ImageLoader.decodeSampledBitmapFromResource(
+//						photoFilePath, columnWidth);
+				imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
+			}
+			rest_pic.setImageBitmap(bitmap);
+		} else {
+			rest_pic.setBackgroundResource(R.drawable.egg);
+		}
 	}
 
 	@SuppressLint("NewApi")
@@ -383,8 +430,8 @@ public class RestaurantDetail extends Sidebar {
 					R.drawable.content_bg));
 			dishLayout.setLayoutParams(linearParams);
 
-			// Restaurant picture
-			TextView dish_pic = new TextView(this);
+			// Dish picture
+			ImageView dish_pic = new ImageView(this);
 			int RestaurantPicID = View.generateViewId();
 			dish_pic.setId(RestaurantPicID);
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -399,8 +446,20 @@ public class RestaurantDetail extends Sidebar {
 							.getDisplayMetrics());
 			dish_pic.getLayoutParams().width = width;
 			dish_pic.getLayoutParams().height = heigth;
-			dish_pic.setBackgroundResource(R.drawable.dish);
-
+			String photoFilePath = getDishPhoto(restId, dish.getDishId());
+			if (photoFilePath != null) {
+				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
+				if (bitmap == null) {
+					bitmap = BitmapFactory.decodeFile(photoFilePath);
+//					bitmap = ImageLoader.decodeSampledBitmapFromResource(
+//							photoFilePath, columnWidth);
+					imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
+				}
+				dish_pic.setImageBitmap(bitmap);
+			} else {
+				dish_pic.setBackgroundResource(R.drawable.egg);
+			}
+			
 			// Dish Name
 			TextView dishName = new TextView(this);
 			int dishNameID = View.generateViewId();
@@ -437,7 +496,7 @@ public class RestaurantDetail extends Sidebar {
 			dishInfo.setLayoutParams(params);
 			
 			// Listen description
-			TextView linstenBtn = new TextView(this);
+			final TextView linstenBtn = new TextView(this);
 			params = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.WRAP_CONTENT,
 					RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -459,6 +518,7 @@ public class RestaurantDetail extends Sidebar {
 			linstenBtn.setBackgroundResource(R.drawable.listen);
 			
 			final String dishID = dish.getDishId();
+			final String restID = restId;
 			linstenBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -466,15 +526,18 @@ public class RestaurantDetail extends Sidebar {
 							String.valueOf(restIDstr)).getAudioPath();
 					// TODO hard code dishVoiceFile same as record! Please delete
 					// it!!
-					dishVoiceFile = OUTPUT_FILE;
+//					dishVoiceFile = OUTPUT_FILE;
+					dishVoiceFile = getDishAudio(restID, dishID);
 
 					try {
 						if (isPlaying) {
-							btnListen.setBackgroundResource(R.drawable.listen);
+							linstenBtn.setBackgroundResource(R.drawable.listen);
 							stopPlayingDescription();
 						} else {
-							btnListen.setBackgroundResource(R.drawable.listen_stop);
-							playDescription(dishVoiceFile);
+							linstenBtn.setBackgroundResource(R.drawable.listen_stop);
+							if (dishVoiceFile != null) {
+								playDescription(dishVoiceFile, linstenBtn);
+							}
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -524,4 +587,80 @@ public class RestaurantDetail extends Sidebar {
 		SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yyyy");
 		return formater.format(date);
 	}
+	
+	private String getRestaurantPhoto(String id) {
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                  Environment.DIRECTORY_PICTURES), "RestaurantPhoto");
+
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                Log.d("RestaurantPhoto", "failed to create directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+            "rest_" + id + ".jpg");
+        
+        return mediaFile.toString();
+	}
+	
+	private String getDishPhoto(String restId, String dishId) {
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                  Environment.DIRECTORY_PICTURES), "DishPhoto");
+
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                Log.d("DishPhoto", "failed to create directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+            "dish_" + restId + "_" + dishId + ".jpg");
+        
+        return mediaFile.toString();
+	}
+	
+	private String getDishAudio(String restId, String dishId) {
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                  Environment.DIRECTORY_MUSIC), "DishAudio");
+
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                Log.d("DishPhoto", "failed to create directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+            "dish_" + restId + "_" + dishId + ".3gpp");
+        
+        return mediaFile.toString();
+	}
+	
+	View.OnTouchListener customPopUpTouchListenr = new View.OnTouchListener(){
+
+	    @SuppressLint("NewApi")
+		@Override
+	    public boolean onTouch(View arg0, MotionEvent arg1) {
+	    	try {
+				stopRecording();
+				stopPlayingRecording();
+				stopPlayingDescription();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	
+	        return false;
+	    }
+
+	};
 }

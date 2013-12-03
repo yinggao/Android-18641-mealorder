@@ -101,7 +101,7 @@ int drawable voice 0x7f02003a
 int id BtnSlide 0x7f050027
 int id ScrollView01 0x7f050008
 int id ScrollView02 0x7f05000c
-int id action_settings 0x7f050041
+int id action_settings 0x7f050040
 int id addfavorite 0x7f050015
 int id address 0x7f05003b
 int id background 0x7f050024
@@ -112,7 +112,6 @@ int id container 0x7f050028
 int id descrption 0x7f050011
 int id direction 0x7f050014
 int id dish_list 0x7f050019
-int id dismiss 0x7f050040
 int id errinput 0x7f05002e
 int id favorite_list 0x7f05000d
 int id favorite_pic 0x7f05000a

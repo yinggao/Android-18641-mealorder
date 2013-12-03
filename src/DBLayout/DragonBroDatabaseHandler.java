@@ -15,18 +15,6 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
 
     // Database Name
     private static final String DATABASE_NAME = "DragonIsHungry";
-
-    // Contacts table name
-//    private static final String TABLE_NAME = "Student";
- 
-    // Contacts Table Columns names
-//    private static final String KEY_EMAIL = "email";
-//    private static final String KEY_PASSWORD = "password";
-//    private static final String KEY_FIRST_NAME = "first_name";
-//    private static final String KEY_LAST_NAME = "last_name";
-//    private static final String KEY_ADDRESS = "address";
-//    private static final String KEY_PHONE = "phone";
-//    private static final String KEY_PHOTO_PATH = "photo_path";
  
     public DragonBroDatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -35,13 +23,6 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-    	
-//        String CREATE_INPUTDATA_TABLE = "CREATE TABLE " + TABLE_NAME + "("
-//                + KEY_EMAIL + " TEXT PRIMARY KEY," + KEY_PASSWORD + " TEXT,"
-//                + KEY_FIRST_NAME + " TEXT," + KEY_LAST_NAME + " TEXT,"
-//                + KEY_ADDRESS + " TEXT," + KEY_PHONE + "TEXT," + KEY_PHOTO_PATH
-//                + "TEXT" + ")";
-//        db.execSQL(CREATE_INPUTDATA_TABLE);
     	String CREATE_DISH_TABLE = "CREATE TABLE Dish (dish_id TEXT, rest_id TEXT, dish_name TEXT, description TEXT, audio_path TEXT, photo_path TEXT, PRIMARY KEY (dish_id, rest_id))";
     	String CREATE_FAVORITE_LIST_TABLE = "CREATE TABLE FavoriteList (rest_id TEXT, email TEXT, PRIMARY KEY (rest_id, email))";
     	String CREATE_HISHTORY_LIST_TABLE = "CREATE TABLE HistoryList (email TEXT, visit_date TEXT, rest_id TEXT, PRIMARY KEY (email, visit_date, rest_id))";

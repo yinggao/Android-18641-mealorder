@@ -18,11 +18,7 @@ public class Shake extends Sidebar implements SensorEventListener {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
-//		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.shake);
-//		getIntent();
-		
-		
+
 		super.onCreate(savedInstanceState);
 		
 		getIntent();
@@ -31,12 +27,7 @@ public class Shake extends Sidebar implements SensorEventListener {
 
 		inflater.inflate(R.layout.shake,
 				(ViewGroup) findViewById(R.id.container));
-		
-		
-		
-//		LayoutInflater inflater = getLayoutInflater();
-//		inflater.inflate(R.layout.shake,
-//				(ViewGroup) findViewById(R.id.container));
+
 		dbdb = new DragonBroDatabaseHandler(this);
 		sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
 		// add listener. The listener will be HelloAndroid (this) class
@@ -61,7 +52,7 @@ public class Shake extends Sidebar implements SensorEventListener {
             if (Math.abs(values[0]) > 14 || Math.abs(values[1]) > 14 || Math.abs(values[2]) > 14){
             	Random generator = new Random();
             	sensorManager.unregisterListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
-        		int id = generator.nextInt(dbdb.getRestaurantNum());
+        		int id = generator.nextInt(dbdb.getRestaurantNum()) + 1;
             	Intent intent  = new Intent(Shake.this, RestaurantDetail.class);
             	intent.putExtra("RestaurantID",id);
     	    	startActivity(intent);              
