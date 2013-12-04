@@ -3,17 +3,17 @@
   associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="DBLayout.DragonBroDatabaseHandler" project="MealDelivery" 
     file="/MealDelivery/src/DBLayout/DragonBroDatabaseHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="170" width="273" x="62" y="22"/>    
+    <position height="55" width="185" x="97" y="99"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
   <class id="2" language="java" name="DBLayout.CurrentUserDatabaseHandler" project="MealDelivery" 
     file="/MealDelivery/src/DBLayout/CurrentUserDatabaseHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="572" y="41"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+    <position height="54" width="192" x="356" y="79"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="DBLayout.DishDatabaseHandler" project="MealDelivery" 
     file="/MealDelivery/src/DBLayout/DishDatabaseHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="336" x="441" y="-171"/>    
+    <position height="55" width="162" x="308" y="9"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="DBLayout.FavoriteListDatabaseHandler" project="MealDelivery" 
     file="/MealDelivery/src/DBLayout/FavoriteListDatabaseHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="119" width="349" x="466" y="114"/>    
+    <position height="55" width="188" x="371" y="149"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,8 +39,8 @@
   </class>  
   <class id="5" language="java" name="DBLayout.HistoryListDatabaseHandler" project="MealDelivery" 
     file="/MealDelivery/src/DBLayout/HistoryListDatabaseHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="219" y="315"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+    <position height="57" width="187" x="102" y="195"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="DBLayout.RestaurantDatabaseHandler" project="MealDelivery" 
     file="/MealDelivery/src/DBLayout/RestaurantDatabaseHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="354" x="430" y="250"/>    
+    <position height="57" width="198" x="355" y="221"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="DBLayout.StudentDatabaseHandler" project="MealDelivery" 
     file="/MealDelivery/src/DBLayout/StudentDatabaseHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="121" width="309" x="66" y="-170"/>    
+    <position height="54" width="172" x="105" y="10"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <dependency id="8">    
     <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="TARGET" refId="6"/>  
   </dependency>  
   <dependency id="9">    
     <end type="SOURCE" refId="1"/>    
@@ -74,7 +74,7 @@
   </dependency>  
   <dependency id="10">    
     <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
+    <end type="TARGET" refId="7"/>  
   </dependency>  
   <dependency id="11">    
     <end type="SOURCE" refId="1"/>    
@@ -82,7 +82,7 @@
   </dependency>  
   <dependency id="12">    
     <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="6"/>  
+    <end type="TARGET" refId="3"/>  
   </dependency>  
   <dependency id="13">    
     <end type="SOURCE" refId="1"/>    
