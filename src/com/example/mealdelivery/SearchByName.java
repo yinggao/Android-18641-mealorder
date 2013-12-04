@@ -74,6 +74,8 @@ public class SearchByName extends Sidebar {
 					int position, long id) {
 				String option = (String) categorySelect.getSelectedItem();
 				searchByCategory(option);
+				EditText search_query = (EditText) findViewById(R.id.search_query);
+				search_query.setText("");
 			}
 
 			@Override
