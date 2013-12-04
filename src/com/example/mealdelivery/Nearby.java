@@ -31,6 +31,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.text.StaticLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -117,6 +118,19 @@ public class Nearby extends Sidebar {
 			}
 		});
 	}//end on create
+	
+	//A helper function that calculate distance based on lat & lng
+	protected double getdistance(double lat1, double lng1, double lat2, double lng2) {
+		final double EARTH_R = 6378.137;
+	    double lat1rad=lat1*Math.PI/180.0;
+	    double lng1rad=lng1*Math.PI/180.0;
+	    double lat2rad=lat2*Math.PI/180.0;
+	    double lng2rad=lng2*Math.PI/180.0;
+	    double a=lat1rad-lat2rad;
+	    double b=lng1rad-lng2rad;
+	    double dis=2*EARTH_R*Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2)+Math.cos(lat1rad)*Math.cos(lat1rad)*Math.pow(Math.sin(b/2),2)));
+	    return dis;
+	}
 }
 
 
