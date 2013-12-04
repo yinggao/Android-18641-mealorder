@@ -45,6 +45,17 @@ public class Shake extends Sidebar implements SensorEventListener {
 		
 	}
 	
+	@Override
+	public void onResume() {
+		super.onResume();
+		dbdb = new DragonBroDatabaseHandler(this);
+		sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
+		// add listener. The listener will be HelloAndroid (this) class
+		sensorManager.registerListener(this, 
+				sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+				SensorManager.SENSOR_DELAY_NORMAL);
+	}
+	
 	public void onSensorChanged(SensorEvent event){
         int sensorType = event.sensor.getType();
         float[] values = event.values;

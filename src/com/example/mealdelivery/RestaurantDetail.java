@@ -186,7 +186,7 @@ public class RestaurantDetail extends Sidebar {
 							mailList = list.toArray(mailList);
 							email.putExtra("Rcipients", mailList);
 							email.putExtra("HasAudio", true);
-							email.putExtra("Subject", "Order meals from XXXXX");
+							email.putExtra("Subject", "Order meals from CMU");
 							email.putExtra("Body", "I want this this and that");
 							startActivity(email);
 							hasRecord = false;
@@ -633,7 +633,7 @@ public class RestaurantDetail extends Sidebar {
 
         if (! mediaStorageDir.exists()){
             if (! mediaStorageDir.mkdirs()){
-                Log.d("DishPhoto", "failed to create directory");
+                Log.d("DishAudio", "failed to create directory");
                 return null;
             }
         }
