@@ -8,9 +8,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import entities.ImageLoader;
+import entities.RestaurantContainer;
 
 import DBLayout.DragonBroDatabaseHandler;
-import DBLayout.RestaurantContainer;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -158,8 +158,6 @@ public class SearchByName extends Sidebar {
 				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
 				if (bitmap == null) {
 					bitmap = BitmapFactory.decodeFile(photoFilePath);
-//					bitmap = ImageLoader.decodeSampledBitmapFromResource(
-//							photoFilePath, columnWidth);
 					imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
 				}
 				restaurant_pic.setImageBitmap(bitmap);

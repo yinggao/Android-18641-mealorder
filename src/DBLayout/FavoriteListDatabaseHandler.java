@@ -2,6 +2,8 @@ package DBLayout;
 
 import java.util.ArrayList;
 
+import entities.FavoriteListContainer;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

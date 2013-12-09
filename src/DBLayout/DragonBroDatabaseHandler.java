@@ -2,6 +2,12 @@ package DBLayout;
 
 import java.util.ArrayList;
 
+import entities.DishContainer;
+import entities.FavoriteListContainer;
+import entities.HistoryListContainer;
+import entities.RestaurantContainer;
+import entities.StudentContainer;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

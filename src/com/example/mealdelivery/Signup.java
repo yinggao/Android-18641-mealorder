@@ -2,8 +2,9 @@ package com.example.mealdelivery;
 
 import java.io.File;
 
+import entities.StudentContainer;
+
 import DBLayout.DragonBroDatabaseHandler;
-import DBLayout.StudentContainer;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;

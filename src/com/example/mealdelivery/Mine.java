@@ -4,11 +4,11 @@ package com.example.mealdelivery;
 import java.io.File;
 import java.util.ArrayList;
 
+import entities.HistoryListContainer;
 import entities.ImageLoader;
+import entities.RestaurantContainer;
 
 import DBLayout.DragonBroDatabaseHandler;
-import DBLayout.HistoryListContainer;
-import DBLayout.RestaurantContainer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -36,8 +36,6 @@ public class Mine extends Sidebar {
 		imageLoader = ImageLoader.getInstance();
 		dbdb = new DragonBroDatabaseHandler(this);
 
-		//getIntent();
-
 		LayoutInflater inflater = getLayoutInflater();
 
 		inflater.inflate(R.layout.mine,
@@ -53,30 +51,7 @@ public class Mine extends Sidebar {
 		LinearLayout historyList = (LinearLayout) findViewById(R.id.history_list);
 		for (HistoryListContainer historyRest : historyRests) {
 			RestaurantContainer restaurant = dbdb.getRestaurantInfo(historyRest.getRestId());
-			
-			//History Form
-//			LinearLayout historyForm = new LinearLayout(this);
-//			LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(
-//					LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//			historyForm.setLayoutParams(linearParams);
-//			historyForm.setGravity(Gravity.CENTER);
-//			historyForm.setOrientation(LinearLayout.VERTICAL);
-			
-			
-			//Calendar Image
-//			ImageView calander = new ImageView(this);
-//			int heigth = (int) TypedValue.applyDimension(
-//					TypedValue.COMPLEX_UNIT_DIP, 83, getResources()
-//					.getDisplayMetrics());
-//			int width = (int) TypedValue.applyDimension(
-//					TypedValue.COMPLEX_UNIT_DIP, 74, getResources()
-//					.getDisplayMetrics());
-//			linearParams = new LinearLayout.LayoutParams(width, heigth);
-//			calander.setLayoutParams(linearParams);
-//			calander.setImageDrawable(getResources().getDrawable(R.drawable.calander));
-//			historyForm.addView(calander);
-			
-			
+
 			// restaurant layout
 			RelativeLayout restLayout = new RelativeLayout(this);
 			restLayout.setId(Integer.valueOf(restaurant.getRestId()));
@@ -115,8 +90,6 @@ public class Mine extends Sidebar {
 				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
 				if (bitmap == null) {
 					bitmap = BitmapFactory.decodeFile(photoFilePath);
-//					bitmap = ImageLoader.decodeSampledBitmapFromResource(
-//							photoFilePath, columnWidth);
 					imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
 				}
 				rest_pic.setImageBitmap(bitmap);
@@ -173,7 +146,6 @@ public class Mine extends Sidebar {
 				}
 			});// End of onclick listener
 
-			//historyForm.addView(restLayout);
 			historyList.addView(restLayout);
 		}//end history list
 		
@@ -220,8 +192,6 @@ public class Mine extends Sidebar {
 				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
 				if (bitmap == null) {
 					bitmap = BitmapFactory.decodeFile(photoFilePath);
-//					bitmap = ImageLoader.decodeSampledBitmapFromResource(
-//							photoFilePath, columnWidth);
 					imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
 				}
 				rest_pic.setImageBitmap(bitmap);

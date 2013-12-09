@@ -2,24 +2,17 @@ package com.example.mealdelivery;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
-import javax.security.auth.callback.Callback;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import entities.Map;
-
-import DBLayout.RestaurantContainer;
+import entities.RestaurantContainer;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -31,8 +24,6 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.text.StaticLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Toast;

@@ -12,11 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import ws.remote.EMail;
-import DBLayout.DishContainer;
 import DBLayout.DragonBroDatabaseHandler;
-import DBLayout.FavoriteListContainer;
-import DBLayout.HistoryListContainer;
-import DBLayout.RestaurantContainer;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -44,7 +40,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import entities.DishContainer;
+import entities.FavoriteListContainer;
+import entities.HistoryListContainer;
 import entities.ImageLoader;
+import entities.RestaurantContainer;
 
 @SuppressLint("SdCardPath")
 public class RestaurantDetail extends Sidebar {
@@ -62,7 +62,6 @@ public class RestaurantDetail extends Sidebar {
 	private Boolean isPlaying = false;
 	private PopupWindow popupWindow;
 	private ImageLoader imageLoader;
-	private int columnWidth;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		
@@ -114,6 +113,7 @@ public class RestaurantDetail extends Sidebar {
 		final TextView btnVoicePop = (TextView) findViewById(R.id.voice);
 		btnVoicePop.setOnClickListener(new View.OnClickListener() {
 				
+			@SuppressWarnings("deprecation")
 			@Override
 			public void onClick(View v) {
 				LayoutInflater layoutInflater = (LayoutInflater) RestaurantDetail.this
@@ -190,10 +190,6 @@ public class RestaurantDetail extends Sidebar {
 							email.putExtra("Body", "I want this this and that");
 							startActivity(email);
 							hasRecord = false;
-							// new EMail().withRcipients("test@test.com")
-							// .withSubject("Order meal")
-							// .withBody("I want this this and that")
-							// .send();
 						} else {
 							Toast.makeText(RestaurantDetail.this,
 									"Please record first!", Toast.LENGTH_LONG)
@@ -202,27 +198,7 @@ public class RestaurantDetail extends Sidebar {
 					}
 				});
 
-//				// dismiss pop up window
-//				Button btnDismiss = (Button) popupView
-//						.findViewById(R.id.dismiss);
-//				btnDismiss.setOnClickListener(new Button.OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v) {
-//						try {
-//							stopPlayingRecording();
-//							stopPlayingDescription();
-//						} catch (Exception e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//						// TODO Auto-generated method stub
-//						popupWindow.dismiss();
-//					}
-//				});
-
 				popupWindow.showAsDropDown(btnVoicePop, 0, 0);
-				// popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 			}
 		});
 		
@@ -279,7 +255,6 @@ public class RestaurantDetail extends Sidebar {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		   // TODO Auto-generated method stub
 		   if (popupWindow != null && popupWindow.isShowing()) {
 		   popupWindow.dismiss();
 		   }
@@ -391,14 +366,11 @@ public class RestaurantDetail extends Sidebar {
 
 		layoutAllDishes(restaurant.getRestId());
 		ImageView rest_pic = (ImageView)findViewById(R.id.picture);
-		columnWidth = rest_pic.getWidth();
 		String photoFilePath = getRestaurantPhoto(restaurant.getRestId());
 		if (photoFilePath != null) {
 			Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
 			if (bitmap == null) {
 				bitmap = BitmapFactory.decodeFile(photoFilePath);
-//				bitmap = ImageLoader.decodeSampledBitmapFromResource(
-//						photoFilePath, columnWidth);
 				imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
 			}
 			rest_pic.setImageBitmap(bitmap);
@@ -451,8 +423,6 @@ public class RestaurantDetail extends Sidebar {
 				Bitmap bitmap = imageLoader.getBitmapFromMemoryCache(photoFilePath);
 				if (bitmap == null) {
 					bitmap = BitmapFactory.decodeFile(photoFilePath);
-//					bitmap = ImageLoader.decodeSampledBitmapFromResource(
-//							photoFilePath, columnWidth);
 					imageLoader.addBitmapToMemoryCache(photoFilePath, bitmap);
 				}
 				dish_pic.setImageBitmap(bitmap);
@@ -524,9 +494,6 @@ public class RestaurantDetail extends Sidebar {
 				public void onClick(View v) {
 					String dishVoiceFile = dbdb.getDishInfo(dishID,
 							String.valueOf(restIDstr)).getAudioPath();
-					// TODO hard code dishVoiceFile same as record! Please delete
-					// it!!
-//					dishVoiceFile = OUTPUT_FILE;
 					dishVoiceFile = getDishAudio(restID, dishID);
 
 					try {
@@ -583,6 +550,7 @@ public class RestaurantDetail extends Sidebar {
 		}
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	public String dateToString(Date date) {
 		SimpleDateFormat formater = new SimpleDateFormat("MM/dd/yyyy");
 		return formater.format(date);
@@ -655,7 +623,6 @@ public class RestaurantDetail extends Sidebar {
 				stopPlayingRecording();
 				stopPlayingDescription();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    	

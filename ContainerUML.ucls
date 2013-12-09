@@ -10,8 +10,8 @@
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="DBLayout.DishContainer" project="MealDelivery" 
-    file="/MealDelivery/src/DBLayout/DishContainer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="entities.DishContainer" project="MealDelivery" 
+    file="/MealDelivery/src/entities/DishContainer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="54" width="112" x="14" y="-81"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="DBLayout.FavoriteListContainer" project="MealDelivery" 
-    file="/MealDelivery/src/DBLayout/FavoriteListContainer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="entities.FavoriteListContainer" project="MealDelivery" 
+    file="/MealDelivery/src/entities/FavoriteListContainer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="54" width="145" x="-200" y="-58"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="DBLayout.HistoryListContainer" project="MealDelivery" 
-    file="/MealDelivery/src/DBLayout/HistoryListContainer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="entities.HistoryListContainer" project="MealDelivery" 
+    file="/MealDelivery/src/entities/HistoryListContainer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="53" width="148" x="-207" y="26"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="DBLayout.RestaurantContainer" project="MealDelivery" 
-    file="/MealDelivery/src/DBLayout/RestaurantContainer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="entities.RestaurantContainer" project="MealDelivery" 
+    file="/MealDelivery/src/entities/RestaurantContainer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="55" width="142" x="15" y="111"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="DBLayout.StudentContainer" project="MealDelivery" 
-    file="/MealDelivery/src/DBLayout/StudentContainer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="entities.StudentContainer" project="MealDelivery" 
+    file="/MealDelivery/src/entities/StudentContainer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="56" width="164" x="-199" y="102"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

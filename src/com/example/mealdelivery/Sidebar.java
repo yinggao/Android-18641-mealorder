@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import utilities.Config;
 import DBLayout.DragonBroDatabaseHandler;
-import DBLayout.RestaurantContainer;
 import adapter.MenuAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -31,6 +30,8 @@ import android.widget.TextView;
 
 import com.example.mealdelivery.SidebarView.SizeCallback;
 
+import entities.RestaurantContainer;
+
 @SuppressLint("NewApi")
 public class Sidebar extends Activity implements OnGestureListener {
 	SidebarView scrollView;
@@ -50,7 +51,8 @@ public class Sidebar extends Activity implements OnGestureListener {
     private DragonBroDatabaseHandler dbdb;
     private GestureDetector detector; 
 
-    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
+	@SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,13 +68,11 @@ public class Sidebar extends Activity implements OnGestureListener {
 
         menu = inflater.inflate(R.layout.sidebar_scroll_menu, null);
         app = inflater.inflate(R.layout.sidebar, null);
-        //webView =(WebView) app.findViewById(R.id.webView);
         ViewGroup tabBar = (ViewGroup) app.findViewById(R.id.tabBar);
         
         options = Config.createOptions(dbdb.getCurrentUser());
         menuAdapter = new MenuAdapter(this,R.layout.link, options);
         ListView listView = (ListView) menu.findViewById(R.id.list);
-        //ViewUtils.initListView(this, listView, "Menu ", 8, android.R.layout.simple_list_item_1);
         listView.setAdapter(menuAdapter);
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -122,9 +122,7 @@ public class Sidebar extends Activity implements OnGestureListener {
         btnSlide.setOnClickListener(new ClickListenerForScrolling(scrollView, menu));
 
         final View[] children = new View[] { menu, app };
-
-        // Scroll to app (view[1]) when layout finished.
-
+        
         int scrollToViewIdx = 1;
         
         scrollView.initViews(children, scrollToViewIdx, new SizeCallbackForMenu(btnSlide));
@@ -229,7 +227,6 @@ public class Sidebar extends Activity implements OnGestureListener {
     
     public void dragOut() {
     	scrollView.smoothScrollTo(menu.getMeasuredWidth(), 0); 
-    	//scrollView.smoothScrollTo(0, 0); 
     }
     
     @Override  

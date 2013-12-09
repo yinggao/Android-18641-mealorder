@@ -1,9 +1,19 @@
 package ws.local;
 
-public interface Audio {
+import java.io.IOException;
 
-	/**
-	 * This method will play an audio
-	 */
-	public void playAuoid(String audioID);
+import android.media.MediaPlayer;
+
+public class Audio {
+
+	public void playAudio(MediaPlayer mediaPlayer) throws IllegalStateException, IOException {
+		mediaPlayer.prepare();
+		mediaPlayer.start();
+	}
+	
+	public void stopAudio(MediaPlayer mediaPlayer) {
+		if (mediaPlayer != null) {
+			mediaPlayer.stop();
+		}
+	}
 }

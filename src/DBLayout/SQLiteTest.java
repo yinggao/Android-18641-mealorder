@@ -1,6 +1,10 @@
 package DBLayout;
 
-import DBLayout.DishContainer;
+import entities.DishContainer;
+import entities.FavoriteListContainer;
+import entities.HistoryListContainer;
+import entities.RestaurantContainer;
+import entities.StudentContainer;
 import DBLayout.DragonBroDatabaseHandler;
 import android.app.Activity;
 import android.os.Bundle;

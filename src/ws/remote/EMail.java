@@ -1,5 +1,4 @@
 package ws.remote;
-//package com.example.mealdelivery;
 
 /**
  * Reference:
@@ -12,7 +11,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 
 @SuppressLint("SdCardPath")
 public class EMail extends Activity {
@@ -57,7 +55,6 @@ public class EMail extends Activity {
 		}
 		Intent testIntent = Intent.createChooser(sendEmail, "Choose an email client:");
 		startActivity(testIntent);//choose email client then start email intent
-		//startActivity(sendEmail);
 	}
 
 	public void setRecipients(String[] recipients) {

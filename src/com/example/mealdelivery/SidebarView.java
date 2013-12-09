@@ -109,6 +109,7 @@ public class SidebarView extends HorizontalScrollView {
 			this.sizeCallback = sizeCallback;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public void onGlobalLayout() {
 			// System.out.println("onGlobalLayout");
