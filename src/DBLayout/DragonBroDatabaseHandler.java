@@ -11,7 +11,7 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 11;
 
     // Database Name
     private static final String DATABASE_NAME = "DragonIsHungry";
@@ -85,6 +85,8 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	db.execSQL(addData);
     	addData = "INSERT INTO Dish VALUES('3','5','Fried Chicken Over Rice','A kind of traditional chinese food',NULL,NULL)";
     	db.execSQL(addData);
+    	addData = "INSERT INTO Dish VALUES('2','7','Indian Cake','A traditional indian cake',NULL,NULL)";
+    	db.execSQL(addData);
     }
     
     private void initializeHistoryList(SQLiteDatabase db) {
@@ -145,6 +147,8 @@ public class DragonBroDatabaseHandler extends SQLiteOpenHelper {
     	addData = "INSERT INTO Restaurant VALUES('6','Starbucks','417 South Craig Street, Pittsburgh, PA 15213','(412)687-2494','Mon.-Sun. 05:30每21:00',NULL,'Cafe', 'dragonishungrytest@gmail.com', '1')";
     	db.execSQL(addData);
     	addData = "INSERT INTO Restaurant VALUES('7','Yuva India Restaurant','412 South Craig Street, Pittsburgh, PA 15213','(412)681-5700','Mon.-Fri. 11:30每14:30 17:00每22:30',NULL,'Indian', 'dragonishungrytest@gmail.com', '3')";
+    	db.execSQL(addData);
+    	addData = "INSERT INTO Restaurant VALUES('8','CMU Indian Food','5000 Forbes Avenue, Pittsburgh, PA 15213','(412)423-5719','Mon.-Fri. 11:30每14:30 17:00每22:30',NULL,'Indian', 'dragonishungrytest@gmail.com', '3')";
     	db.execSQL(addData);
     }
     
